@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 // MainFrame class : 프로그램 시작점 클래스.
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") // 시리얼 번호는 쓰지않는다.
 public class MainFrame extends JFrame {
 
 	// --- Constructor ---
