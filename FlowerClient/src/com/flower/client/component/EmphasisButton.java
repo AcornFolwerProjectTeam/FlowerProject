@@ -8,9 +8,9 @@ import javax.swing.border.LineBorder;
 import com.flower.clinet.config.EnVal;
 
 @SuppressWarnings("serial")
-public class StyleButton extends JButton {
+public class EmphasisButton extends JButton {
 	// --- Constructor ---
-	public StyleButton() {
+	public EmphasisButton() {
 		super();
 		// JButton 클래스의 기본 디자인을 해제한다.
 		//setContentAreaFilled(false); // 내부 그라데이션 해제
@@ -19,12 +19,12 @@ public class StyleButton extends JButton {
 		
 		// 프로젝트 자체 스타일로 버튼을 설정한다.
 		setBorder(new LineBorder(EnVal.MAINCOLOR, 2)); // 외각선 설정
-		setForeground(EnVal.MAINCOLOR); // 글자색 설정
+		setForeground(Color.white); // 글자색 설정
 		setFont(EnVal.BUTTONFONT); // 폰트 설정
-		setBackground(Color.white); // 버튼 배경색 설정
+		setBackground(EnVal.MAINCOLOR); // 버튼 배경색 설정
 	}
 	
-	public StyleButton(String text) {
+	public EmphasisButton(String text) {
 		this();
 		setText(text);
 	}
