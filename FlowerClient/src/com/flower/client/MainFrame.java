@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame {
 
 	// --- Constructor ---
+	// 기본 생성자
 	public MainFrame() {
 		// 초기 설정
 		setTitle("La Fleur"); // 제목 표시줄의 제목.
