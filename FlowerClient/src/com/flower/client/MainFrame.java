@@ -21,16 +21,8 @@ public class MainFrame extends JFrame {
 		
 		// TODO : 패널 추가 코드 를 넣을 영역
 		
-		// 화면 띄우기
-		setVisible(true); // 화면에 윈도우를 띄운다.
 		setMinimumSize(getSize()); // 초기 띄워진 윈도우 크기를 기준으로 윈도우 최소 크기를 고정한다.
 	}
 	// --- Constructor end ---
-	
-	// main method : 프로그램 시작점 메인메서드
-	public static void main(String[] args) {
-		new MainFrame(); // 윈도우를 띄운다.
-	}
-	// main method end
 
 } // MainFrame class end

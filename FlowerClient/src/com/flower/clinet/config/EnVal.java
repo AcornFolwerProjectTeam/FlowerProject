@@ -11,5 +11,19 @@ public class EnVal {
 	 * 프로젝트 테마 메인컬러. (RGB : 34, 41, 68)
 	 * */
 	public static Color MAINCOLOR = new Color(34, 41, 68);
+	
+	/**
+	 * 버튼 폰트 (맑은고딕/굵게/크기14)
+	 * */
 	public static Font BUTTONFONT = new Font("맑은 고딕", Font.BOLD, 14);
+	
+	/**
+	 * 서버 IP
+	 * */
+	public static String SERVERIP = "";
+	
+	/**
+	 * 서버 포트번호
+	 * */
+	public static int SERVERPORT = 0;
 }
