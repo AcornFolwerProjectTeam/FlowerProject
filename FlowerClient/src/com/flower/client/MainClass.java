@@ -3,13 +3,13 @@ package com.flower.client;
 import java.awt.CardLayout;
 
 import com.flower.client.container.SingleContainPanal;
-import com.flower.client.login.LoginPan;
+import com.flower.client.login.LoginPanel;
 
 public class MainClass {
 	// 필드변수
 	CardLayout cly; // 카드레이아웃
 	SingleContainPanal loginScp; // 패널을 중앙 정렬 시켜주는 백패널
-	LoginPan lp; // 로그인 패널
+	LoginPanel lp; // 로그인 패널
 	MainFrame mf; // 메인프레임
 
 	// --- Constructors ---
@@ -19,7 +19,7 @@ public class MainClass {
 		cly = new CardLayout(); // 컨테이너를 스위칭해줄 카드 레이아웃
 		// 로그인 컨테이너 및 컴포넌트
 		mf = new MainFrame(); // 메인 프레임 생성 및 화면을 띄움.
-		lp = new LoginPan(); // 로그인 패널
+		lp = new LoginPanel(); // 로그인 패널
 		loginScp = new SingleContainPanal(mf, lp); // 로그인용 중앙정렬 컨테이너 생성 및 매개값 전달.
 		// 회원가입 컨테이너 및 컴포넌트
 	}
