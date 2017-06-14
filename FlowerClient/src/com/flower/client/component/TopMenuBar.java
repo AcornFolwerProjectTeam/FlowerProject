@@ -25,7 +25,7 @@ public class TopMenuBar extends JPanel implements ActionListener{
 	private Font f;
 	private ChatFrame cf = new ChatFrame();
 
-	TopMenuBar(MainClass mc, Boolean flag){	// flag가 true 값이면 메뉴버튼이 생성되고 로고버튼 ActionListener 붙는다.
+	public TopMenuBar(MainClass mc, Boolean flag){	// flag가 true 값이면 메뉴버튼이 생성되고 로고버튼 ActionListener 붙는다.
 		this.mc = mc;
 		f = new Font("맑은 고딕", Font.BOLD, 15); // 메뉴 버튼을 위한 폰트
 		
