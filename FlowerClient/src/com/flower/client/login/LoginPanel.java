@@ -75,7 +75,7 @@ public class LoginPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sbtnLogin) { // 로그인 버튼을 눌렀을시
 			// TODO : 로그인 처리. if문 써서 성공시, 실패시 분리
-		} else if (e.getSource() == sbtnLogin) { // 회원가입 버튼을 눌렀을시
+		} else if (e.getSource() == sbtnReg) { // 회원가입 버튼을 눌렀을시
 			mc.changeCardLayout("register"); // 회원가입 패널로 전환.
 		} 
 	} // actionPerformed override method end
