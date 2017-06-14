@@ -2,6 +2,8 @@ package com.flower.client.login;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -9,11 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.flower.client.MainClass;
 import com.flower.client.component.StyleButton;
 
 @SuppressWarnings("serial")
-public class LoginPanel extends JPanel{
-	
+public class LoginPanel extends JPanel implements ActionListener{
+	private MainClass mc;
 	private JLabel jlbId, jlbPw;
 	private JTextField jtfId;
 	private JPasswordField jtfPw; // 패스워드 입력하면 검은 동그라미로 보여준다.
@@ -21,7 +24,8 @@ public class LoginPanel extends JPanel{
 	private StyleButton sbtnLogin, sbtnReg;
 
 	// --- Constructor ---
-	public LoginPanel() {
+	public LoginPanel(MainClass mc) {
+		this.mc = mc;
 		// 패널 기본 Layout 해제한다. 배경색은 흰색으로 한다.
 		setLayout(null);
 		setBackground(Color.WHITE);
@@ -52,13 +56,28 @@ public class LoginPanel extends JPanel{
 		sbtnReg.setBounds(310, 505, 140, 40);	// 회원가입 버튼 
 		
 		// 패널 부착
-		add(imgbox);
-		add(jlbId);
-		add(jlbPw);
-		add(jtfId);
-		add(jtfPw);
-		add(sbtnLogin);
-		add(sbtnReg);
+		add(imgbox); // 로고 이미지 추가
+		add(jlbId); // ID 라벨 추가
+		add(jlbPw); // PW 라벨 추가
+		add(jtfId); // Id 필드 추가
+		add(jtfPw); // PW 필드 추가
+		add(sbtnLogin); // 로그인 버튼 추가
+		add(sbtnReg); // 회원가입 버튼 추가
+		
+		// 이벤트 처리
+		sbtnLogin.addActionListener(this); // 로그인 버튼 이벤트 추가.
+		sbtnReg.addActionListener(this); // 회원가입 버튼 이벤트 추가.
 	}
+
+	// actionPerformed override method
+	// 버튼 액션 리스너 핸들러 이벤트
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == sbtnLogin) { // 로그인 버튼을 눌렀을시
+			// TODO : 로그인 처리. if문 써서 성공시, 실패시 분리
+		} else if (e.getSource() == sbtnLogin) { // 회원가입 버튼을 눌렀을시
+			mc.changeCardLayout("register"); // 회원가입 패널로 전환.
+		} 
+	} // actionPerformed override method end
 	
 }
