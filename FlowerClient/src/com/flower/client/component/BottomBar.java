@@ -1,4 +1,4 @@
-package com.flower.client.register;
+package com.flower.client.component;
 
 import javax.swing.JPanel;
 
