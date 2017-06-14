@@ -20,10 +20,10 @@ public class EnVal {
 	/**
 	 * 서버 IP
 	 * */
-	public static String SERVERIP = "";
+	public static String SERVERIP = "192.168.0.201";
 	
 	/**
 	 * 서버 포트번호
 	 * */
-	public static int SERVERPORT = 0;
+	public static int SERVERPORT = 5000;
 }
