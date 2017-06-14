@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.flower.client.component.BottomBar;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.component.StyleButton;
 
@@ -26,17 +27,11 @@ public class RegisterPanel extends JPanel{
 	private StyleButton sbtnCancel;
 	private EmphasisButton ebtnEnter;
 	private JCheckBox jcbAgree;
-	private RegisterMenuBar menuBar;
-	private BottomBar bottomBar;
 	
 	// ------- Constructor ---------
 	public RegisterPanel() {
 		setLayout(null);
 		setBackground(Color.WHITE);
-		
-		// 메뉴 바 & 하단 바
-		menuBar = new RegisterMenuBar();
-		bottomBar = new BottomBar();
 		
 		// 약관동의
 		jtaAgreement = new JTextArea();
@@ -99,10 +94,6 @@ public class RegisterPanel extends JPanel{
 		sbtnCancel.setBounds(180, 560, 120, 40);
 		ebtnEnter.setBounds(310, 560, 120, 40);
 		
-		// 크기 위치: 메뉴바&하단바
-		menuBar.setLocation(15, 10);
-		bottomBar.setLocation(15,735);
-		
 		// 컴포넌트 부착
 		add(jspAgreement);
 		add(jlbId);
@@ -121,8 +112,6 @@ public class RegisterPanel extends JPanel{
 		add(sbtnCancel);
 		add(ebtnEnter);
 		add(jcbAgree);
-		add(menuBar);
-		add(bottomBar);
 		
 	}
 	
