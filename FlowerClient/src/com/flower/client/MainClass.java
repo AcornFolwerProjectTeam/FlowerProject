@@ -26,7 +26,7 @@ public class MainClass {
 		loginPanel = new LoginPanel(this); // 로그인 패널
 		loginScp = new SingleContainPanal(mf, loginPanel); // 로그인용 중앙정렬 컨테이너 생성 및 매개값 전달.
 		// 회원가입 컨테이너 및 컴포넌트
-		registerPanel = new RegisterPanel(); // 회원가입 패널
+		registerPanel = new RegisterPanel(this); // 회원가입 패널
 		registerMcp = new MenuContainPanal(mf, registerPanel, this, false); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
 	}
 	// --- Constructors end ---
@@ -38,7 +38,7 @@ public class MainClass {
 	 * @param 보여줄 패널의 이름 문자열
 	 * */
 	public void changeCardLayout(String taget) {
-		System.out.println(taget);
+		//System.out.println(taget);
 		cly.show(mf.getContentPane(), taget); // 메인프레임 패널 이동
 	} // changeCardLayout method end
 	

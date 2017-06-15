@@ -36,4 +36,9 @@ public class EnVal {
 	 * 서버 포트번호
 	 * */
 	public static int SERVERPORT = 5000;
+	
+	/**
+	 * 채팅 포트번호
+	 * */
+	public static int CHATPORT = 5001;
 }

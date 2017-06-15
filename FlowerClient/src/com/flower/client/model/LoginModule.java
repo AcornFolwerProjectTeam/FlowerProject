@@ -52,7 +52,6 @@ public class LoginModule {
 			// 서버에 로그인 값을 전달한다.
 			oos.writeObject(hmdata); // 서버에 값 전달을 전달하나 특성상 예약된다.
 			oos.flush(); // 예약된 작업을 모두 처리한다.
-			oos.close(); // 작업이 끝났으므로 아웃풋 스트림을 닫는다.
 			
 			// 서버에서 로그인 결과를 받는다.
 			ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream())); // 서버에서 값을 전달받아 세팅한다.
@@ -60,21 +59,30 @@ public class LoginModule {
 			// 객체타입의 값을 전달 받았으나 HashMap 타입이므로 형변환을 해준다.
 			@SuppressWarnings("unchecked") // 반드시 HashMap 타입이 오므로 경고는 꺼준다.
 			HashMap<String, String> oisHm = (HashMap<String, String>) ois.readObject(); // Object to HashMap
-			
-			ois.close(); // 아웃풋 스트림을 종료한다.
+			System.out.println(oisHm);	// testCode
 			
 			// 서버에서
-			if (oisHm.get("respond").equals("okey")) {
+			if (oisHm.get("respond").equals("okay")) {
 				// TODO : 로그인 정보를 전역같은 위치의 VO에 저장하는 코드 작성 필요
 				return true; // 성공했다는 의미의 참값을 반환한다.
 			} else { // 에러(error)일경우
 				return false; // 거짓값을 반환한다.
 			}
 			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(ois!=null)ois.close(); // 아웃풋 스트림을 종료한다.
+				if(oos!=null)oos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // 작업이 끝났으므로 아웃풋 스트림을 닫는다.
+			
 		}
 		
 		return false;
