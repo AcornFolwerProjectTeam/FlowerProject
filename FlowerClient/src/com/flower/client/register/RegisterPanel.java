@@ -64,7 +64,7 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 		term = new StringBuffer();
 		
 		try {
-			br = new BufferedReader(new FileReader(new File("c:\\terms.txt")));	// BufferedReader를 이용하여 약관 동의 내용을 읽어온다.
+			br = new BufferedReader(new FileReader(new File("src/File/terms.txt")));	// BufferedReader를 이용하여 약관 동의 내용을 읽어온다.
 			while(br.readLine()!=null){	// 파일이 끝날 때까지 약관 동의 내용을 읽어온다.
 				term.append(br.readLine()+"\n");	// 기존 내용에 1줄씩 읽어온 내용을 추가한다.
 			}
