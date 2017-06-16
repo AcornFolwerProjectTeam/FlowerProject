@@ -18,6 +18,11 @@ public class EnVal {
 	public static Font BUTTONFONT = new Font("맑은 고딕", Font.BOLD, 14);
 	
 	/**
+	 * 레이블 강조 폰트 (맑은고딕/굵게/크기14)
+	 * */
+	public static Font LABLEFONT = new Font("맑은 고딕", Font.BOLD, 13);
+	
+	/**
 	 * 게시판 한페이지에 보여줄 게시물수
 	 * */
 	public static int BOARDVIEWNUM = 10;
