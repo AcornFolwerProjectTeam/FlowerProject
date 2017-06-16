@@ -27,6 +27,7 @@ import com.flower.client.model.RegisterModule;
 
 @SuppressWarnings("serial")
 public class RegisterPanel extends JPanel implements ActionListener, CaretListener{
+	// TODO: 공백일 때 db 연결 안되도록 조건 걸기
 	
 	// GUI 변수
 	private MainClass mc;
@@ -85,8 +86,7 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 		jcbAgree = new JCheckBox("약관에 동의합니다."); // 체크박스 생성
 		jcbAgree.setFont(flbmsg);	// 체크박스 폰트 설정
 		jcbAgree.setBounds(30, 490, 250, 20);	// 체크박스 크기, 위치 지정
-		jcbAgree.setBackground(Color.WHITE);	// 체크박스 배경색
-		//jcbAgree.addActionListener(this);
+		jcbAgree.setBackground(Color.WHITE);	// 체크박스 배경
 		add(jcbAgree);	// 체크박스 부착
 		
 		// ID 라벨

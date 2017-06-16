@@ -10,13 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.StyleButton;
 import com.flower.client.model.LoginModule;
 
 @SuppressWarnings("serial")
-public class LoginPanel extends JPanel implements ActionListener{
+public class LoginPanel extends JPanel implements ActionListener, CaretListener{
 	private MainClass mc;
 	private JLabel jlbId, jlbPw;
 	private JTextField jtfId;
@@ -58,6 +60,8 @@ public class LoginPanel extends JPanel implements ActionListener{
 		sbtnLogin.setBounds(150, 505, 140, 40);	// 로그인 버튼
 		sbtnReg.setBounds(310, 505, 140, 40);	// 회원가입 버튼 
 		
+		sbtnLogin.setEnabled(false);
+		
 		// 패널 부착
 		add(imgbox); // 로고 이미지 추가
 		add(jlbId); // ID 라벨 추가
@@ -66,10 +70,13 @@ public class LoginPanel extends JPanel implements ActionListener{
 		add(jtfPw); // PW 필드 추가
 		add(sbtnLogin); // 로그인 버튼 추가
 		add(sbtnReg); // 회원가입 버튼 추가
-		
+	
 		// 이벤트 처리
-		sbtnLogin.addActionListener(this); // 로그인 버튼 이벤트 추가.
-		sbtnReg.addActionListener(this); // 회원가입 버튼 이벤트 추가.
+		jtfId.addCaretListener(this);	// 로그인 입력창 이벤트 추가 (공백 제한)
+		jtfPw.addCaretListener(this);	// 비밀번호 입력창 이벤트 추가 (공백 제한)
+		sbtnLogin.addActionListener(this); // 로그인 버튼 이벤트 추가
+		sbtnReg.addActionListener(this); // 회원가입 버튼 이벤트 추가
+		
 	}
 
 	// actionPerformed override method
@@ -77,6 +84,7 @@ public class LoginPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sbtnLogin) { // 로그인 버튼을 눌렀을시
+			System.out.println("db 연결");
 			lm = new LoginModule();
 			Boolean flag = lm.login(jtfId.getText(), String.valueOf(jtfPw.getPassword()));
 			lm.close();
@@ -85,8 +93,19 @@ public class LoginPanel extends JPanel implements ActionListener{
 			}
 			// TODO : 로그인 처리. if문 써서 성공시, 실패시 분리
 		} else if (e.getSource() == sbtnReg) { // 회원가입 버튼을 눌렀을시
-			mc.changeCardLayout("register"); // 회원가입 패널로 전환.
+				mc.changeCardLayout("register"); // 회원가입 패널로 전환.
 		} 
 	} // actionPerformed override method end
-	
+
+	@Override
+	public void caretUpdate(CaretEvent e) {
+		if(e.getSource()==jtfId || e.getSource()==jtfPw){	// ID 입력창과 비밀번호 입력창에 글씨를 입력할 때마다 조건 검사
+			if(jtfId.getText().length()>0 && String.valueOf(jtfPw.getPassword()).length()>0){ // ID와 PW 입력칸 에공백이 없어야 로그인 버튼을 활성화
+				sbtnLogin.setEnabled(true);
+			} else {	
+				sbtnLogin.setEnabled(false);	// 공백이 있으면 로그인 버튼 비활성화
+			}
+		}
+	}
+
 }
