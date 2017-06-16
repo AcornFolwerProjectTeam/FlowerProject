@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DAO {
+public class Connect {
 	// 1. 환경 변수
 	String driver = "oracle.jdbc.driver.OracleDriver"; 
 	String url = "jdbc:oracle:thin:@192.168.0.201:1521:orcl"; 
@@ -18,7 +18,7 @@ public class DAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public DAO() {
+	public Connect() {
 		try {
 			// 2. 드라이버 로딩
 			Class.forName(driver);

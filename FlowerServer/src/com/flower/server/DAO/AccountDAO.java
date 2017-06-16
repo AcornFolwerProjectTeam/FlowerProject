@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import com.flower.server.VO.AccountVO;
 
-public class AccountDAO extends DAO {
+public class AccountDAO extends Connect {
 
 	public AccountDAO() {
-		new DAO();
+		new Connect();
 	} // default constructor ends : db access
 
 	public ArrayList<AccountVO> selectAll() {

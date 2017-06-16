@@ -11,6 +11,10 @@ public class AccountVO {
 	public AccountVO() {
 
 	} // default constructor
+	public AccountVO(String id, String pw){
+		this.id = id;
+		this.pw = pw;
+	}
 
 	public AccountVO(int customerCode, String id, String pw, String name, String tel) {
 		super();
