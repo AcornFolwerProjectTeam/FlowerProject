@@ -9,8 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.flower.client.ChatFrame;
 import com.flower.client.MainClass;
+import com.flower.client.chat.ChatDialog;
+import com.flower.client.model.ChatModule;
 import com.flower.clinet.config.EnVal;
 
 @SuppressWarnings("serial")
@@ -23,7 +24,6 @@ public class TopMenuBar extends JPanel implements ActionListener{
 	private Image img, newimg;
 	private ImageIcon imgicon;
 	private Font f;
-	private ChatFrame cf = new ChatFrame();
 
 	public TopMenuBar(MainClass mc, Boolean flag){	// flag가 true 값이면 메뉴버튼이 생성되고 로고버튼 ActionListener 붙는다.
 		this.mc = mc;
@@ -85,10 +85,24 @@ public class TopMenuBar extends JPanel implements ActionListener{
 		}else if(e.getSource()==jbtnOrder){
 			// TO-DO: 주문확인 패널로 전환
 		}else if(e.getSource()==jbtnChat){
-			cf.setVisible(true);
+			ChatDialog cd = new ChatDialog(mc.getMf()); // 채팅패널을 생성하며 채팅서버 연결객체를 넘긴다.
+			cd.setVisible(true);
 		}else if(e.getSource()==jbtnLogout){
 			// TO-DO: 로그아웃 처리
 		}
 		
 	}
+
+	public void moveOrderBtnLocationX(int x) {
+		jbtnOrder.setLocation(x, jbtnOrder.getY());
+	}
+
+	public void moveChatBtnLocationX(int x) {
+		jbtnChat.setLocation(x, jbtnChat.getY());
+	}
+
+	public void moveLogoutBtnLocationX(int x) {
+		jbtnLogout.setLocation(x, jbtnLogout.getY());
+	}
+	
 }

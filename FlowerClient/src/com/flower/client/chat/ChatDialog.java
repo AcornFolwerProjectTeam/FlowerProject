@@ -6,17 +6,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-import javax.swing.JPanel;
+import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.flower.client.MainFrame;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.model.ChatModule;
 
 @SuppressWarnings("serial")
-public class ChatPanel extends JPanel implements ActionListener, KeyListener{
+public class ChatDialog extends JDialog implements ActionListener, KeyListener, WindowListener{
 	
 	// MainFrame 상단 메뉴바에서 1:1 채팅 버튼 누르면 ChatFrame이 뜬다.
 	private JScrollPane jspShow;
@@ -27,13 +30,20 @@ public class ChatPanel extends JPanel implements ActionListener, KeyListener{
 	private ChatModule cm;
 	
 	// --- Constructor ---
-	public ChatPanel(){
-		cm = new ChatModule();
+	public ChatDialog(MainFrame mf){
+		super(mf, true); // 메인프레임을 상위프레임으로 두고 모달로 동작한다.
 		
 		// 패널 기본 설정: Layout 해제, color: white, 폰트 설정
 		setLayout(null);
 		setBackground(Color.WHITE);
 		fta= new Font("맑은 고딕", Font.PLAIN, 15);
+		setTitle("1:1 채팅"); // 제목표시줄 타이틀 설정
+		setLocation(300, 300); // 초기위치
+		setSize(450, 600); // 크기 설정
+		setResizable(false); // 크기 고정
+		
+		// 채팅 객체 생성
+		cm = new ChatModule(); // 채팅 모듈 생성하여 연결 객체를 만든다.
 		
 		// 채팅 내용 확인창
 		jtaShow = new JTextArea();	// 확인창 생성
@@ -54,6 +64,9 @@ public class ChatPanel extends JPanel implements ActionListener, KeyListener{
 		ebtnSend.setBounds(340, 500, 85, 40);	// 전송버튼 크기 및 위치 설정
 		ebtnSend.addActionListener(this);
 		add(ebtnSend);	// 패널에 전송버튼 부착
+		
+		// 윈도우 리스너 추가.
+		addWindowListener(this);
 	 }
 
 	private void chatsend(){
@@ -80,4 +93,27 @@ public class ChatPanel extends JPanel implements ActionListener, KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void windowOpened(WindowEvent e) {}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		cm.close();
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {}
+
+	@Override
+	public void windowIconified(WindowEvent e) {}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {}
+
+	@Override
+	public void windowActivated(WindowEvent e) {}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {}
 }

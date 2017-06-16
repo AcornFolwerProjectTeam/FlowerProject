@@ -9,12 +9,12 @@ import com.flower.client.register.RegisterPanel;
 
 public class MainClass {
 	// 필드변수
-	CardLayout cly; // 카드레이아웃
-	MainFrame mf; // 메인프레임
-	LoginPanel loginPanel; // 로그인 패널
-	SingleContainPanal loginScp; // 로그인패널 가운데 정렬 컨테인 패널
-	RegisterPanel registerPanel; // 회원가입 패널
-	MenuContainPanal registerMcp; // 회원가입 패널 가운데 정렬 컨테인 패널
+	private CardLayout cly; // 카드레이아웃
+	private MainFrame mf; // 메인프레임
+	private LoginPanel loginPanel; // 로그인 패널
+	private SingleContainPanal loginScp; // 로그인패널 가운데 정렬 컨테인 패널
+	private RegisterPanel registerPanel; // 회원가입 패널
+	private MenuContainPanal registerMcp; // 회원가입 패널 가운데 정렬 컨테인 패널
 
 	// --- Constructors ---
 	// 기본생성자 : 필드 변수 초기화 및 객체 생성
@@ -42,6 +42,11 @@ public class MainClass {
 		cly.show(mf.getContentPane(), taget); // 메인프레임 패널 이동
 	} // changeCardLayout method end
 	
+	
+	public MainFrame getMf() {
+		return mf;
+	}
+
 	// main method : 프로그램 시작점 메인메서드
 	public static void main(String[] args) {
 		MainClass mc = new MainClass(); // 메인 객체 생성
