@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.ConnectException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ import javax.swing.event.CaretListener;
 import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.component.StyleButton;
+import com.flower.client.dialog.CommonDialog;
 import com.flower.client.model.RegisterModule;
 
 @SuppressWarnings("serial")
@@ -214,15 +216,23 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 					String.valueOf(jtfPw.getPassword()).length()<=15 && String.valueOf(jtfPw.getPassword()).length()>=8 &&
 					String.valueOf(jtfPwConfirm.getPassword()).equals(String.valueOf(jtfPw.getPassword()))){ // 회원가입 조건 전부 만족하면
 				
-				rm = new RegisterModule();	// 서버 연결 객체 설정
-				Boolean flag = rm.register(jtfId.getText(), String.valueOf(jtfPw.getPassword()), jtfName.getText(), jtfPhone.getText());
-				rm.close();
-				
-				System.out.println("객체 연결");
-				
-				if((flag==true) && (jcbAgree.isSelected()==true)){
-					mc.changeCardLayout("product");
-				}
+				try {
+					// 서버 연결 객체 설정
+					rm = new RegisterModule();
+					Boolean flag = rm.register(jtfId.getText(), String.valueOf(jtfPw.getPassword()), jtfName.getText(), jtfPhone.getText());
+					rm.close();
+					
+					System.out.println("객체 연결");
+					
+					if((flag==true) && (jcbAgree.isSelected()==true)){
+						mc.changeCardLayout("product");
+					}
+				} catch (ConnectException e1) { // 서버 접속 시간이 초과되었을 경우 
+					new CommonDialog(mc.getMf(), "서버에 접속할 수 없습니다."); // 에러 다이얼 로그 출력
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}	
 			}
 		}
 	}

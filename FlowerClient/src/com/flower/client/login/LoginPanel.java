@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.ConnectException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,6 +17,7 @@ import javax.swing.event.CaretListener;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.StyleButton;
+import com.flower.client.dialog.CommonDialog;
 import com.flower.client.model.LoginModule;
 
 @SuppressWarnings("serial")
@@ -84,12 +87,23 @@ public class LoginPanel extends JPanel implements ActionListener, CaretListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sbtnLogin) { // 로그인 버튼을 눌렀을시
-			System.out.println("db 연결");
-			lm = new LoginModule();
-			Boolean flag = lm.login(jtfId.getText(), String.valueOf(jtfPw.getPassword()));
-			lm.close();
-			if(flag == true){
-				mc.changeCardLayout("product");
+			new CommonDialog(mc.getMf(), "서버에 접속할 수 없습니다."); 
+			
+			//System.out.println("db 연결");
+			try {
+				lm = new LoginModule();
+				Boolean flag = lm.login(jtfId.getText(), String.valueOf(jtfPw.getPassword()));
+				lm.close();
+				if(flag == true){
+					mc.changeCardLayout("product");
+				}
+			}
+			catch (ConnectException e1) { // 서버 접속 시간이 초과되었을 경우 
+				new CommonDialog(mc.getMf(), "서버에 접속할 수 없습니다."); // 에러 다이얼 로그 출력
+			}
+			catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			// TODO : 로그인 처리. if문 써서 성공시, 실패시 분리
 		} else if (e.getSource() == sbtnReg) { // 회원가입 버튼을 눌렀을시

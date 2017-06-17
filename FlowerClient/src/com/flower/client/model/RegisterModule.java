@@ -5,7 +5,9 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 public class RegisterModule {
@@ -16,7 +18,7 @@ public class RegisterModule {
 	boolean flag;
 	
 	// ----- Constructor -------
-	public RegisterModule(){ 
+	public RegisterModule() throws ConnectException, UnknownHostException, IOException{ 
 		flag = false;
 		cs = new ConnectServer();	// ConnectServer 객체 생성
 		socket = cs.getSocket();	// Socket 연결

@@ -1,7 +1,9 @@
 package com.flower.client.model;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import com.flower.clinet.config.EnVal;
 
@@ -16,13 +18,11 @@ public class ConnectServer {
 	/**
 	 * 기본생성자로 클래스가 생성됨과 동시에 설정파일에 기입된 서버 IP주소와 포트번호로
 	 * 서버에 접속하여 소캣 객체를 생성한다.
+	 * @throws IOException 
+	 * @throws ConnectException, UnknownHostException 
 	 * */
-	public ConnectServer() {
-		try {
-			socket = new Socket(EnVal.SERVERIP, EnVal.SERVERPORT);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public ConnectServer() throws ConnectException, UnknownHostException, IOException {
+		socket = new Socket(EnVal.SERVERIP, EnVal.SERVERPORT);
 	}
 	// --- Constructors end---
 	

@@ -5,7 +5,9 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 // LoginModule class
@@ -22,8 +24,11 @@ public class LoginModule {
 	/**
 	 * 로그인 클래스의 기본생성자로 매개값은 없지만 서버와 접속이 이루어진다.
 	 * 때문에 이 객체를 인스턴스하여 사용한 이후 close 메서드를 호출해줘야한다. 
+	 * @throws IOException 
+	 * @throws UnknownHostException 
+	 * @throws ConnectException 
 	 * */
-	public LoginModule() {
+	public LoginModule() throws ConnectException, UnknownHostException, IOException {
 		cs = new ConnectServer();
 		socket = cs.getSocket();
 	}
