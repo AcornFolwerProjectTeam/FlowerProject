@@ -33,6 +33,16 @@ public class EnVal {
 	public static int BOARDPAGENUM = 5;
 	
 	/**
+	 * 화면 사이즈 자동 조절시 최대 컨테이너 너비.
+	 * */
+	public static int MAXCOMPONENTWIDTH = 800;
+	
+	/**
+	 * 화면 사이즈 자동 조절시 최대 컨테이너 높이.
+	 * */
+	public static int MAXCOMPONENTHEIGhT = 950;
+	
+	/**
 	 * 서버 IP
 	 * */
 	public static String SERVERIP = "192.168.0.201";

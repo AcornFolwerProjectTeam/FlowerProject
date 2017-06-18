@@ -2,6 +2,8 @@ package com.flower.client.orderconfirm;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,7 +13,7 @@ import com.flower.client.component.BottomBar;
 
 // OrderListPanel class
 @SuppressWarnings("serial")
-public class OrderListPanel extends JPanel {
+public class OrderListPanel extends JPanel implements ComponentListener {
 	private MainClass mc;
 	private JScrollPane jspOrderScroll;
 	private JPanel jpnOrderItems;
@@ -27,6 +29,7 @@ public class OrderListPanel extends JPanel {
 		setSize(600, 800); // 크기 설정
 		setLayout(null); // 기본 배치관리자 해제
 		setBackground(Color.WHITE); // 배경색은 흰색으로
+		addComponentListener(this);
 		
 		// 변수 초기화
 		index = 0;
@@ -69,12 +72,39 @@ public class OrderListPanel extends JPanel {
 	private void appendList(int page) {
 		while (index < page) {
 			orderPanels[index].setBounds(0, 0+160*index, 480, 150);
-			bbLine[index].setBounds(0, 0+orderPanels[index].getY()+150, 480, 10);
+			bbLine[index].setBounds(0, 0+orderPanels[index].getY()+150, 2000, 10);
 			
 			index++;
 		}
 		
 		jpnOrderItems.setPreferredSize(new Dimension(jpnOrderItems.getWidth(), 0+160*index));
 	} // appendList method end
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		jspOrderScroll.setSize(getWidth()-100, getHeight()-120);
+		
+		for (int i = 0; i < orderPanels.length; i++) {
+			orderPanels[i].setLocation((getWidth()-100-480)/2, orderPanels[i].getY());
+		}
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 } // OrderListPanel class end

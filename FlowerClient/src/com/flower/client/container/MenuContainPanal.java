@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 import com.flower.client.MainClass;
 import com.flower.client.MainFrame;
 import com.flower.client.component.BottomBar;
-import com.flower.client.component.TopMenuBar;;
+import com.flower.client.component.TopMenuBar;
+import com.flower.client.orderconfirm.OrderListPanel;
+import com.flower.clinet.config.EnVal;
 
 // MenuContainPanal class
 /**
@@ -18,9 +20,10 @@ import com.flower.client.component.TopMenuBar;;
 @SuppressWarnings("serial")
 public class MenuContainPanal extends JPanel implements ComponentListener {
 	private MainFrame mf; // 메인프레임(윈도우 크기 값 참조용)
-	private TopMenuBar topMenuBar;
+	private TopMenuBar topMenuBar; // 상단 메뉴바
 	private JPanel jp; // 중앙 정렬 시킬 패널
-	private BottomBar bottomBar;
+	private int earlyWidth, earlyHeight; // 패널의 초기 크기.
+	private BottomBar bottomBar; // 하단 그래픽 바
 	
 	/**
 	 * 메인프레임과 중앙정렬시킬 패널을 받는 생성자.
@@ -32,7 +35,11 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 	 * */
 	public MenuContainPanal(MainFrame mf, JPanel jp, MainClass mc, Boolean flag) {
 		this.mf = mf; // 메인 프레임주소를 저장한다.
-		this.jp = jp;
+		this.jp = jp; // 패널 주소를 저장한다.
+		
+		// 패널의 초기 크기를 저장한다.
+		earlyWidth = jp.getWidth(); // 초기 너비
+		earlyHeight = jp.getHeight(); // 초기 높이
 		
 		setLayout(null); // 백그라운드 패널의 배치관리자를 해제한다.
 		setSize(mf.getSize()); // 백그라운드 패널의 사이즈는 프레임의 크기로한다.
@@ -56,7 +63,17 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		jp.setLocation(mf.getWidth() / 2 - 300, mf.getHeight() / 2 - 400); // 주 패널 가운데 정렬
+		int increaseWidth = (int) (mf.getWidth() - mf.getMinimumSize().getWidth());
+		int increaseHeight = (int) (mf.getHeight() - mf.getMinimumSize().getHeight());
+		
+		if (jp instanceof OrderListPanel) {
+			int width = earlyWidth+increaseWidth>EnVal.MAXCOMPONENTWIDTH?EnVal.MAXCOMPONENTWIDTH:earlyWidth+increaseWidth;
+			int height = earlyHeight+increaseHeight>EnVal.MAXCOMPONENTHEIGhT?EnVal.MAXCOMPONENTHEIGhT:earlyHeight+increaseHeight;
+			
+			jp.setSize(width, height);
+		}
+		
+		jp.setLocation(mf.getWidth() / 2 - (jp.getWidth()) / 2, mf.getHeight() / 2 - (jp.getHeight()) / 2); // 주 패널 가운데 정렬
 		topMenuBar.setSize(mf.getWidth()-50, topMenuBar.getHeight()); // 메뉴바 크기 동적 수정
 		topMenuBar.moveOrderBtnLocationX(mf.getWidth()-410);
 		topMenuBar.moveChatBtnLocationX(mf.getWidth()-310);
@@ -64,6 +81,7 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 		
 		bottomBar.setLocation(bottomBar.getX(), mf.getHeight()-65); // 이미지바 하단으로 위치 동적 이동
 		bottomBar.setSize(mf.getWidth()-50, bottomBar.getHeight()); // 이미지바 크기 동적 수정
+		
 	}
 
 	@Override
