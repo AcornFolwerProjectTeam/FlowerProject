@@ -4,6 +4,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,7 +14,7 @@ import javax.swing.JPanel;
 
 import com.flower.client.MainClass;
 import com.flower.client.chat.ChatDialog;
-import com.flower.client.model.ChatModule;
+import com.flower.client.dialog.CommonDialog;
 import com.flower.clinet.config.EnVal;
 
 @SuppressWarnings("serial")
@@ -85,8 +88,18 @@ public class TopMenuBar extends JPanel implements ActionListener{
 		}else if(e.getSource()==jbtnOrder){
 			// TO-DO: 주문확인 패널로 전환
 		}else if(e.getSource()==jbtnChat){
-			ChatDialog cd = new ChatDialog(mc.getMf()); // 채팅패널을 생성하며 채팅서버 연결객체를 넘긴다.
-			cd.setVisible(true);
+			ChatDialog cd;
+			try {
+				// 채팅패널을 생성하며 채팅서버 연결객체를 넘긴다.
+				cd = new ChatDialog(mc.getMf());
+				cd.setVisible(true);
+			} catch (ConnectException e1) {
+				new CommonDialog(mc.getMf(), "채팅 서버에 접속할 수 없습니다."); // 에러 다이얼 로그 출력
+			} catch (UnknownHostException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}else if(e.getSource()==jbtnLogout){
 			// TO-DO: 로그아웃 처리
 		}

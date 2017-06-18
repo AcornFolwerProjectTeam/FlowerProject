@@ -24,7 +24,7 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 	Font f;
 	Boolean flag;
 	
-	OrderConfirmPanel(MainClass mc, String productName, String productPrice, Boolean flag) {
+	public OrderConfirmPanel(MainClass mc, String productName, String productPrice, Boolean flag) {
 		this.mc = mc;
 		
 		// 초기 설정

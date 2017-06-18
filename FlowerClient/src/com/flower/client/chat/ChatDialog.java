@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
@@ -30,7 +33,7 @@ public class ChatDialog extends JDialog implements ActionListener, KeyListener, 
 	private ChatModule cm;
 	
 	// --- Constructor ---
-	public ChatDialog(MainFrame mf){
+	public ChatDialog(MainFrame mf) throws UnknownHostException, ConnectException, IOException {
 		super(mf, true); // 메인프레임을 상위프레임으로 두고 모달로 동작한다.
 		
 		// 패널 기본 설정: Layout 해제, color: white, 폰트 설정

@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import com.flower.clinet.config.EnVal;
 
@@ -18,13 +20,8 @@ public class ChatModule{ // 서버와 통신, 소켓 연결, 주고 받는 것까지, 값은 view�
 	 /* ------- Constructor ---------
 	 생성자에서는 서버와 연결한다.*/
 	
-	public ChatModule() {
-		try {
+	public ChatModule() throws UnknownHostException, ConnectException, IOException {
 			socket = new Socket(EnVal.SERVERIP, EnVal.CHATPORT);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	// 채팅 내용을 서버로 전송하는 method
