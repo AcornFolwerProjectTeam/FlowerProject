@@ -41,7 +41,7 @@ public class BoardWritePanel extends JPanel {
 	private StyleButton sbtnPost; // 등록(게시글 게시) 버튼
 	
 	// --- Constructor ---
-	public BoardWritePanel(MainClass mc, String productName) {
+	public BoardWritePanel(MainClass mc) {
 		this.mc = mc; // 컨터롤러 헨들링을 위한 메인클레스를 받는다.
 		// 기본설정
 		setSize(600, 800); // 크기 설정
@@ -58,7 +58,7 @@ public class BoardWritePanel extends JPanel {
 		add(jlabProductName); // 패널에 추가.
 		
 		// 제목 표기칸
-		jlabProductNameVal = new JLabel("  " + productName); // 레이블 생성
+		jlabProductNameVal = new JLabel("  "); // 레이블 생성
 		jlabProductNameVal.setBounds(130, 60, 400, 41); // 위치 및 크기 설정
 		jlabProductNameVal.setBorder(new LineBorder(EnVal.MAINCOLOR)); // 테두리 설정
 		jlabProductNameVal.setFont(EnVal.LABLEFONT); // 폰트 설정
@@ -158,4 +158,9 @@ public class BoardWritePanel extends JPanel {
 		add(sbtnPost);
 	}
 	// --- Constructor end---
+
+	public void setProductName(String productName) {
+		jlabProductNameVal.setText("  " + productName); // 상품명 설정
+	}
+	
 } // BoardWritePanel class end
