@@ -85,10 +85,10 @@ public class ProductModule {
 			ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 			
 			ProductVO fvo = (ProductVO) ois.readObject();
-			ProductVO fvo2 = (ProductVO) ois.readObject();
 			ArrayList<ProductVO> list=(ArrayList<ProductVO>)ois.readObject();//arraylist로 받아온다.
 			this.list=list;
-			System.out.println(list);
+			System.out.println("list" + list);
+			System.out.println("fvo" + fvo);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
