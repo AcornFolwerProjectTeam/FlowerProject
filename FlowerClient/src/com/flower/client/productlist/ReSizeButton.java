@@ -1,0 +1,36 @@
+package com.flower.client.productlist;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import com.flower.client.productdetail.DetailTop;
+
+import com.flower.vo.ProductVO;
+
+
+
+public class ReSizeButton extends JButton implements ActionListener{
+
+	
+	ArrayList<ProductVO> list;//flowerVO를 담은  list 객체를 받는다.
+	int index;//이 버튼이 몇번째로 생성되었는지 저장=> 몇번째 list에서 가져왔는지
+	ReSizeButton(ArrayList<ProductVO> list, int index, ImageIcon arg0){
+		//생성자 오버로딩
+		super(arg0);//이미지 아이콘 생성자
+		
+		this.list=list;
+		this.index=index ;
+		addActionListener(this);//버튼 액션리스너 추가
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	    DetailTop dt = new DetailTop(list, index);
+	    
+	}
+
+}
