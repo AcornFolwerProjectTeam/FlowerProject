@@ -73,7 +73,8 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 			jp.setSize(width, height);
 		}
 		
-		jp.setLocation(mf.getWidth() / 2 - (jp.getWidth()) / 2, mf.getHeight() / 2 - (jp.getHeight()) / 2); // 주 패널 가운데 정렬
+		//System.out.println(jp.getSize());
+		jp.setLocation(mf.getWidth() / 2 - (jp.getWidth()-16) / 2, mf.getHeight() / 2 - (jp.getHeight()-38) / 2); // 주 패널 가운데 정렬
 		topMenuBar.setSize(mf.getWidth()-50, topMenuBar.getHeight()); // 메뉴바 크기 동적 수정
 		topMenuBar.moveOrderBtnLocationX(mf.getWidth()-410);
 		topMenuBar.moveChatBtnLocationX(mf.getWidth()-310);
