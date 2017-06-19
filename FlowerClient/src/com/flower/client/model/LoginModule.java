@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 
+import com.flower.client.vo.AccountVO;
+
 // LoginModule class
 /**
  * 계정 로그인 처리를 담당하는 로그인 클래스
@@ -41,9 +43,9 @@ public class LoginModule {
 	 * 
 	 * @param id 로그인 아이디
 	 * @param password 로그인 패스워드
-	 * @return 로그인 성공시 true, 실패시 false
+	 * @return 로그인 성공시 회원 정보를 담고 있는 AccountVO, 실패시 null
 	 * */
-	public boolean login(String id, String password) {
+	public AccountVO login(String id, String password) {
 		try {
 			// 변수/객체 설정
 			oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream())); // 서버에 객체타입의 값을 전달하기위한 객체 생성
@@ -64,14 +66,18 @@ public class LoginModule {
 			// 객체타입의 값을 전달 받았으나 HashMap 타입이므로 형변환을 해준다.
 			@SuppressWarnings("unchecked") // 반드시 HashMap 타입이 오므로 경고는 꺼준다.
 			HashMap<String, String> oisHm = (HashMap<String, String>) ois.readObject(); // Object to HashMap
-			System.out.println(oisHm);	// testCode
 			
-			// 서버에서
-			if (oisHm.get("respond").equals("okay")) {
-				// TODO : 로그인 정보를 전역같은 위치의 VO에 저장하는 코드 작성 필요
-				return true; // 성공했다는 의미의 참값을 반환한다.
-			} else { // 에러(error)일경우
-				return false; // 거짓값을 반환한다.
+			// 서버에서 데이터를 받아 세팅한다.
+			if (oisHm.get("respond").equals("okay")) { // 로그인 성공시
+				AccountVO avo = new AccountVO(); // 회원 정보를 담을 VO객체 생성
+				
+				avo.setId(oisHm.get("id")); // ID
+				avo.setName(oisHm.get("name")); // 이름(닉네임)
+				avo.setTel(oisHm.get("tel")); // 회원 전화번호
+				
+				return avo; // VO에 세팅한 회원정보를 반환한다.
+			} else { // 에러(error)일경우 로그인 실패
+				return null; // null값을 반환한다.
 			}
 			
 			
@@ -90,7 +96,7 @@ public class LoginModule {
 			
 		}
 		
-		return false;
+		return null; // 만약 메서드 종료까지 로그인처리가 되지 않았다면 null값을 반환해 강제 실패처리한다.
 	}// login method end
 	
 	// close method

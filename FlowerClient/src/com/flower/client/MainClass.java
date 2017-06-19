@@ -7,6 +7,7 @@ import com.flower.client.board.BoardWritePanel;
 import com.flower.client.container.MenuContainPanal;
 import com.flower.client.login.LoginPanel;
 import com.flower.client.register.RegisterPanel;
+import com.flower.client.vo.AccountVO;
 
 public class MainClass {
 	// 필드변수
@@ -19,6 +20,8 @@ public class MainClass {
 	private BoardWritePanel boardWritePanel; // 상품 후기 쓰기 패널(게시판 쓰기모듈)
 	private MenuContainPanal boardWriteMcp; // 상품 후기 쓰기 패널 가운데 정렬 컨테인 패널
 	
+	// 필드VO
+	private AccountVO avo;
 
 	// --- Constructors ---
 	// 기본생성자 : 필드 변수 초기화 및 객체 생성
@@ -75,4 +78,14 @@ public class MainClass {
 		
 	} // main method end
 
+	
+	// --- Getter and Setter ---
+	public AccountVO getAvo() {
+		return avo;
+	}
+
+	public void setAvo(AccountVO avo) {
+		this.avo = avo;
+	}
+	// --- Getter and Setter end ---
 }
