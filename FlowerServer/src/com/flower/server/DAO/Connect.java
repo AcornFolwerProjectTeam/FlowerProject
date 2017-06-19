@@ -9,9 +9,11 @@ import java.sql.SQLException;
 public class Connect {
 	// 1. 환경 변수
 	String driver = "oracle.jdbc.driver.OracleDriver"; 
-	String url = "jdbc:oracle:thin:@192.168.0.201:1521:orcl"; 
+	//test server
+	// String url = "jdbc:oracle:thin:@192.168.0.201:1521:orcl"; 
+	String url = "jdbc:oracle:thin:@orcl.ckjncc7mkeew.ap-northeast-2.rds.amazonaws.com:1521:orcl";
 	String user = "scott";
-	String pw = "tiger";
+	String pw = "tigertiger";
 	
 	Connection conn = null;
 	StringBuffer sb = new StringBuffer();
