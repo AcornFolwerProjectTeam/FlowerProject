@@ -86,9 +86,7 @@ public class LoginPanel extends JPanel implements ActionListener, CaretListener{
 	// 버튼 액션 리스너 핸들러 이벤트
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == sbtnLogin) { // 로그인 버튼을 눌렀을시
-			new CommonDialog(mc.getMf(), "서버에 접속할 수 없습니다."); 
-			
+		if (e.getSource() == sbtnLogin) { // 로그인 버튼을 눌렀을시			
 			//System.out.println("db 연결");
 			try {
 				lm = new LoginModule();
