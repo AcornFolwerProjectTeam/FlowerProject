@@ -27,7 +27,7 @@ public class Connect {
 			// 3. db 접속
 			conn = DriverManager.getConnection(url, user, pw);
 			if(conn != null){
-				System.out.println("db에 연결되었습니다");
+				//System.out.println("db에 연결되었습니다");
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("jdbc driver error");
