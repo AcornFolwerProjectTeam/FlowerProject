@@ -46,14 +46,16 @@ public class MTreadServer extends Thread {
 				LogInDAO ln = new LogInDAO(hm);
 				ln.check();
 				hm1 = ln.check();
-
+				oos.writeObject(hm1);
+				oos.flush();
+				
 			} else if (hm.get("request").equals("signin")) {
 				SignInDAO si = new SignInDAO(hm);
 				si.check();
 				hm1 = si.check();
+				oos.writeObject(hm1);
+				oos.flush();
 			}
-			oos.writeObject(hm1);
-			oos.flush();
 
 			// 상품정보 조회
 			// DAO 클래스에 hm 정보("request" 및 "me1" 등) 전달
@@ -68,6 +70,8 @@ public class MTreadServer extends Thread {
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
+				oos.writeObject(selectResult);
+				oos.flush();
 			} else if (hm.get("request").equals("selectme")) {
 				System.out.println("select me 동작");
 				pda.selectMe();
@@ -75,16 +79,17 @@ public class MTreadServer extends Thread {
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
+				oos.writeObject(selectResult);
+				oos.flush();
 			} else if (hm.get("request").equals("selectyou")) {
 				pda.selectYou();
 				selectResult = pda.selectYou();
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
+				oos.writeObject(selectResult);
+				oos.flush();
 			}
-
-			oos.writeObject(selectResult);
-			oos.flush();
 
 		} catch (IOException e) {
 			System.out.println("IO exception in Reader and Writer, MThreadServer");
