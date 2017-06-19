@@ -28,7 +28,7 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 	private JTextArea jtaMsg;
 	private StyleButton sbtnCancel;
 	private EmphasisButton ebtnBuy;
-	private Font flb, fcb;
+	private Font flb, fcb, ftf;
 	private JScrollPane jspMsg;
 	private MainClass mc;
 	
@@ -40,13 +40,14 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		setBackground(Color.WHITE);
 		
 		flb = new Font("맑은 고딕", Font.BOLD, 13); // JLabel 폰트
+		ftf = new Font("맑은 고딕", Font.PLAIN, 13); // 텍스트필드 폰트
 		fcb = new Font("맑은 고딕", Font.PLAIN, 12);	// 체크박스 폰트
 		
 		// 상품 이미지 버튼
 		jbtnImg = new JButton();	// 이미지가 들어갈 버튼 생성
 									// TODO 이미지 붙이기
 		jbtnImg.setBounds(30, 150, 170, 245);	// 이미지 크기, 위치 지정
-		jbtnImg.setEnabled(false);
+		jbtnImg.setEnabled(false);	// 상품 이미지버튼 클릭할 수 없도록 비활성화
 		add(jbtnImg);	// 이미지 부착
 		
 		// 예약 시간 라벨
@@ -58,6 +59,7 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		// 시간 설정 입력칸
 		jtfTime = new JTextField();	// 시간 설정 입력칸 생성
 		jtfTime.setBounds(360, 150, 190, 30);	// 시간 설정 크기, 위치 지정
+		jtfTime.setFont(ftf);	// 시간 설정 폰트 설정
 		add(jtfTime);	// 시간설정 콤보박스 부착
 		
 		// 주문자 이름 라벨
@@ -95,16 +97,21 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		jtaMsg.setLineWrap(true);	// JTextArea의 가로 크기에 따라 자동 줄바꿈
 		jspMsg = new JScrollPane(jtaMsg, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);	// 메시지 입력 스크롤 패널 부착
 		jspMsg.setBounds(30, 450, 520, 100);	// 메시지 입력창 크기, 위치 지정
+		jspMsg.setFont(ftf);	// 메시지 입력창 폰트 설정
 		add(jspMsg);	// 메시지 입력창 부착
 		
 		// 구매자 이름 입력칸
-		jtfBuyerName = new JTextField();	// 구매자 이름 입력칸 생성
+		jtfBuyerName = new JTextField(mc.getAvo().getName());	// 구매자 이름 입력칸 생성, 로그인한 유저의 이름으로 초기화
 		jtfBuyerName.setBounds(360, 200, 190, 30); // 구매자 이름 입력칸 크기, 위치 지정
+		jtfBuyerName.setFont(ftf);	// 구매자 이름 입력칸 폰트 설정
+		jtfBuyerName.setEnabled(false);	// 구매자 이름 수정할 수 없게 설정
 		add(jtfBuyerName);	// 구매자 이름 입력칸 부착
 		
 		// 구매자 핸드폰 입력칸
-		jtfBuyerPhone = new JTextField();	// 구매자 핸드폰 입력칸 생성
+		jtfBuyerPhone = new JTextField(mc.getAvo().getTel());	// 구매자 핸드폰 입력칸 생성, 로그인한 유저의 핸드폰 번호로 초기화
 		jtfBuyerPhone.setBounds(360, 240, 190, 30);	// 구매자 핸드폰 입력칸 크기, 위치 지정
+		jtfBuyerPhone.setFont(ftf);	// 구매자 핸드폰 입력칸 폰트 설정
+		jtfBuyerPhone.setEnabled(false);	// 구매자 핸드폰 입력칸 수정할 수 없게 설정
 		add(jtfBuyerPhone); // 구매자 핸드폰 입력칸 부착
 		
 		// 주문자 정보와 동일한지 체크
@@ -112,17 +119,19 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		jcbInfo.setBounds(235, 290, 190, 20);	// 체크박스 크기, 위치 지정
 		jcbInfo.setFont(fcb);	// 체크박스 폰트 지정
 		jcbInfo.setBackground(Color.WHITE);	// 체크박스 배경색 변경
-		jcbInfo.addItemListener(this);
+		jcbInfo.addItemListener(this);	// 체크박스 입력했을 때 찾는사람 정보 set 하기 위한 Listener 부착
 		add(jcbInfo);	// 체크박스 부착
 		
 		// 찾는 사람 이름 입력
 		jtfName = new JTextField();	// 찾는 사람 이름 입력칸 생성
 		jtfName.setBounds(360, 325, 190, 30);	// 이름 입력칸 크기, 위치 지정
+		jtfName.setFont(ftf);	// 찾는 사람 이름 입력칸 폰트 설정
 		add(jtfName);	// 찾는 사람 이름 입력칸 부착
 		
-		// 찾는 사람 이름 입력
+		// 찾는 사람 핸드폰 입력
 		jtfPhone = new JTextField();	// 찾는 사람 핸드폰 입력칸 생성
 		jtfPhone.setBounds(360, 365, 190, 30);	// 핸드폰번호 입력칸 크기, 위치 지정
+		jtfPhone.setFont(ftf);	// 찾는 사람 핸드폰 입력칸 폰트 설정
 		add(jtfPhone);	// 찾는 사람 핸드폰 입력칸 부착
 		
 		// 주문 취소 버튼
@@ -152,13 +161,12 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		}
 	}
 
-
-
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		if(jcbInfo.isSelected()==true){
-			jtfName.setText(jtfBuyerName.getText());
-			jtfPhone.setText(jtfBuyerPhone.getText());			
+		if(jcbInfo.isSelected()==true){	// 체크박스 체크 하면
+			jtfName.setText(jtfBuyerName.getText());	// 찾는 사람 이름에 주문자 이름 가지고 오기
+			jtfPhone.setText(jtfBuyerPhone.getText());	// 찾는사람 핸드폰번호에 주문자 핸드폰번호 가지고 오기
+			
 		};
 		
 	}

@@ -4,17 +4,19 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.component.StyleButton;
+import com.flower.clinet.config.EnVal;
 
 @SuppressWarnings("serial")
 public class ProductInfoPanel extends JPanel implements ActionListener{
-	private JButton jbtnImg, jbtnProduct;
+	private JLabel jlbImg, jlbProduct;
 	private StyleButton sbtnReview;
 	private EmphasisButton ebtnBuy;
 	private JScrollPane jsp;
@@ -28,16 +30,18 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		setBackground(Color.WHITE);
 		
 		// 좌측 상단 제품 사진
-		jbtnImg = new JButton();	// 제품사진 버튼 생성
-		jbtnImg.setBounds(50, 50, 200, 200);	// 제품사진 버튼 크기, 위치 지정
-		jbtnImg.setEnabled(false);	// 제품사진 버튼 클릭 비활성화
-		add(jbtnImg);	// 제품사진 버튼 부착
+		jlbImg = new JLabel();	// 제품사진 버튼 생성
+		jlbImg.setBounds(50, 50, 200, 200);	// 제품사진 버튼 크기, 위치 지정
+		jlbImg.setBorder(new LineBorder(EnVal.MAINCOLOR));	// 테스트를 위한 테두리 설정
+		jlbImg.setEnabled(false);	// 제품사진 버튼 클릭 비활성화
+		add(jlbImg);	// 제품사진 버튼 부착
 		
 		// 우측 상단 제품 정보
-		jbtnProduct = new JButton();	// 제품정보 버튼 생성	
-		jbtnProduct.setBounds(290, 50, 250, 140);	// 제품정보 버튼 크기, 위치 지정
-		jbtnImg.setEnabled(false);	// 제품정보 버튼 클릭 비활성화
-		add(jbtnProduct);	// 제품정보 버튼 부착
+		jlbProduct = new JLabel();	// 제품정보 버튼 생성	
+		jlbProduct.setBounds(290, 50, 250, 140);	// 제품정보 버튼 크기, 위치 지정
+		jlbProduct.setBorder(new LineBorder(EnVal.MAINCOLOR));	// 테스트를 위한 테두리 설정
+		jlbProduct.setEnabled(false);	// 제품정보 버튼 클릭 비활성화
+		add(jlbProduct);	// 제품정보 버튼 부착
 		
 		// 우측 상단 리뷰보기 버튼
 		sbtnReview = new StyleButton("리뷰보기");	// 리뷰보기 버튼 생성
