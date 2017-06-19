@@ -132,7 +132,7 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 		// PW 재입력
 		jtfPwConfirm = new JPasswordField();	// PW 재입력칸 생성
 		jtfPwConfirm.setBounds(400, 305, 160, 30);	// PW 재입력칸 크기, 위치 지정
-		jtfPwConfirm.addCaretListener(this);
+		jtfPwConfirm.addCaretListener(this);	// PW 조건 검사를 위한 Listener 부착
 		add(jtfPwConfirm);	// PW 재입력칸 부착
 		
 		// PW 확인 경고 메시지
@@ -157,11 +157,13 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 		// 이름 입력
 		jtfName = new JTextField();	// 이름 입력칸 생성
 		jtfName.setBounds(400, 370, 160, 30);	// 이름 입력칸 크기, 위치 지정
+		jtfName.addCaretListener(this);
 		add(jtfName);	// 이름 입력칸 부착
 		
 		// 핸드폰번호 입력
 		jtfPhone = new JTextField();	// 핸드폰번호 입력칸 생성
 		jtfPhone.setBounds(400, 425, 160, 30);	// 핸드폰번호 입력칸 크기, 위치 지정
+		jtfPhone.addCaretListener(this);
 		add(jtfPhone);	// 핸드폰번호 입력칸 부착
 				
 		// 취소 버튼
@@ -175,6 +177,7 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 		ebtnEnter = new EmphasisButton("가입 완료");	// 확인버튼 생성: 강조버튼
 		ebtnEnter.setBounds(310, 560, 120, 40);	// 확인버튼 크기, 위치 지정
 		ebtnEnter.addActionListener(this); // 확인 버튼에 ActionListener 부착
+		ebtnEnter.setEnabled(false);
 		add(ebtnEnter); // 확인버튼 부착
 
 	} // Constructor End
@@ -203,6 +206,18 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 			} else {
 				jlbPwConfirmMsg.setText("");	// 비밀번호와 비밀번호 확인칸이 일치하면 경고 메시지 없애기
 			}
+		} else if (e.getSource()==jtfId || e.getSource()==jtfPw || 
+				e.getSource()==jtfPwConfirm || e.getSource()==jtfName ||
+				e.getSource()==jtfPhone){
+			
+			if(jtfId.getText().length()<=15 && jtfId.getText().length()>=8 &&
+			String.valueOf(jtfPw.getPassword()).length()<=15 &&
+			String.valueOf(jtfPw.getPassword()).length()>=8 &&
+			String.valueOf(jtfPwConfirm.getPassword()).equals(String.valueOf(jtfPw.getPassword())) &&
+			jtfName.getText().length()>0 && 
+			jtfPhone.getText().length()>0){
+				ebtnEnter.setEnabled(true);
+			}
 		}
 	}	// Override end
 
@@ -211,32 +226,32 @@ public class RegisterPanel extends JPanel implements ActionListener, CaretListen
 		if(e.getSource()==sbtnCancel){	// 취소버튼 클릭
 			mc.changeCardLayout("login");	//  로그인 패널로 돌아가기
 		} else if(e.getSource()==ebtnEnter){	// 가입완료 버튼 클릭
-			
-			if(jtfId.getText().length()<=15 && jtfId.getText().length()>=8 &&
-					String.valueOf(jtfPw.getPassword()).length()<=15 && String.valueOf(jtfPw.getPassword()).length()>=8 &&
-					String.valueOf(jtfPwConfirm.getPassword()).equals(String.valueOf(jtfPw.getPassword()))){ // 회원가입 조건 전부 만족하면
-				
+			//System.out.println(jcbAgree.isSelected());
+			if(jcbAgree.isSelected()==true){
 				try {
 					// 서버 연결 객체 설정
 					rm = new RegisterModule();
 					Boolean flag = rm.register(jtfId.getText(), String.valueOf(jtfPw.getPassword()), jtfName.getText(), jtfPhone.getText());
 					rm.close();
 					
-					System.out.println("객체 연결");
-					
-					if((flag==true) && (jcbAgree.isSelected()==true)){
-						mc.changeCardLayout("product");
+					if(flag==true){
+						new CommonDialog(mc.getMf(), "회원가입에 성공했습니다.");
+						mc.changeCardLayout("login");
+					}else {
+						new CommonDialog(mc.getMf(), "이미 존재하는 ID입니다.");
 					}
+					
 				} catch (ConnectException e1) { // 서버 접속 시간이 초과되었을 경우 
 					new CommonDialog(mc.getMf(), "서버에 접속할 수 없습니다."); // 에러 다이얼 로그 출력
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
-				}	
-			}
-		}
+				}
+			} else {
+				new CommonDialog(mc.getMf(), "약관에 동의해주세요.");
+			}	// if2 end
+		} // if1 end
 	}
-
 }
 	
 

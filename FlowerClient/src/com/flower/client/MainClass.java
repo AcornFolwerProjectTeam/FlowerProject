@@ -19,6 +19,7 @@ public class MainClass {
 	private MenuContainPanal registerMcp; // 회원가입 패널 가운데 정렬 컨테인 패널
 	private BoardWritePanel boardWritePanel; // 상품 후기 쓰기 패널(게시판 쓰기모듈)
 	private MenuContainPanal boardWriteMcp; // 상품 후기 쓰기 패널 가운데 정렬 컨테인 패널
+	private Boolean chatFlag;	// 채팅창이 켜져 있는지를 판별하는 변수
 	
 	// 필드VO
 	private AccountVO avo;
@@ -38,6 +39,8 @@ public class MainClass {
 		// 상품후기 컨테이너 및 컴포넌트
 		boardWritePanel = new BoardWritePanel(this);
 		boardWriteMcp = new MenuContainPanal(mf, boardWritePanel, this, true); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
+		// ChatDialog 실행 판별
+		chatFlag = false;
 	}
 	// --- Constructors end ---
 	
@@ -87,5 +90,15 @@ public class MainClass {
 	public void setAvo(AccountVO avo) {
 		this.avo = avo;
 	}
+
+	public Boolean getChatFlag() {
+		return chatFlag;
+	}
+
+	public void setChatFlag(Boolean chatFlag) {
+		this.chatFlag = chatFlag;
+	}
+	
+	
 	// --- Getter and Setter end ---
 }

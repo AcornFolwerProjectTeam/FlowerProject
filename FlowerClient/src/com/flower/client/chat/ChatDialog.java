@@ -17,9 +17,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.flower.client.MainFrame;
+import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.model.ChatModule;
+import com.flower.client.model.ChatThreadModule;
 
 @SuppressWarnings("serial")
 public class ChatDialog extends JDialog implements ActionListener, KeyListener, WindowListener{
@@ -31,10 +32,14 @@ public class ChatDialog extends JDialog implements ActionListener, KeyListener, 
 	private EmphasisButton ebtnSend;
 	private Font fta; 
 	private ChatModule cm;
+	private ChatThreadModule ctm;
+	private MainClass mc;
 	
 	// --- Constructor ---
-	public ChatDialog(MainFrame mf) throws UnknownHostException, ConnectException, IOException {
-		super(mf, true); // 메인프레임을 상위프레임으로 두고 모달로 동작한다.
+	public ChatDialog(MainClass mc) throws UnknownHostException, ConnectException, IOException {
+		super(mc.getMf(), false); // 메인프레임을 상위프레임으로 두고 모달로 동작한다.
+		this.mc = mc;
+		mc.setChatFlag(true);
 		
 		// 패널 기본 설정: Layout 해제, color: white, 폰트 설정
 		setLayout(null);
@@ -49,7 +54,7 @@ public class ChatDialog extends JDialog implements ActionListener, KeyListener, 
 		cm = new ChatModule(); // 채팅 모듈 생성하여 연결 객체를 만든다.
 		
 		// 채팅 내용 확인창
-		jtaShow = new JTextArea();	// 확인창 생성
+		jtaShow = new JTextArea("행복을 전하는 La Fleur" + "\n" + "1:1 채팅을 통해 편하게 상담하세요." +"\n" +"\n");	// 확인창 생성
 		jspShow = new JScrollPane(jtaShow, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); // 확인창 스크롤 생성
 		jtaShow.setFont(fta);	// 확인창 폰트 설정
 		jspShow.setBounds(20, 30, 405, 462);	// 확인창 크기 및 위치 설정
@@ -70,23 +75,31 @@ public class ChatDialog extends JDialog implements ActionListener, KeyListener, 
 		
 		// 윈도우 리스너 추가.
 		addWindowListener(this);
+		
+		// 채팅 Thread객체 생성
+		ctm = new ChatThreadModule(cm, jtaShow, jspShow);	// ChatModule, jtaShow, jspShow 주소값 받아서 ChatThreadModule 생성
+		ctm.start();	// 채팅 Thread를 돌리기 시작
+	
 	 }
 
 	private void chatsend(){
-		cm.send(jtaMsg.getText());	// 서버로 메시지를 전송한다. 
+		String msg = jtaMsg.getText();
+		cm.send(msg);	// 서버로 메시지를 전송한다. 
+		jtaShow.append("[" + mc.getAvo().getName() + "]: " +msg +"\n");	// [접속한ID] : 메시지 내용을 채팅 내용 확인창에 띄운다.
 		jtaMsg.setText("");	// 메시지 입력 창을 비운다.
+		jtaMsg.requestFocus();	// 메시지 입력 창으로 커서를 위치한다.
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == ebtnSend){
+		if(e.getSource() == ebtnSend){	//  전송버튼 눌렀을 때 chatsend() 실행해서 server로 메시지를 전송한다.
 			chatsend();
 		}
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){ //  엔터버튼 눌렀을 때 chatsend() 실행해서 server로 메시지를 전송한다.
 			chatsend();
 		}
 	}
@@ -103,6 +116,7 @@ public class ChatDialog extends JDialog implements ActionListener, KeyListener, 
 	@Override
 	public void windowClosing(WindowEvent e) {
 		cm.close();
+		mc.setChatFlag(false);
 	}
 
 	@Override
@@ -119,4 +133,5 @@ public class ChatDialog extends JDialog implements ActionListener, KeyListener, 
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {}
+
 }

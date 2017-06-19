@@ -88,20 +88,25 @@ public class TopMenuBar extends JPanel implements ActionListener{
 		}else if(e.getSource()==jbtnOrder){
 			// TO-DO: 주문확인 패널로 전환
 		}else if(e.getSource()==jbtnChat){
-			ChatDialog cd;
-			try {
-				// 채팅패널을 생성하며 채팅서버 연결객체를 넘긴다.
-				cd = new ChatDialog(mc.getMf());
-				cd.setVisible(true);
-			} catch (ConnectException e1) {
-				new CommonDialog(mc.getMf(), "채팅 서버에 접속할 수 없습니다."); // 에러 다이얼 로그 출력
-			} catch (UnknownHostException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			if(mc.getChatFlag()==false){
+				ChatDialog cd;
+				try {
+					// 채팅패널을 생성하며 채팅서버 연결객체를 넘긴다.
+					cd = new ChatDialog(mc);
+					cd.setVisible(true);
+				} catch (ConnectException e1) {
+					new CommonDialog(mc.getMf(), "채팅 서버에 접속할 수 없습니다."); // 에러 다이얼 로그 출력
+				} catch (UnknownHostException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			} else{
+				new CommonDialog(mc.getMf(), "이미 1:1 채팅이 실행중입니다.");
 			}
 		}else if(e.getSource()==jbtnLogout){
-			// TO-DO: 로그아웃 처리
+			mc.setAvo(null);	// AccountVO의 값을 null로 설정하여 비운다.
+			mc.changeCardLayout("login");	// login 패널로 전환한다.
 		}
 		
 	}
