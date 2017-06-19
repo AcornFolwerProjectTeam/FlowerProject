@@ -1,4 +1,4 @@
-package com.flower.client.vo;
+package com.flower.vo;
 
 public class BoardVO {
 	private String title;

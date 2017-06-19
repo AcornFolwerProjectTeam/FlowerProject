@@ -19,7 +19,7 @@ import com.flower.client.MainClass;
 import com.flower.client.component.StyleButton;
 import com.flower.client.dialog.CommonDialog;
 import com.flower.client.model.LoginModule;
-import com.flower.client.vo.AccountVO;
+import com.flower.vo.AccountVO;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel implements ActionListener, CaretListener{

@@ -7,7 +7,7 @@ import com.flower.client.board.BoardWritePanel;
 import com.flower.client.container.MenuContainPanal;
 import com.flower.client.login.LoginPanel;
 import com.flower.client.register.RegisterPanel;
-import com.flower.client.vo.AccountVO;
+import com.flower.vo.AccountVO;
 
 public class MainClass {
 	// 필드변수

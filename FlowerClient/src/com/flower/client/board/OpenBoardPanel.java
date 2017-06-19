@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.flower.client.component.BottomBar;
-import com.flower.client.vo.BoardVO;
 import com.flower.clinet.config.EnVal;
+import com.flower.vo.BoardVO;
 
 // OpenBoardPanel class
 /**

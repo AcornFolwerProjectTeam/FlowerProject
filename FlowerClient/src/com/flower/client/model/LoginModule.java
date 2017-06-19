@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 
-import com.flower.client.vo.AccountVO;
+import com.flower.vo.AccountVO;
 
 // LoginModule class
 /**

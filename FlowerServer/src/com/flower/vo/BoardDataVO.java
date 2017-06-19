@@ -1,4 +1,4 @@
-package com.flower.server.VO;
+package com.flower.vo;
 
 public class BoardDataVO {
 	private int postCode;

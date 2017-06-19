@@ -3,7 +3,7 @@ package com.flower.server.DAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.flower.server.VO.AccountVO;
+import com.flower.vo.AccountVO;
 
 public class AccountDAO extends Connect {
 
