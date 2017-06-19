@@ -3,7 +3,7 @@ package com.flower.server.DAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.flower.server.VO.ProductVO;
+import com.flower.vo.ProductVO;
 
 public class ProductDAO extends Connect {
 	// 1. Client를 통해서 request 정보가 담긴 HashMap을 생성자를 통해서 가져온다

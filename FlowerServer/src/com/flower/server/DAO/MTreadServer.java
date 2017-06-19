@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.flower.server.VO.ProductVO;
+import com.flower.vo.ProductVO;
 
 // thread를 상속받은 멀티스레드서버 클래스
 public class MTreadServer extends Thread {
