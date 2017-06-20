@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.flower.vo.OrderListVO;
-import com.flower.vo.ProductVO;
 
 public class OrderModule {
 	ConnectServer cs = null;

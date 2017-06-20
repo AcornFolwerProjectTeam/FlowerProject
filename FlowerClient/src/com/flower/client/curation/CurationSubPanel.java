@@ -1,17 +1,13 @@
 package com.flower.client.curation;
 //큐레이션 질문의 부속패널
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
+@SuppressWarnings("serial")
 public class CurationSubPanel  extends JFrame {
 	public JButton jbtnMe;
 	public JButton jbtnYou;

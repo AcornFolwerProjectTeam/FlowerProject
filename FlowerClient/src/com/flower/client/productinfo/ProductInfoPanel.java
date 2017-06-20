@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -19,6 +20,8 @@ import com.flower.client.component.EmphasisButton;
 import com.flower.client.component.StyleButton;
 import com.flower.client.config.EnMethod;
 import com.flower.client.config.EnVal;
+import com.flower.client.model.BoardModule;
+import com.flower.vo.BoardDataVO;
 import com.flower.vo.ProductVO;
 
 @SuppressWarnings("serial")
@@ -114,6 +117,26 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		
 		obp.setLocation(0, resizeimg.getIconHeight());
 		backPanel.setPreferredSize(new Dimension(490, resizeimg.getIconHeight()+obp.getHeight())); // 크기 설정
+		
+		setBoard(pvo.getImgUrl(), pvo.getfName()); // 게시판 데이터를 세팅한다.
+	}
+	
+	private void setBoard(String imgPath, String fname) {
+		BoardModule bm;
+		try {
+			bm = new BoardModule();
+			ArrayList<BoardDataVO> list = bm.getPostList(fname);
+			bm.close();
+			
+			if (list.size() > 0)
+				obp.setBoard(list, imgPath);
+			else
+				obp.resetBoard();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

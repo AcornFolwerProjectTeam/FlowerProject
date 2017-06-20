@@ -8,13 +8,13 @@ import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.flower.client.MainClass;
 import com.flower.client.model.ProductModule;
 import com.flower.vo.ProductVO;
 
+@SuppressWarnings("serial")
 public class CurationMainPanel extends JPanel implements ActionListener{
 	
 	CardLayout c1;

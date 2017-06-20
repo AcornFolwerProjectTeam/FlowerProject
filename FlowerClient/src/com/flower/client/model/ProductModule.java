@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.security.AllPermission;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -85,6 +84,7 @@ public class ProductModule {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<ProductVO> meFlower(String me1, String me2, String color){
 		try {//나를 위한 꽃 리스트 받기
 			oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));// 발신 객체를 생성한다.

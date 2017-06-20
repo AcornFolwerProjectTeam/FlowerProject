@@ -31,6 +31,7 @@ public class ReSizeButton extends JButton implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println(list.get(index).toString());
 		mc.getProductInfoPanel().setProduct(list.get(index));
 		mc.changeCardLayout("productInfo");
 		

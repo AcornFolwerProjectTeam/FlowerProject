@@ -8,7 +8,10 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.flower.vo.BoardDataVO;
 
 public class BoardModule {
 	private ConnectServer cs = null; // 서버 접속 객체
@@ -23,6 +26,53 @@ public class BoardModule {
 		socket = cs.getSocket();
 	}
 	// --- Constructor end---
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<BoardDataVO> getPostList(String fname) {
+		ArrayList<BoardDataVO> list = null;
+		try {
+			// 주문정보
+			oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));// 발신 객체를 생성한다.
+			HashMap<String, String> hmlist = new HashMap<String, String>(); 
+			hmlist.put("request", "postList");
+			hmlist.put("fname", fname);
+			
+			oos.writeObject(hmlist); // 서버에 HashMap을 전송한다.
+			oos.flush();// Buffer flush
+			// 서버에서 회원가입 처리 결과 수신
+			ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			
+			// 서버로부터 데이터 개수를 받는다.
+			HashMap<String, Integer> hashData = (HashMap<String, Integer>) ois.readObject();
+			int datasize = hashData.get("datasize"); // 데이터 개수를 정수로 저장
+			
+			// 개수만큼 데이터를 가져오며 추가로 VO와 list 구별작업을 거친다.
+			BoardDataVO[] bvo = new BoardDataVO[datasize-1]; // list객체 요소 vo 배열
+			
+			// 반복문으로 VO와 list데이터를 받아온다.
+			for (int i = 0; i < datasize; i++) {
+				if (i < datasize-1) { // 0~datasize-1 인덱스는 vo데이터
+					bvo[i] = (BoardDataVO) ois.readObject();
+				} else { // datasize 인덱스는 list데이터
+					list=(ArrayList<BoardDataVO>)ois.readObject();//arraylist로 받아온다.					
+				} // if end
+			} // for end
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ois != null)ois.close();
+				if(ois != null) oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
 	
 	public boolean writePost(String title, int grade, String comment, String id, String fname) {
 		try {

@@ -45,7 +45,7 @@ public class EnVal {
 	/**
 	 * 서버 IP
 	 * */
-	public static String SERVERIP = "192.168.0.201";
+	public static String SERVERIP = "127.0.0.1";
 	
 	/**
 	 * 서버 포트번호

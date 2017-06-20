@@ -14,6 +14,7 @@ import com.flower.client.MainClass;
 
 @SuppressWarnings("serial")
 public class ProductPanel extends JPanel implements ComponentListener {
+	@SuppressWarnings("unused")
 	private MainClass mc;
 	private TopProdPane tpp;
 	private JScrollPane jsp; // 상품 스크롤 패널

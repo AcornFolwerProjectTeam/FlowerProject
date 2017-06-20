@@ -19,9 +19,9 @@ public class BoardDAO extends Connect {
 		sb.append("SELECT b.postnumber, b.posttitle, b.postcomment, a.name, ");
 		sb.append("b.grade, b.postdate ");
 		sb.append("FROM boarddata b, account a, product p ");
-		sb.append("WHERE p.customercode = a.customercode ");
+		sb.append("WHERE b.customercode = a.customercode ");
 		sb.append("AND p.productcode = b.productcode ");
-		sb.append("AND p.name = ? ");
+		sb.append("AND p.fName = ? ");
 
 		System.out.println(sb.toString());
 		// 3. 결과를 담을 list
@@ -30,7 +30,7 @@ public class BoardDAO extends Connect {
 		try {
 			// 4. sql문 실행
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setString(1, hm.get("name"));
+			pstmt.setString(1, hm.get("fname"));
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

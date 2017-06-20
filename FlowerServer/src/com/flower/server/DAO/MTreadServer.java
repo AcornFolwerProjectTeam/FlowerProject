@@ -123,7 +123,20 @@ public class MTreadServer extends Thread {
 				HashMap<String, String> hmBoard = bdao.boardInsert();
 				oos.writeObject(hmBoard);
 				oos.flush();
-			} 
+			}  else if (hm.get("request").equals("postList")) {
+				BoardDAO bdao = new BoardDAO();
+				bdao.setHm(hm);
+				ArrayList<BoardDataVO> list = bdao.select();
+
+				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
+				hashData.put("datasize", list.size() + 1);
+				oos.writeObject(hashData);
+				for (int i = 0; i < list.size(); i++) {
+					oos.writeObject(list.get(i));
+				}
+				oos.writeObject(list);
+				oos.flush();
+			}
 
 		} catch (IOException e) {
 			System.out.println("IO exception in Reader and Writer, MThreadServer");
