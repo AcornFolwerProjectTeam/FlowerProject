@@ -10,8 +10,8 @@ import com.flower.client.MainClass;
 import com.flower.client.MainFrame;
 import com.flower.client.component.BottomBar;
 import com.flower.client.component.TopMenuBar;
+import com.flower.client.config.EnVal;
 import com.flower.client.orderconfirm.OrderListPanel;
-import com.flower.clinet.config.EnVal;
 
 // MenuContainPanal class
 /**

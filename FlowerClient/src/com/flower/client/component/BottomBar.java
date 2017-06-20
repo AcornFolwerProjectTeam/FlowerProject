@@ -2,7 +2,7 @@ package com.flower.client.component;
 
 import javax.swing.JPanel;
 
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 @SuppressWarnings("serial")
 public class BottomBar extends JPanel{

@@ -13,7 +13,7 @@ import javax.swing.border.LineBorder;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.StyleButton;
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 /*
  * 2x4 테이블 형태의 인터페이스를 다수의 컨테이너/컴포넌트를 배치하고 보더값을 주어

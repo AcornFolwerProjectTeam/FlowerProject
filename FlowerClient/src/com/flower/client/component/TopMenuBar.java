@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 import com.flower.client.MainClass;
 import com.flower.client.chat.ChatDialog;
+import com.flower.client.config.EnVal;
 import com.flower.client.dialog.CommonDialog;
-import com.flower.clinet.config.EnVal;
 
 @SuppressWarnings("serial")
 public class TopMenuBar extends JPanel implements ActionListener{

@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.flower.client.component.StyleButton;
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 /**
  * <p>커스텀 다이얼로그 클래스.</p>

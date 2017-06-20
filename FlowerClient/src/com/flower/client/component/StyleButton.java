@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 @SuppressWarnings("serial")
 public class StyleButton extends JButton {

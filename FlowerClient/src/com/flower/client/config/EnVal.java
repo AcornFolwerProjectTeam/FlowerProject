@@ -1,4 +1,4 @@
-package com.flower.clinet.config;
+package com.flower.client.config;
 
 import java.awt.Color;
 import java.awt.Font;

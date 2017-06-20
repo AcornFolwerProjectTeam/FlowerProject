@@ -9,7 +9,7 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 public class ChatModule{ // 서버와 통신, 소켓 연결, 주고 받는 것까지, 값은 view로 
 	
