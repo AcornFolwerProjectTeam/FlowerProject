@@ -150,6 +150,9 @@ public class MainClass {
 		return this.orderListPanel;
 	}
 
+	public BoardWritePanel getBoardWritePanel() {
+		return this.boardWritePanel;
+	}
 	
 	public Boolean getChatFlag() {
 		return chatFlag;

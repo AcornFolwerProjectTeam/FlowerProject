@@ -21,9 +21,11 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 	EmphasisButton ebtnBoard;
 	Font f;
 	Boolean flag;
+	String productName;
 	
 	public OrderConfirmPanel(MainClass mc , String productName, String img, String date, String productPrice, Boolean flag) {
 		this.mc = mc;
+		this.productName = productName;
 		
 		// 초기 설정
 		setLayout(null);
@@ -90,6 +92,7 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==ebtnBoard){	// 후기 작성버튼 클릭하면
 			mc.changeCardLayout("postscript");	// 후기 작성 패널로 전환
+			mc.getBoardWritePanel().setFname(this.productName);
 		}
 		
 	}
