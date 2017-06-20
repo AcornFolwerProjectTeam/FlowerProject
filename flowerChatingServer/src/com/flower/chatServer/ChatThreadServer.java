@@ -55,7 +55,6 @@ public class ChatThreadServer extends Thread {
 					break;
 				}
 			} catch (IOException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			} // try - catch ends
 			
@@ -101,7 +100,6 @@ public class ChatThreadServer extends Thread {
 
 	private void editIp(String disConnIp) {
 		String tempText = jtaWait.getText();
-		System.out.println(tempText);
 		tempText = tempText.replace(disConnIp + "\n", "");
 		jtaWait.setText(tempText);
 	}

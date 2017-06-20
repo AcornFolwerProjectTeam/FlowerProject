@@ -173,7 +173,9 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener,
 		if(e.getSource()==sbtnCancel){
 			mc.changeCardLayout("productInfo");	// 주문취소 버튼을 누르면 상품 상세페이지로 이동
 		}else if (e.getSource()==ebtnBuy){
+			//System.out.println(mc.getAvo().getId() + " + " + jtfTime.getText() + " + " + jtfName.getText() + " + " + jtfPhone.getText() + " + " + jtaMsg.getText() + " + " + pName);
 			try {
+				
 				om = new OrderModule();
 				Boolean flag = om.order(mc.getAvo().getId(), jtfTime.getText(), jtfName.getText(), jtfPhone.getText(), jtaMsg.getText(), pName);
 				om.close();
@@ -198,23 +200,29 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener,
 		}
 	}
 
+	private void okbtnck() {
+		if(jtfTime.getText().length()>0 && jtfName.getText().length()>0 && jtfPhone.getText().length()>0){ // ID와 PW 입력칸 에공백이 없어야 로그인 버튼을 활성화
+			ebtnBuy.setEnabled(true);
+		} else {	
+			ebtnBuy.setEnabled(false);	// 공백이 있으면 구매 버튼 비활성화
+		}
+	}
+	
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if(jcbInfo.isSelected()==true){	// 체크박스 체크 하면
 			jtfName.setText(jtfBuyerName.getText());	// 찾는 사람 이름에 주문자 이름 가지고 오기
 			jtfPhone.setText(jtfBuyerPhone.getText());	// 찾는사람 핸드폰번호에 주문자 핸드폰번호 가지고 오기
+			
+			okbtnck();
 		};
 		
 	}
 
 	@Override
 	public void caretUpdate(CaretEvent e) {
-		if(e.getSource()== jtfTime|| e.getSource()==jtfName || e.getSource()==jtfPhone){	// ID 입력창과 비밀번호 입력창에 글씨를 입력할 때마다 조건 검사
-			if(jtfTime.getText().length()>0 && jtfName.getText().length()>0 && jtfPhone.getText().length()>0){ // ID와 PW 입력칸 에공백이 없어야 로그인 버튼을 활성화
-				ebtnBuy.setEnabled(true);
-			} else {	
-				ebtnBuy.setEnabled(false);	// 공백이 있으면 구매 버튼 비활성화
-			}
+		if(e.getSource()== jtfTime|| e.getSource()==jtfName || e.getSource()==jtfPhone || e.getSource() == jcbInfo){	// ID 입력창과 비밀번호 입력창에 글씨를 입력할 때마다 조건 검사
+			okbtnck();
 		}
 		
 	}

@@ -3,6 +3,7 @@ package com.flower.server.DAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.flower.vo.ProductVO;
 
 public class ProductDAO extends Connect {
@@ -13,27 +14,28 @@ public class ProductDAO extends Connect {
 	private int you2;
 	private int color;
 
+	public ProductDAO() {
+	}
+
 	public ProductDAO(HashMap<String, String> hm) {
 		// 해쉬맵 자체의 정보를 가져오고, int parseInt 후 필드변수로 저장
-		if(hm.get("me1") != null){
-			this.me1 = Integer.parseInt(hm.get("me1"));			
-		} if(hm.get("me2") != null){
+		if (hm.get("me1") != null) {
+			this.me1 = Integer.parseInt(hm.get("me1"));
+		}
+		if (hm.get("me2") != null) {
 			this.me2 = Integer.parseInt(hm.get("me2"));
-		} if(hm.get("you1") != null){
+		}
+		if (hm.get("you1") != null) {
 			this.you1 = Integer.parseInt("you1");
-		} if(hm.get("you2")!= null){
+		}
+		if (hm.get("you2") != null) {
 			this.you2 = Integer.parseInt(hm.get("you2"));
-		} if(hm.get("color")!= null){
+		}
+		if (hm.get("color") != null) {
 			this.color = Integer.parseInt(hm.get("color"));
 		}
-		
-		System.out.println("me1 :" + me1 );
-		System.out.println("me2 :" + me2 );
-		System.out.println("color :" + color );
 		// 2. 오라클 원격지에 접속한다
-		new Connect();
 	}
-	
 
 	// 3. selectAll, selectMe, selectYou method를 각각 만든다
 	// 4. 쿼리의 결과를 서버는 ArrayList를 통해서 반환한다
@@ -80,7 +82,7 @@ public class ProductDAO extends Connect {
 		sb.append("FROM product ");
 		sb.append("WHERE me1 =?  AND me2=? AND color=? ");
 		// 결과를 저장하기 위한 arrayList
-		
+
 		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
 
 		try {
@@ -90,7 +92,7 @@ public class ProductDAO extends Connect {
 			pstmt.setInt(1, me1);
 			pstmt.setInt(2, me2);
 			pstmt.setInt(3, color);
-			
+
 			// 결과를 resultSet에 return
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -123,42 +125,58 @@ public class ProductDAO extends Connect {
 		sb.append("WHERE you1=? AND you2=? AND color=? ");
 		// 결과를 담을 arrayList
 		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
-		
+
 		try {
 			// 쿼리문 db 연결
 			pstmt = conn.prepareStatement(sb.toString());
-			
+
 			// 쿼리문의 ?를 정의하고
 			pstmt.setInt(1, you1);
 			pstmt.setInt(2, you2);
 			pstmt.setInt(3, color);
-			
+
 			// 쿼리문을 실행한 결과를 resultSet에 담는다
 			rs = pstmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				// 테이블의 행을 지역변수에 담고
 				String fName = rs.getString("fName");
 				int fPrice = rs.getInt("fPrice");
 				String imgUrl = rs.getString("imgUrl");
 				String textUrl = rs.getString("textUrl");
-				
+
 				// VO객체에 매개변수로 전달하고
 				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl);
-				
+
 				// arrayList에 VO객체를 담는다
 				list.add(pvo);
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("selectYou sql error");
 			e.printStackTrace();
 		}
-		//return list
-		return list; 
+		// return list
+		return list;
 	} // selectYou method ends
-	
-	
-	
-	
-	
+
+	public Object[][] getObject() {
+		ArrayList<ProductVO> list = selectAll();
+
+		if (list == null) {
+			return null;
+		}
+		// object 준비
+		Object[][] obj = new Object[list.size()][4];
+
+		for (int i = 0; i < obj.length; i++) {
+			obj[i][0] = list.get(i).getfName();
+			obj[i][1] = list.get(i).getfPrice();
+			obj[i][2] = list.get(i).getImgUrl();
+			obj[i][3] = list.get(i).getTextUrl();
+
+		}
+
+		return obj;
+	}
+
 }// class ends
