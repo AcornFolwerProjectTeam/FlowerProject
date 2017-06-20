@@ -8,8 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import com.flower.client.MainClass;
-import com.flower.client.productdetail.DetailTop;
-
 import com.flower.vo.ProductVO;
 
 
