@@ -31,7 +31,7 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 	private JPanel backPanel;
 	private JLabel jlbTextImg;
 	private OpenBoardPanel obp;
-	private ProductVO fvo;
+	private ProductVO pvo;
 	// ------- Constructor ---------
 	public ProductInfoPanel(MainClass mc) {
 		// 초기설정
@@ -81,7 +81,8 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		// 회원 리뷰 열거형 게시판
 		obp = new OpenBoardPanel();
 		obp.setLocation(0, 500);
-		obp.setSize(490, 400);
+		obp.setPreferredSize(new Dimension(470, 400));
+		obp.setSize(470,400);
 		backPanel.add(obp, BorderLayout.CENTER);
 		
 		backPanel.setPreferredSize(new Dimension(490, jlbTextImg.getHeight()+obp.getHeight())); // 크기 설정
@@ -89,32 +90,38 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		// 상세정보 사진과 게시판 패널이 들어갈 스크롤 패널
 		jsp = new JScrollPane(backPanel);	// TODO: 상세정보와 게시판 패널 부착하고 스크롤바
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		jsp.setBounds(50, 290, 490, 430);	// 스크롤패널 크기, 위치 지정
 		add(jsp);	// 스크롤 패널 부착
 		
 		setVisible(true);	// 패널 보이도록
 	}
 	
-	public void setProduct(ProductVO fvo) {
-		this.fvo = fvo;
-		jlbImg.setIcon(new ImageIcon(fvo.getImgUrl())); // 썸네일 이미지 설정
-		jlbProduct.setText(fvo.getfName() + "\n" + fvo.getfPrice()); // 제품명 & 가격
+	public void setProduct(ProductVO pvo) {
+		this.pvo = pvo;
+		jlbImg.setIcon(new ImageIcon(pvo.getImgUrl())); // 썸네일 이미지 설정
+		jlbProduct.setText(pvo.getfName() + "\n" + pvo.getfPrice()); // 제품명 & 가격
 		
-		System.out.println(fvo.getTextUrl());
+		System.out.println(pvo.getTextUrl());
 		
 		// 이미지를 가져와서 화면 크기에 맞게 줄여 배치한다.
-		ImageIcon img = new ImageIcon(fvo.getTextUrl());
-		double resizepoint = ((double)(backPanel.getPreferredSize().getWidth()/img.getIconWidth())); // 이미지와 화면 비율을 구한다.
+		ImageIcon img = new ImageIcon(pvo.getTextUrl());
+		double resizepoint = ((double)((backPanel.getPreferredSize().getWidth()-20)/img.getIconWidth())); // 이미지와 화면 비율을 구한다.
 		ImageIcon resizeimg = EnMethod.scaleImage(img, (int)(img.getIconWidth()*resizepoint),
 														(int)(img.getIconHeight()*resizepoint)); // 이미지를 비율에 맞게 줄인다.
 		jlbTextImg.setIcon(resizeimg); // 크기를 줄인 이미지 대입
+		jlbTextImg.setSize(resizeimg.getIconWidth(), resizeimg.getIconHeight());
+		
+		obp.setLocation(0, resizeimg.getIconHeight());
+		backPanel.setPreferredSize(new Dimension(490, resizeimg.getIconHeight()+obp.getHeight())); // 크기 설정
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==sbtnReview){
-			// TODO: 게시판 패널로 스크롤 이동
+			mc.changeCardLayout("productList");
 		} else if (e.getSource()==ebtnBuy){
+			mc.getOrderPanel().setProductData(pvo);
 			mc.changeCardLayout("order"); // OrderPanel로 전환한다.
 		}
 		

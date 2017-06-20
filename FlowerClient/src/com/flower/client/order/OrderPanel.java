@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -29,8 +30,7 @@ import com.flower.vo.ProductVO;
 
 @SuppressWarnings("serial")
 public class OrderPanel extends JPanel implements ActionListener , ItemListener, CaretListener{
-	private JButton jbtnImg;
-	private JLabel jlbTime, jlbBuyerName, jlbBuyerPhone, jlbName, jlbPhone, jlbMsg;
+	private JLabel jlbImg, jlbTime, jlbBuyerName, jlbBuyerPhone, jlbName, jlbPhone, jlbMsg;
 	private JTextField jtfBuyerName, jtfBuyerPhone, jtfName, jtfPhone, jtfTime;
 	private JCheckBox jcbInfo;
 	private JTextArea jtaMsg;
@@ -54,11 +54,10 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener,
 		fcb = new Font("맑은 고딕", Font.PLAIN, 12);	// 체크박스 폰트
 		
 		// 상품 이미지 버튼
-		jbtnImg = new JButton();	// 이미지가 들어갈 버튼 생성
+		jlbImg = new JLabel();	// 이미지가 들어갈 버튼 생성
 									// TODO 이미지 붙이기
-		jbtnImg.setBounds(30, 150, 170, 245);	// 이미지 크기, 위치 지정
-		jbtnImg.setEnabled(false);	// 상품 이미지버튼 클릭할 수 없도록 비활성화
-		add(jbtnImg);	// 이미지 부착
+		jlbImg.setBounds(30, 150, 170, 245);	// 이미지 크기, 위치 지정
+		add(jlbImg);	// 이미지 부착
 		
 		// 예약 시간 라벨
 		jlbTime = new JLabel("예약 시간");	// 예약시간 라벨 생성
@@ -166,6 +165,7 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener,
 	
 	public void setProductData(ProductVO pvo){
 		pName = pvo.getfName();
+		jlbImg.setIcon(new ImageIcon(pvo.getImgUrl()));
 	}
 
 	@Override

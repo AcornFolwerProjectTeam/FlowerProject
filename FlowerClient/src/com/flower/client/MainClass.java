@@ -136,6 +136,10 @@ public class MainClass {
 	public ProductInfoPanel getProductInfoPanel() {
 		return this.productInfoPanel;
 	}
+	
+	public OrderPanel getOrderPanel() {
+		return this.orderPanel;
+	}
 
 	
 	public Boolean getChatFlag() {
