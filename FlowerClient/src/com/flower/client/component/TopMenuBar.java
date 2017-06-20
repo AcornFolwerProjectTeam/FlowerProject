@@ -38,7 +38,7 @@ public class TopMenuBar extends JPanel implements ActionListener{
 		setBackground(EnVal.MAINCOLOR); // 메인컬러 사용
 		
 		// 로고 버튼 생성
-		imgicon = new ImageIcon("imgs/menubarlogo.png");	// 버튼에 부착할 ImageIcon에 로고사진을 넣는다.	
+		imgicon = new ImageIcon("imgs/menubarlogo2.png");	// 버튼에 부착할 ImageIcon에 로고사진을 넣는다.	
 															// 추후에 메인컬러 배경인 로고 사진으로 대체
 		img = imgicon.getImage();  // ImageIcon으로부터 이미지를 가져와 Image 객체에 넣는다.
 		newimg = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH );  // 이미지 사이즈를 조절해서  새로운 Image 객체에 넣는다.
@@ -47,6 +47,7 @@ public class TopMenuBar extends JPanel implements ActionListener{
 		jbtnLogo = new JButton(imgicon); // 로고이미지 버튼 생성
 		jbtnLogo.setBounds(10, 10, 30, 30);	// 로고버튼 위치, 크기 설정
 		jbtnLogo.setBorder(null); // 로고버튼 테두리 삭제
+		jbtnLogo.setBackground(EnVal.MAINCOLOR); // 로고버튼 색상 설정
 		add(jbtnLogo); 	// 로고 버튼 부착
 		
 		// 주문확인 버튼 생성
