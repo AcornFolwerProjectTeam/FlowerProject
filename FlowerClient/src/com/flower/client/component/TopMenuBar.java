@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import com.flower.client.MainClass;
 import com.flower.client.chat.ChatDialog;
 import com.flower.client.config.EnVal;
 import com.flower.client.dialog.CommonDialog;
+import com.flower.client.model.OrderModule;
+import com.flower.vo.OrderListVO;
 
 @SuppressWarnings("serial")
 public class TopMenuBar extends JPanel implements ActionListener{
@@ -87,7 +90,19 @@ public class TopMenuBar extends JPanel implements ActionListener{
 		if(e.getSource()==jbtnLogo){
 			mc.changeCardLayout("productList");
 		}else if(e.getSource()==jbtnOrder){
-			mc.changeCardLayout("orderList");
+			OrderModule om;
+			try {
+				om = new OrderModule();
+				ArrayList<OrderListVO> list = om.getOrderList(mc.getAvo().getId());
+				mc.getOrderListPanel().setOrderList(list);
+				om.close();
+				
+				mc.changeCardLayout("orderList");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			
 		}else if(e.getSource()==jbtnChat){
 			if(mc.getChatFlag()==false){
 				ChatDialog cd;

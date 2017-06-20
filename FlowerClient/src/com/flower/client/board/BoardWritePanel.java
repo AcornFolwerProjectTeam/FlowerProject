@@ -1,6 +1,13 @@
 package com.flower.client.board;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -14,6 +21,8 @@ import javax.swing.border.LineBorder;
 import com.flower.client.MainClass;
 import com.flower.client.component.StyleButton;
 import com.flower.client.config.EnVal;
+import com.flower.client.dialog.CommonDialog;
+import com.flower.client.model.BoardModule;
 
 /*
  * 2x4 테이블 형태의 인터페이스를 다수의 컨테이너/컴포넌트를 배치하고 보더값을 주어
@@ -23,7 +32,7 @@ import com.flower.client.config.EnVal;
 
 // BoardWritePanel class
 @SuppressWarnings("serial") // 시리얼 번호는 쓰지 않으므로 경고 무시처리.
-public class BoardWritePanel extends JPanel {
+public class BoardWritePanel extends JPanel implements ActionListener, ItemListener {
 	private MainClass mc;
 	private JLabel jlabProductName; // 구매 상품명 제목 칸
 	private JLabel jlabProductNameVal; // 구매 상품명 표기 칸
@@ -40,6 +49,9 @@ public class BoardWritePanel extends JPanel {
 	private StyleButton sbtnCancel; // 등록 취소 버튼
 	private StyleButton sbtnPost; // 등록(게시글 게시) 버튼
 	
+	private int grade;
+	private String fname;
+	
 	// --- Constructor ---
 	public BoardWritePanel(MainClass mc) {
 		this.mc = mc; // 컨터롤러 헨들링을 위한 메인클레스를 받는다.
@@ -47,6 +59,7 @@ public class BoardWritePanel extends JPanel {
 		setSize(600, 800); // 크기 설정
 		setLayout(null); // 기본 배치관리자 해제
 		setBackground(Color.WHITE); // 배경색은 흰색으로
+		grade = 1;
 		
 		// -- 구매상품명행 --
 		// 제목칸
@@ -84,6 +97,7 @@ public class BoardWritePanel extends JPanel {
 			jrbGrade[i].setBackground(Color.WHITE); // 배경색 수정
 			jrbGrade[i].setForeground(Color.MAGENTA); // 별 색 수정
 			jrbGrade[i].setFocusPainted(false); // 마우스 선택시 뜨는 테두리 제거
+			jrbGrade[i].addItemListener(this);
 			bgGrade.add(jrbGrade[i]); // 그룹에 버튼추가.
 		}
 		
@@ -149,11 +163,13 @@ public class BoardWritePanel extends JPanel {
 		// -- 버튼 --
 		// 등록 취소 버튼
 		sbtnCancel = new StyleButton("등록 취소");
+		sbtnCancel.addActionListener(this);
 		sbtnCancel.setBounds(150, 695, 140, 40);	// 위치 및 크기 지정
 		add(sbtnCancel);
 		
 		// 등록 버튼
 		sbtnPost = new StyleButton("등록");
+		sbtnPost.addActionListener(this);
 		sbtnPost.setBounds(310, 695, 140, 40);	// 위치 및 크기 지정 
 		add(sbtnPost);
 	}
@@ -162,5 +178,52 @@ public class BoardWritePanel extends JPanel {
 	public void setProductName(String productName) {
 		jlabProductNameVal.setText("  " + productName); // 상품명 설정
 	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == sbtnCancel) {
+			mc.changeCardLayout("orderList");	// 후기 작성 패널로 전환
+		} else if (e.getSource() == sbtnPost) {
+			try {
+				BoardModule bm = new BoardModule();
+				Boolean flag = bm.writePost(jlabTitle.getText(), grade, jtaComment.getText(), mc.getAvo().getId(), fname);
+				bm.close();
+				
+				if (flag == true) {
+					new CommonDialog(mc.getMf(), "후기를 등록하였습니다.");
+					mc.changeCardLayout("orderList");	// 후기 작성 패널로 전환
+				} else {
+					new CommonDialog(mc.getMf(), "후기 작성을 실패했습니다.");
+				}
+				
+			} catch (ConnectException e1) {
+				new CommonDialog(mc.getMf(), "서버에 접속할 수 없습니다.");
+			} catch (UnknownHostException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == jrbGrade[0] )
+			grade = 1;
+		else if (e.getSource() == jrbGrade[1] )
+			grade = 2;
+		else if (e.getSource() == jrbGrade[2] )
+			grade = 3;
+		else if (e.getSource() == jrbGrade[3] )
+			grade = 4;
+		else if (e.getSource() == jrbGrade[4] )
+			grade = 5;
+		
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+		jlabProductNameVal.setText(fname);
+	}
+	
 	
 } // BoardWritePanel class end
