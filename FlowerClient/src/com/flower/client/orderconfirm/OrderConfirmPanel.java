@@ -66,8 +66,6 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		
 		// 수령현황라벨
 		jlbGet = new JLabel();	// 수령현황 라벨 생성
-		
-		
 		jlbGet.setFont(f);	// 수령현황 라벨 폰트 설정
 		jlbGet.setBounds(410, 55, 60, 40);	//수령현황 라벨 크기, 위치 설정
 		add(jlbGet);	// 수령현황 라벨 부착
@@ -75,16 +73,17 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		// 후기 작성버튼
 		ebtnBoard = new EmphasisButton("후기 작성");	// 후기 작성버튼 생성
 		ebtnBoard.setFont(f);	// 후기 작성버튼 폰트 설정	
-		ebtnBoard.setBounds(480, 35, 80, 80);	// 후기 작성버튼 크기, 위치 설정
+		ebtnBoard.setBounds(490, 55, 70, 40);	// 후기 작성버튼 크기, 위치 설정
 		ebtnBoard.addActionListener(this);	// 후기 작성버튼 Listener 부착
-		add(ebtnBoard);	// 후기 작성버튼 부착
 		
 		if(flag == true){
 			jlbGet.setText("수령 완료");	// 상품 수령했으면 수령현황을 수령완료로 변경한다.
+			add(ebtnBoard);	// 후기 작성버튼 부착
 		}else {
 			jlbGet.setText("준비중");	// 상품 수령하지 않으면 수령현황을 준비중으로 변경한다.
 			ebtnBoard.setEnabled(false); // 상품 수령하지 않으면 후기 작성 버튼 비활성화한다.
 		}
+		
 		
 		setVisible(true);
 	}
