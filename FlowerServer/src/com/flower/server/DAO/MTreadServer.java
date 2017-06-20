@@ -67,6 +67,9 @@ public class MTreadServer extends Thread {
 			if (hm.get("request").equals("selectall")) {
 				pda.selectAll();
 				selectResult = pda.selectAll();
+				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
+				hashData.put("datasize", selectResult.size()+1);
+				oos.writeObject(hashData);
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
