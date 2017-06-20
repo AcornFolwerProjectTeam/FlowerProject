@@ -165,7 +165,7 @@ public class Resize2 extends JPanel implements ComponentListener {
 		int temp = column * row - listLength;// 배치를 위해 가상의 버튼을 추가, 추가하는 버튼의 갯수는 grid의 총갯수-실제 버튼 갯수
 		JButton[] tempBtn = new JButton[temp];
 		for (int i = 0; i < temp; i++) {
-			// tempBtn[i]= new JButton("temp"+i);
+			tempBtn[i]= new JButton("");
 			tempBtn[i].setBorderPainted(false);
 			tempBtn[i].setContentAreaFilled(false);
 			jfrGrid.add(tempBtn[i]); // 가상버튼 추가.
