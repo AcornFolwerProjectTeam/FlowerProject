@@ -94,7 +94,7 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==ebtnBoard){	// 후기 작성버튼 클릭하면
-			mc.changeCardLayout("board");	// 후기 작성 패널로 전환
+			mc.changeCardLayout("postscript");	// 후기 작성 패널로 전환
 		}
 		
 	}

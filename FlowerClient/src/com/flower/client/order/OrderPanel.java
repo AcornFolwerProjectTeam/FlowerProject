@@ -6,7 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -14,15 +18,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.component.StyleButton;
+import com.flower.client.dialog.CommonDialog;
+import com.flower.client.model.OrderModule;
+import com.flower.vo.ProductVO;
 
 @SuppressWarnings("serial")
-public class OrderPanel extends JPanel implements ActionListener , ItemListener{
-	private JButton jbtnImg;
-	private JLabel jlbTime, jlbBuyerName, jlbBuyerPhone, jlbName, jlbPhone, jlbMsg;
+public class OrderPanel extends JPanel implements ActionListener , ItemListener, CaretListener{
+	private JLabel jlbImg, jlbTime, jlbBuyerName, jlbBuyerPhone, jlbName, jlbPhone, jlbMsg;
 	private JTextField jtfBuyerName, jtfBuyerPhone, jtfName, jtfPhone, jtfTime;
 	private JCheckBox jcbInfo;
 	private JTextArea jtaMsg;
@@ -31,6 +39,8 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 	private Font flb, fcb, ftf;
 	private JScrollPane jspMsg;
 	private MainClass mc;
+	private String pName;
+	private OrderModule om;
 	
 	// ------- Constructor ---------
 	public OrderPanel(MainClass mc) {
@@ -44,11 +54,10 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		fcb = new Font("맑은 고딕", Font.PLAIN, 12);	// 체크박스 폰트
 		
 		// 상품 이미지 버튼
-		jbtnImg = new JButton();	// 이미지가 들어갈 버튼 생성
+		jlbImg = new JLabel();	// 이미지가 들어갈 버튼 생성
 									// TODO 이미지 붙이기
-		jbtnImg.setBounds(30, 150, 170, 245);	// 이미지 크기, 위치 지정
-		jbtnImg.setEnabled(false);	// 상품 이미지버튼 클릭할 수 없도록 비활성화
-		add(jbtnImg);	// 이미지 부착
+		jlbImg.setBounds(30, 150, 170, 245);	// 이미지 크기, 위치 지정
+		add(jlbImg);	// 이미지 부착
 		
 		// 예약 시간 라벨
 		jlbTime = new JLabel("예약 시간");	// 예약시간 라벨 생성
@@ -60,6 +69,7 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		jtfTime = new JTextField();	// 시간 설정 입력칸 생성
 		jtfTime.setBounds(360, 150, 190, 30);	// 시간 설정 크기, 위치 지정
 		jtfTime.setFont(ftf);	// 시간 설정 폰트 설정
+		jtfTime.addCaretListener(this);
 		add(jtfTime);	// 시간설정 콤보박스 부착
 		
 		// 주문자 이름 라벨
@@ -72,7 +82,7 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		jlbBuyerPhone = new JLabel("주문자 핸드폰번호");	// 주문자 핸드폰번호 라벨 생성
 		jlbBuyerPhone.setBounds(235, 240, 110, 35); // 주문자 핸드폰번호 크기, 위치 지정
 		jlbBuyerPhone.setFont(flb);	// 주문자 핸드폰번호 폰트 설정
-		add(jlbBuyerPhone);	// 주문자 팬드폰번호 라벨 부착
+		add(jlbBuyerPhone);	// 주문자 핸드폰번호 라벨 부착
 		
 		// 찾는 사람 이름 라벨
 		jlbName = new JLabel("찾는사람 이름");	// 찾는사람 이름 라벨 생성
@@ -126,12 +136,14 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		jtfName = new JTextField();	// 찾는 사람 이름 입력칸 생성
 		jtfName.setBounds(360, 325, 190, 30);	// 이름 입력칸 크기, 위치 지정
 		jtfName.setFont(ftf);	// 찾는 사람 이름 입력칸 폰트 설정
+		jtfName.addCaretListener(this);	// 공백 검사 위한 Listener
 		add(jtfName);	// 찾는 사람 이름 입력칸 부착
 		
 		// 찾는 사람 핸드폰 입력
 		jtfPhone = new JTextField();	// 찾는 사람 핸드폰 입력칸 생성
 		jtfPhone.setBounds(360, 365, 190, 30);	// 핸드폰번호 입력칸 크기, 위치 지정
 		jtfPhone.setFont(ftf);	// 찾는 사람 핸드폰 입력칸 폰트 설정
+		jtfName.addCaretListener(this);	// 공백 검사 위한 Listener
 		add(jtfPhone);	// 찾는 사람 핸드폰 입력칸 부착
 		
 		// 주문 취소 버튼
@@ -144,20 +156,45 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		ebtnBuy = new EmphasisButton("주문 완료");	// 주문버튼 생성
 		ebtnBuy.setBounds(310, 580, 120, 40);	// 주문버튼 크기, 위치 지정
 		ebtnBuy.addActionListener(this); // 주문 버튼에 ActionListener 부착
+		ebtnBuy.setEnabled(false);
 		add(ebtnBuy); // 주문버튼 부착
 	
 		setVisible(true);
 		
 	}
 	
-		
+	public void setProductData(ProductVO pvo){
+		pName = pvo.getfName();
+		jlbImg.setIcon(new ImageIcon(pvo.getImgUrl()));
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==sbtnCancel){
 			mc.changeCardLayout("productInfo");	// 주문취소 버튼을 누르면 상품 상세페이지로 이동
 		}else if (e.getSource()==ebtnBuy){
-			mc.changeCardLayout("orderConfirm"); 	// 주문 버튼을 누르면 주문 확인 페이지로 이동
+			try {
+				om = new OrderModule();
+				Boolean flag = om.order(mc.getAvo().getId(), jtfTime.getText(), jtfName.getText(), jtfPhone.getText(), jtaMsg.getText(), pName);
+				om.close();
+				if(flag==true){
+					new CommonDialog(mc.getMf(), "구매해주셔서 감사합니다.");
+					mc.changeCardLayout("productList");
+				}else {
+					new CommonDialog(mc.getMf(), "모든 정보를 입력해주세요.");
+				}
+			} catch (ConnectException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		
 		}
 	}
 
@@ -166,8 +203,19 @@ public class OrderPanel extends JPanel implements ActionListener , ItemListener{
 		if(jcbInfo.isSelected()==true){	// 체크박스 체크 하면
 			jtfName.setText(jtfBuyerName.getText());	// 찾는 사람 이름에 주문자 이름 가지고 오기
 			jtfPhone.setText(jtfBuyerPhone.getText());	// 찾는사람 핸드폰번호에 주문자 핸드폰번호 가지고 오기
-			
 		};
+		
+	}
+
+	@Override
+	public void caretUpdate(CaretEvent e) {
+		if(e.getSource()== jtfTime|| e.getSource()==jtfName || e.getSource()==jtfPhone){	// ID 입력창과 비밀번호 입력창에 글씨를 입력할 때마다 조건 검사
+			if(jtfTime.getText().length()>0 && jtfName.getText().length()>0 && jtfPhone.getText().length()>0){ // ID와 PW 입력칸 에공백이 없어야 로그인 버튼을 활성화
+				ebtnBuy.setEnabled(true);
+			} else {	
+				ebtnBuy.setEnabled(false);	// 공백이 있으면 구매 버튼 비활성화
+			}
+		}
 		
 	}
 	

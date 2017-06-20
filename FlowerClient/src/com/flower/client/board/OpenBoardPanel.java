@@ -110,11 +110,11 @@ public class OpenBoardPanel extends JScrollPane implements ComponentListener {
 			
 			// 구분선 추가.
 			bbLine[i].setLocation(10, jpnPost[i].getY()+150+8); // 구분선 위치 설정 
-			bbLine[i].setSize(new Dimension(550, 3)); // 구분선 크기 설정
+			bbLine[i].setSize(new Dimension(getWidth()-40, 3)); // 구분선 크기 설정
 			jpnBackBoard.add(bbLine[i]); // 백패널에 구분선 추가.
 		} // for end
 		
-		jpnBackBoard.setPreferredSize(new Dimension(600, bbLine[size-1].getY()+80)); // 백패널 크기 설정
+		jpnBackBoard.setPreferredSize(new Dimension(getWidth()-40, bbLine[size-1].getY()+80)); // 백패널 크기 설정
 	} // setBoard method end
 	
 	// resetBoard method : 백패널의 모든 컴포넌트를 제거한다.

@@ -109,7 +109,7 @@ public class Resize2 extends JPanel implements ComponentListener {
 		for (int i = 0; i < listLength; i++) {
 			fvo = list.get(i);// 리스트에서 i번째 vo를 가져온다.
 			prodImg[i] = new ImageIcon(fvo.getImgUrl());// vo의 주소를 가져와서 imgicon을 생성다.
-			jbtn[i] = new ReSizeButton(list, i, prodImg[i]);// 버튼을 만들고 이미지를 넣는다.
+			jbtn[i] = new ReSizeButton(mc, list, i, prodImg[i]);// 버튼을 만들고 이미지를 넣는다.
 			jfrGrid.add(jbtn[i]);// 그리드 패널에 버튼을 추가한다.
 		} // for end
 	}
@@ -144,7 +144,7 @@ public class Resize2 extends JPanel implements ComponentListener {
 		for (int i = 0; i < listLength; i++) {
 			fvo = list.get(i);
 			prodImg[i] = new ImageIcon(fvo.getImgUrl());// 이미지아이콘 생성
-			jbtn[i] = new ReSizeButton(list, i, prodImg[i]);// 이미지 넣은 버튼 생성
+			jbtn[i] = new ReSizeButton(mc, list, i, prodImg[i]);// 이미지 넣은 버튼 생성
 
 			jbtn[i].setBorderPainted(false); // 버튼윤곽선 투명
 			jbtn[i].setContentAreaFilled(false);// 버튼의 내부색 투명

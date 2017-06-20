@@ -7,7 +7,9 @@ import com.flower.client.container.SingleContainPanal;
 import com.flower.client.board.BoardWritePanel;
 import com.flower.client.container.MenuContainPanal;
 import com.flower.client.login.LoginPanel;
+import com.flower.client.order.OrderPanel;
 import com.flower.client.orderconfirm.OrderListPanel;
+import com.flower.client.productinfo.ProductInfoPanel;
 import com.flower.client.productlist.ProductPanel;
 import com.flower.client.register.RegisterPanel;
 import com.flower.vo.AccountVO;
@@ -26,6 +28,10 @@ public class MainClass {
 	private MenuContainPanal orderListMcp; // 주문 목록 패널 가운데 정렬 컨테인 패널
 	private BoardWritePanel boardWritePanel; // 상품 후기 쓰기 패널(게시판 쓰기모듈)
 	private MenuContainPanal boardWriteMcp; // 상품 후기 쓰기 패널 가운데 정렬 컨테인 패널
+	private ProductInfoPanel productInfoPanel; // 상품 정보 패널
+	private MenuContainPanal productInfoMcp; // 상품 정보 패널 가운데 정렬 컨테인 패널
+	private OrderPanel orderPanel; // 주문 패널
+	private MenuContainPanal orderPanelMcp; // 주문 정보 패널 가운데 정렬 컨테인 패널
 	private Boolean chatFlag;	// 채팅창이 켜져 있는지를 판별하는 변수
 	
 	// 필드VO
@@ -48,9 +54,13 @@ public class MainClass {
 		// 주문 목록 컨테이너 및 컴포넌트
 		orderListPanel = new OrderListPanel(this); // 주문 목록 패널 생성
 		orderListMcp = new MenuContainPanal(mf, orderListPanel, this, true); // 주문목록용 중앙정렬 컨테이너 생성 및 매개값 전달
-		// 상품후기 컨테이너 및 컴포넌트
+		// 상품 후기 컨테이너 및 컴포넌트
 		boardWritePanel = new BoardWritePanel(this); // 상품 후기 패널 생성
-		boardWriteMcp = new MenuContainPanal(mf, boardWritePanel, this, true); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
+		boardWriteMcp = new MenuContainPanal(mf, boardWritePanel, this, true); // 상품 후기용 주앙정렬 컨테이너 생성 및 매개값 전달.
+		// 상품 정보 컨테이너 및 컴포넌트
+		productInfoPanel = new ProductInfoPanel(this); // 상품 정보 패널 생성
+		productInfoMcp = new MenuContainPanal(mf, productInfoPanel, this, true); // 상품 정보용 주앙정렬 컨테이너 생성 및 매개값 전달.
+
 	}
 	// --- Constructors end ---
 
@@ -61,7 +71,15 @@ public class MainClass {
 			productPanel = new ProductPanel(this);
 			productMcp = new MenuContainPanal(mf, productPanel, this, true); // 상품목록용 중앙정렬 컨테이너 생성 및 매개값 전달
 			mf.add(productMcp, "productList"); // 상품 리스트.
+			
+			// 상품 주문 컨테이너 및 컴포넌트
+			orderPanel = new OrderPanel(this); // 상품 주문 패널 생성
+			orderPanelMcp = new MenuContainPanal(mf, orderPanel, this, true); // 상품 주문용 주앙정렬 컨테이너 생성 및 매개값 전달.
+			mf.add(orderPanelMcp, "order"); // 상품 정보 패널 추가.
+			
 			changeCardLayout("productList"); // 로그인이 끝났으므로 화면을 상품 리스트로 전환한다.
+			
+			
 		} catch (IOException e) {
 			// TODO : 에러 페이지 이동 코드 필요
 			e.printStackTrace();
@@ -97,6 +115,7 @@ public class MainClass {
 		mc.mf.add(mc.registerMcp, "register"); // 프레임에 회원가입 패널 추가.
 		mc.mf.add(mc.orderListMcp, "orderList"); // 주문 목록 패널 추가.
 		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
+		mc.mf.add(mc.productInfoMcp, "productInfo"); // 상품 정보 패널 추가.
 		
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.
@@ -114,6 +133,15 @@ public class MainClass {
 		this.avo = avo;
 	}
 
+	public ProductInfoPanel getProductInfoPanel() {
+		return this.productInfoPanel;
+	}
+	
+	public OrderPanel getOrderPanel() {
+		return this.orderPanel;
+	}
+
+	
 	public Boolean getChatFlag() {
 		return chatFlag;
 	}
