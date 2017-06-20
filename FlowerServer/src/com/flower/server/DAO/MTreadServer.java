@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.flower.vo.BoardDataVO;
 import com.flower.vo.OrderListVO;
 import com.flower.vo.ProductVO;
 
@@ -71,6 +72,7 @@ public class MTreadServer extends Thread {
 				selectResult = pda.selectMe();
 				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
 				hashData.put("datasize", selectResult.size() + 1);
+				oos.writeObject(hashData);
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
@@ -81,6 +83,7 @@ public class MTreadServer extends Thread {
 				selectResult = pda.selectYou();
 				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
 				hashData.put("datasize", selectResult.size() + 1);
+				oos.writeObject(hashData);
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
@@ -99,27 +102,37 @@ public class MTreadServer extends Thread {
 				// hashMap을 전송
 				oos.writeObject(hmOrder);
 				oos.flush();
-			} else if(hm.get("request").equals("orderlist")){
+			} else if (hm.get("request").equals("orderlist")) {
 				OrderDAO odo = new OrderDAO();
 				odo.setHm(hm);
 				ArrayList<OrderListVO> list = odo.selectUser();
-				
+
 				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
 				hashData.put("datasize", list.size() + 1);
+				oos.writeObject(hashData);
 				for (int i = 0; i < list.size(); i++) {
 					oos.writeObject(list.get(i));
 				}
 				oos.writeObject(list);
-				oos.flush();				
+				oos.flush();
 			}
+			// 게시판
+			if (hm.get("request").equals("boardwrite")) {
+				BoardDAO bdao = new BoardDAO();
+				bdao.setHm(hm);
+				HashMap<String, String> hmBoard = bdao.boardInsert();
+				oos.writeObject(hmBoard);
+				oos.flush();
+			} 
+
 		} catch (IOException e) {
 			System.out.println("IO exception in Reader and Writer, MThreadServer");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
-			
-		}// try - catch - finally ends
+
+		} // try - catch - finally ends
 
 	}// run method ends
 
