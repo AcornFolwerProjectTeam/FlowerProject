@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
@@ -39,21 +40,22 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		jlbDate = new JLabel("오늘 날짜");	// 날짜 라벨 생성
 		// TODO: DB에서 구매 날짜 가지고 와서 setText
 		jlbDate.setFont(f);	// 날짜라벨 폰트 설정
-		jlbDate.setBounds(30, 55, 80, 40);	// 날짜 라벨 크기, 위치 설정	
+		jlbDate.setBounds(20, 60, 80, 20);	// 날짜 라벨 크기, 위치 설정	
 		add(jlbDate);	// 날짜 라벨 부착
 		
 		// 이미지버튼
 		jbtnProduct = new JButton();	// 이미지 버튼 생성
 		// TODO: DB에서 정보 가지고 와서 해당하는 이미지 SET
-		jbtnProduct.setBounds(110, 35, 80, 80);	// 이미지 버튼 크기, 위치 설정
+		jbtnProduct.setBounds(100, 35, 80, 80);	// 이미지 버튼 크기, 위치 설정
 		jbtnProduct.setEnabled(false);	// 이미지 버튼 눌리지 않게 설정
 		add(jbtnProduct);	// 이미지 버튼 부착
 		
 		// 상품명라벨
+		
 		jlbProductName = new JLabel(productName);	// 상품명 라벨 생성
 		// TODO: DB에서 상품명 가지고 와서 setText
 		jlbProductName.setFont(f);	// 상품명 라벨 폰트 설정
-		jlbProductName.setBounds(220,55,100,40);	// 상품명 라벨 크기, 위치 설정
+		jlbProductName.setBounds(200,55,100,20);	// 상품명 라벨 크기, 위치 설정
 		jlbProductName.addMouseListener(this);	// 마우스 클릭 Listener 부착
 		add(jlbProductName);	// 상품명 라벨 부착
 		
@@ -61,19 +63,20 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		jlbPrice = new JLabel(productPrice);	// 상품가격 라벨 생성
 		// TODO: DB에서 상품가격 가지고 와서 setText
 		jlbPrice.setFont(f);	// 상품가격 라벨 폰트 설정
-		jlbPrice.setBounds(330, 55, 60, 40);	// 상품가격 라벨 크기, 위치 설정
+		jlbPrice.setBounds(200, 75, 100, 20);	// 상품가격 라벨 크기, 위치 설정
+		jlbPrice.setHorizontalAlignment(SwingConstants.CENTER);	// 가운데 정렬
 		add(jlbPrice);	// 상품가격라벨 부착
-		
+
 		// 수령현황라벨
 		jlbGet = new JLabel();	// 수령현황 라벨 생성
 		jlbGet.setFont(f);	// 수령현황 라벨 폰트 설정
-		jlbGet.setBounds(410, 55, 60, 40);	//수령현황 라벨 크기, 위치 설정
+		jlbGet.setBounds(315, 45, 100, 40);	//수령현황 라벨 크기, 위치 설정
 		add(jlbGet);	// 수령현황 라벨 부착
 		
 		// 후기 작성버튼
 		ebtnBoard = new EmphasisButton("후기 작성");	// 후기 작성버튼 생성
 		ebtnBoard.setFont(f);	// 후기 작성버튼 폰트 설정	
-		ebtnBoard.setBounds(490, 55, 70, 40);	// 후기 작성버튼 크기, 위치 설정
+		ebtnBoard.setBounds(390, 45, 70, 40);	// 후기 작성버튼 크기, 위치 설정
 		ebtnBoard.addActionListener(this);	// 후기 작성버튼 Listener 부착
 		
 		if(flag == true){
