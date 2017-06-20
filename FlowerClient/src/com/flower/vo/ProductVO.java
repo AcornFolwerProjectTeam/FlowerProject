@@ -7,12 +7,14 @@ public class ProductVO implements Serializable {
 	private String fName;
 	private String imgUrl;
 	private String textUrl;
+
 	private int fPrice;
 	private int you1;
 	private int you2;
 	private int me1;
 	private int me2;
 	private int color;
+	
 	
 	public ProductVO(String fName, int fPrice, String imgUrl, String textUrl) {
 		this.fName = fName;
