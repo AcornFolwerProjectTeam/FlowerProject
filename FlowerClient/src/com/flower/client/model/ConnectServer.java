@@ -5,7 +5,7 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 // ConnectServer class
 /**

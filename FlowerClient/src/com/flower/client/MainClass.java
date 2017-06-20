@@ -6,6 +6,8 @@ import com.flower.client.container.SingleContainPanal;
 import com.flower.client.board.BoardWritePanel;
 import com.flower.client.container.MenuContainPanal;
 import com.flower.client.login.LoginPanel;
+import com.flower.client.orderconfirm.OrderListPanel;
+import com.flower.client.productlist.ProductPanel;
 import com.flower.client.register.RegisterPanel;
 import com.flower.vo.AccountVO;
 
@@ -17,6 +19,10 @@ public class MainClass {
 	private SingleContainPanal loginScp; // 로그인패널 가운데 정렬 컨테인 패널
 	private RegisterPanel registerPanel; // 회원가입 패널
 	private MenuContainPanal registerMcp; // 회원가입 패널 가운데 정렬 컨테인 패널
+	private ProductPanel productPanel; // 상품 리스트 패널
+	private MenuContainPanal productMcp; // 상품 리스트 패널 가운데 정렬 컨테인 패널
+	private OrderListPanel orderListPanel; // 주문 목록 패널
+	private MenuContainPanal orderListMcp; // 주문 목록 패널 가운데 정렬 컨테인 패널
 	private BoardWritePanel boardWritePanel; // 상품 후기 쓰기 패널(게시판 쓰기모듈)
 	private MenuContainPanal boardWriteMcp; // 상품 후기 쓰기 패널 가운데 정렬 컨테인 패널
 	private Boolean chatFlag;	// 채팅창이 켜져 있는지를 판별하는 변수
@@ -29,6 +35,8 @@ public class MainClass {
 	public MainClass() {
 		// 설정값
 		cly = new CardLayout(); // 컨테이너를 스위칭해줄 카드 레이아웃
+		chatFlag = false; // ChatDialog 실행 판별
+		
 		// 로그인 컨테이너 및 컴포넌트
 		mf = new MainFrame(); // 메인 프레임 생성 및 화면을 띄움.
 		loginPanel = new LoginPanel(this); // 로그인 패널
@@ -36,11 +44,15 @@ public class MainClass {
 		// 회원가입 컨테이너 및 컴포넌트
 		registerPanel = new RegisterPanel(this); // 회원가입 패널
 		registerMcp = new MenuContainPanal(mf, registerPanel, this, false); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
+		// 상품 목록 컨테이너 및 컴포넌트
+		productPanel = new ProductPanel(this);
+		productMcp = new MenuContainPanal(mf, productPanel, this, true);
+		// 상품 목록 컨테이너 및 컴포넌트
+		orderListPanel = new OrderListPanel(this);
+		orderListMcp = new MenuContainPanal(mf, orderListPanel, this, true);
 		// 상품후기 컨테이너 및 컴포넌트
 		boardWritePanel = new BoardWritePanel(this);
 		boardWriteMcp = new MenuContainPanal(mf, boardWritePanel, this, true); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
-		// ChatDialog 실행 판별
-		chatFlag = false;
 	}
 	// --- Constructors end ---
 	
@@ -68,12 +80,12 @@ public class MainClass {
 		// 기본설정
 		mc.mf.setLayout(mc.cly); // 메인프레임 배치관리자를 카드레이아웃으로
 		
-		// 로그인
+		// 화면 추가.
 		mc.mf.add(mc.loginScp, "login"); // 프레임에 로그인 패널 추가.
-		// 회원가입
 		mc.mf.add(mc.registerMcp, "register"); // 프레임에 회원가입 패널 추가.
-		// 상품 후기 쓰기
 		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
+		mc.mf.add(mc.orderListMcp, "orderList"); // 주문 목록 패널 추가.
+		mc.mf.add(mc.productMcp, "productList"); // 상품 리스트.
 		
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.

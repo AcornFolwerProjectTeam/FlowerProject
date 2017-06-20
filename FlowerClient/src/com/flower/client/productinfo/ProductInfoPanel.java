@@ -12,7 +12,7 @@ import javax.swing.border.LineBorder;
 import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
 import com.flower.client.component.StyleButton;
-import com.flower.clinet.config.EnVal;
+import com.flower.client.config.EnVal;
 
 @SuppressWarnings("serial")
 public class ProductInfoPanel extends JPanel implements ActionListener{

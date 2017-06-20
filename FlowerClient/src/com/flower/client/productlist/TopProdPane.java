@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class TopProdPane extends JPanel implements ActionListener{
 	JButton curation;
 	ImageIcon imgCuration;
@@ -24,7 +25,6 @@ public class TopProdPane extends JPanel implements ActionListener{
 		add(curation,BorderLayout.NORTH);
 		
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

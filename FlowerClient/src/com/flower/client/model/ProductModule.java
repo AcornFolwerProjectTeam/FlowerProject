@@ -30,6 +30,7 @@ public class ProductModule {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<ProductVO> allFlower(){
 		try {//모든꽃 리스트 받기
 			oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));// 발신 객체를 생성한다.
@@ -42,9 +43,23 @@ public class ProductModule {
 			// 서버에서 회원가입 처리 결과 수신
 			ois = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 			
-			@SuppressWarnings("unchecked")
+			// 서버로부터 데이터 개수를 받는다.
+			HashMap<String, Integer> hashData = (HashMap<String, Integer>) ois.readObject();
+			int datasize = hashData.get("datasize"); // 데이터 개수를 정수로 저장
 			
-			 ArrayList<ProductVO> list=(ArrayList<ProductVO>)ois.readObject();//arraylist로 받아온다.
+			// 개수만큼 데이터를 가져오며 추가로 VO와 list 구별작업을 거친다.
+			ArrayList<ProductVO> list = null; // VO 들을 담고있는 list객체
+			ProductVO[] pvo = new ProductVO[datasize-1]; // list객체 요소 vo 배열
+			
+			// 반복문으로 VO와 list데이터를 받아온다.
+			for (int i = 0; i < datasize; i++) {
+				if (i < datasize-1) { // 0~datasize-1 인덱스는 vo데이터
+					pvo[i] = (ProductVO) ois.readObject();
+				} else { // datasize 인덱스는 list데이터
+					list=(ArrayList<ProductVO>)ois.readObject();//arraylist로 받아온다.					
+				} // if end
+			} // for end
+			
 			this.list=list;
 			
 		} catch (IOException e) {

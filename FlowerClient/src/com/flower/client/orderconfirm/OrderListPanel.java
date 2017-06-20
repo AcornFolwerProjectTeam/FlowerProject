@@ -43,7 +43,7 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 		// 스크롤 패널
 		// 좌우 스크롤바는 사용안함, 상하 스크롤바는 사용
 		jspOrderScroll = new JScrollPane(jpnOrderItems, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jspOrderScroll.setBounds(50, 60, 500, 680); // 위치 및 크기 지정
+		jspOrderScroll.setBounds(50, 100, 500, 600); // 위치 및 크기 지정
 
 		// 화면에 배치
 		add(jspOrderScroll); // 패널에 추가.
@@ -82,7 +82,7 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		jspOrderScroll.setSize(getWidth()-100, getHeight()-120);
+		jspOrderScroll.setSize(getWidth()-100, getHeight()-200);
 		
 		for (int i = 0; i < orderPanels.length; i++) {
 			orderPanels[i].setLocation((getWidth()-100-480)/2, orderPanels[i].getY());

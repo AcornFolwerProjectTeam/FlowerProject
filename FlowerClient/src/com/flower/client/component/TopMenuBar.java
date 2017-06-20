@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 import com.flower.client.MainClass;
 import com.flower.client.chat.ChatDialog;
+import com.flower.client.config.EnVal;
 import com.flower.client.dialog.CommonDialog;
-import com.flower.clinet.config.EnVal;
 
 @SuppressWarnings("serial")
 public class TopMenuBar extends JPanel implements ActionListener{
@@ -84,9 +84,9 @@ public class TopMenuBar extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==jbtnLogo){
-			// TO-DO: 상품목록 패널로 전환
+			mc.changeCardLayout("productList");
 		}else if(e.getSource()==jbtnOrder){
-			// TO-DO: 주문확인 패널로 전환
+			mc.changeCardLayout("orderList");
 		}else if(e.getSource()==jbtnChat){
 			if(mc.getChatFlag()==false){
 				ChatDialog cd;
