@@ -26,7 +26,7 @@ public class ProductDAO extends Connect {
 			this.me2 = Integer.parseInt(hm.get("me2"));
 		}
 		if (hm.get("you1") != null) {
-			this.you1 = Integer.parseInt("you1");
+			this.you1 = Integer.parseInt(hm.get("you1"));
 		}
 		if (hm.get("you2") != null) {
 			this.you2 = Integer.parseInt(hm.get("you2"));
@@ -46,7 +46,7 @@ public class ProductDAO extends Connect {
 	public ArrayList<ProductVO> selectAll() {
 		sb.setLength(0); // sb 초기화
 		// 쿼리문 작성
-		sb.append("SELECT fName, fPrice, imgUrl, textUrl ");
+		sb.append("SELECT fName, fPrice, imgUrl, textUrl, thumbNail ");
 		sb.append("FROM product");
 		// 결과를 보내기 위해 값을 저장한 list
 		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
@@ -61,9 +61,9 @@ public class ProductDAO extends Connect {
 				int fPrice = rs.getInt("fPrice");
 				String imgUrl = rs.getString("imgUrl");
 				String textUrl = rs.getString("textUrl");
-
+				String thumbNail = rs.getString("thumbNail");
 				// VO의 생성자를 호출하여 VO에 값을 전달
-				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl);
+				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl, thumbNail);
 				// 이 VO의 참조변수를 arrayList에 저장
 				list.add(pvo);
 			}
@@ -78,7 +78,7 @@ public class ProductDAO extends Connect {
 	public ArrayList<ProductVO> selectMe() {
 		sb.setLength(0); // sb 초기화
 		// 쿼리문 작성
-		sb.append("SELECT fName, fPrice, imgUrl, textUrl ");
+		sb.append("SELECT fName, fPrice, imgUrl, textUrl, thumbNail ");
 		sb.append("FROM product ");
 		sb.append("WHERE me1 =?  AND me2=? AND color=? ");
 		// 결과를 저장하기 위한 arrayList
@@ -101,10 +101,10 @@ public class ProductDAO extends Connect {
 				int fPrice = rs.getInt("fPrice");
 				String imgUrl = rs.getString("imgUrl");
 				String textUrl = rs.getString("textUrl");
+				String thumbNail = rs.getString("thumbNail");
 				// 그 변수를 VO 생성자를 통해서 VO 객체에 전달하고
-				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl);
+				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl, thumbNail);
 				// 이를 arrayList에 저장한다
-				System.out.println("pvo :" + pvo);
 				list.add(pvo);
 			}
 
@@ -120,7 +120,7 @@ public class ProductDAO extends Connect {
 		// sb 초기화
 		sb.setLength(0);
 		// 쿼리문 작성
-		sb.append("SELECT fName, fPrice, imgUrl, textUrl ");
+		sb.append("SELECT fName, fPrice, imgUrl, textUrl, thumbNail ");
 		sb.append("FROM product ");
 		sb.append("WHERE you1=? AND you2=? AND color=? ");
 		// 결과를 담을 arrayList
@@ -143,9 +143,10 @@ public class ProductDAO extends Connect {
 				int fPrice = rs.getInt("fPrice");
 				String imgUrl = rs.getString("imgUrl");
 				String textUrl = rs.getString("textUrl");
+				String thumbNail = rs.getString("thumbNail");
 
 				// VO객체에 매개변수로 전달하고
-				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl);
+				ProductVO pvo = new ProductVO(fName, fPrice, imgUrl, textUrl, thumbNail);
 
 				// arrayList에 VO객체를 담는다
 				list.add(pvo);
@@ -173,7 +174,6 @@ public class ProductDAO extends Connect {
 			obj[i][1] = list.get(i).getfPrice();
 			obj[i][2] = list.get(i).getImgUrl();
 			obj[i][3] = list.get(i).getTextUrl();
-
 		}
 
 		return obj;

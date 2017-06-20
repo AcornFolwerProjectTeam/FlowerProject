@@ -7,6 +7,7 @@ public class ProductVO implements Serializable {
 	private String fName;
 	private String imgUrl;
 	private String textUrl;
+	private String thumbNail;
 	private int fPrice;
 	private int you1;
 	private int you2;
@@ -14,11 +15,12 @@ public class ProductVO implements Serializable {
 	private int me2;
 	private int color;
 	
-	public ProductVO(String fName, int fPrice, String imgUrl, String textUrl) {
+	public ProductVO(String fName, int fPrice, String imgUrl, String textUrl, String thumbNail) {
 		this.fName = fName;
 		this.fPrice = fPrice;
 		this.imgUrl = imgUrl;
 		this.textUrl = textUrl;
+		this.thumbNail = thumbNail;
 	} // constructor
 
 	// setter and getters
@@ -93,7 +95,13 @@ public class ProductVO implements Serializable {
 	public void setColor(int color) {
 		this.color = color;
 	}
-	
-	
-	
-}
+
+	public String getThumbNail() {
+		return thumbNail;
+	}
+
+	public void setThumbNail(String thumbNail) {
+		this.thumbNail = thumbNail;
+	}
+		
+}// class ends

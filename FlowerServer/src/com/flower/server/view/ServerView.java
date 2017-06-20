@@ -26,7 +26,7 @@ public class ServerView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		// 주문 정보 조회
 		Object[][] order = new OrderDAO().getObject();
-		String[] title = { "주문코드", "주문회원", "예약시간", "전화번호", "메세지", "제품명", "수령확인" };
+		String[] title = { "주문코드", "주문회원", "예약시간", "전화번호", "메세지", "제품명", "제품가격", "수령확인" };
 		// 주문 정보 콤포넌트 생성
 		jtOrder = new JTable(order, title);
 		jspOrder = new JScrollPane(jtOrder);

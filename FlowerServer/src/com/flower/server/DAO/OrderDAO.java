@@ -46,9 +46,20 @@ public class OrderDAO extends Connect {
 		ArrayList<OrderListVO> list = null;
 		sb.setLength(0);
 		
-		sb.append("SELECT ordercode, customercode, revtime, revtel, message, fname, (select FPRICE from PRODUCT where FNAME = orderlist.fname) as FPRICE, receive ");
+		sb.append("SELECT ordercode ");
+		sb.append("     , customercode ");
+		sb.append("     , revtime ");
+		sb.append("     , revtel ");
+		sb.append("     , message ");
+		sb.append("     , fname ");
+		sb.append("     , (select FPRICE from PRODUCT where FNAME = orderlist.fname) as FPRICE ");
+		sb.append("     , (select imgurl from PRODUCT where FNAME = orderlist.fname) as imgurl ");
+		sb.append("     , receive ");
+		sb.append("     , orderdate ");
 		sb.append("FROM orderlist ");
-		sb.append("WHERE id =? ");
+		sb.append("WHERE customercode = (select customercode ");
+		sb.append("                      FROM account ");
+		sb.append("                      WHERE id =?)");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -64,7 +75,9 @@ public class OrderDAO extends Connect {
 				ovo.setMessage(rs.getString(5));
 				ovo.setfName(rs.getString(6));
 				ovo.setfPrice(rs.getInt(7));
-				ovo.setReceive(rs.getInt(8));
+				ovo.setImgUrl(rs.getString(8));
+				ovo.setReceive(rs.getInt(9));
+				ovo.setOrderDate(rs.getString(10));
 				
 				list.add(ovo);
 			}
@@ -85,7 +98,7 @@ public class OrderDAO extends Connect {
 		sb.append("(SELECT customercode ");
 		sb.append("FROM account ");
 		sb.append("WHERE id =?), ");
-		sb.append("?, ?, ?, ?, ?) ");
+		sb.append("?, ?, ?, ?, ?, 1, sysdate) ");
 		HashMap<String, String> orderMap = new HashMap<String, String>();
 		int result = 0;
 		try {
@@ -120,7 +133,7 @@ public class OrderDAO extends Connect {
 			return null;
 		}
 		// object ¡ÿ∫Ò
-		Object[][] obj = new Object[list.size()][7];
+		Object[][] obj = new Object[list.size()][8];
 
 		for (int i = 0; i < obj.length; i++) {
 			obj[i][0] = list.get(i).getOrderCode();
@@ -129,7 +142,8 @@ public class OrderDAO extends Connect {
 			obj[i][3] = list.get(i).getRevTel();
 			obj[i][4] = list.get(i).getMessage();
 			obj[i][5] = list.get(i).getfName();
-			obj[i][6] = list.get(i).getReceive();
+			obj[i][6] = list.get(i).getfPrice();
+			obj[i][7] = list.get(i).getReceive();
 		}
 		return obj;
 	}
