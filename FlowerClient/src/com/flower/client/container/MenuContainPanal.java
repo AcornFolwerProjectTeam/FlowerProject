@@ -38,6 +38,7 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 		this.jp = jp; // 패널 주소를 저장한다.
 		
 		// 패널의 초기 크기를 저장한다.
+		jp.setSize(600, 800); // 백그라운드 패널 크기 재차 설정
 		earlyWidth = jp.getWidth(); // 초기 너비
 		earlyHeight = jp.getHeight(); // 초기 높이
 		
@@ -54,7 +55,6 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 		bottomBar.setLocation(15,735); // 위치 지정
 		add(bottomBar); // 패널에 이미지바 추가.
 		
-		jp.setSize(getWidth(), getHeight()); // 패널 크기는 백그라운드 패널 크기와 동일.
 		add(jp); // 백그라운드 패널에 패널을 추가한다.
 		
 		
@@ -68,13 +68,14 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 		
 		if (jp instanceof OrderListPanel) {
 			int width = earlyWidth+increaseWidth>EnVal.MAXCOMPONENTWIDTH?EnVal.MAXCOMPONENTWIDTH:earlyWidth+increaseWidth;
+			width+=16;
 			int height = earlyHeight+increaseHeight>EnVal.MAXCOMPONENTHEIGhT?EnVal.MAXCOMPONENTHEIGhT:earlyHeight+increaseHeight;
+			height+=38;
 			
 			jp.setSize(width, height);
 		}
 		
-		//System.out.println(jp.getSize());
-		jp.setLocation(mf.getWidth() / 2 - (jp.getWidth()-16) / 2, mf.getHeight() / 2 - (jp.getHeight()-38) / 2); // 주 패널 가운데 정렬
+		jp.setLocation(mf.getWidth() / 2 - jp.getWidth() / 2, mf.getHeight() / 2 - jp.getHeight() / 2); // 주 패널 가운데 정렬
 		topMenuBar.setSize(mf.getWidth()-50, topMenuBar.getHeight()); // 메뉴바 크기 동적 수정
 		topMenuBar.moveOrderBtnLocationX(mf.getWidth()-410);
 		topMenuBar.moveChatBtnLocationX(mf.getWidth()-310);
