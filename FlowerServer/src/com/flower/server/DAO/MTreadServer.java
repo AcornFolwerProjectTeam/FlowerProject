@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.flower.vo.OrderListVO;
 import com.flower.vo.ProductVO;
 
 // thread를 상속받은 멀티스레드서버 클래스
@@ -98,6 +99,18 @@ public class MTreadServer extends Thread {
 				// hashMap을 전송
 				oos.writeObject(hmOrder);
 				oos.flush();
+			} else if(hm.get("request").equals("orderlist")){
+				OrderDAO odo = new OrderDAO();
+				odo.setHm(hm);
+				ArrayList<OrderListVO> list = odo.selectUser();
+				
+				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
+				hashData.put("datasize", list.size() + 1);
+				for (int i = 0; i < list.size(); i++) {
+					oos.writeObject(list.get(i));
+				}
+				oos.writeObject(list);
+				oos.flush();				
 			}
 		} catch (IOException e) {
 			System.out.println("IO exception in Reader and Writer, MThreadServer");

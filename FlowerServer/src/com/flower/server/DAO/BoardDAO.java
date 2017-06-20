@@ -60,7 +60,6 @@ public class BoardDAO extends Connect {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return list;
 	} // select method ends
 	

@@ -8,7 +8,9 @@ public class OrderListVO {
 	private String revName;
 	private String message;
 	private String fName;
-	private String receive;
+	private int fPrice;
+	private int receive;
+
 	// fields
 
 	public OrderListVO() {
@@ -17,7 +19,7 @@ public class OrderListVO {
 
 	public OrderListVO(int orderCode, int customerCode, 
 			String revTime, String revTel, String revName, 
-			String message, String fName, String receive) {
+			String message, String fName, int fPrice, int receive) {
 		
 		this.orderCode = orderCode;
 		this.customerCode = customerCode;
@@ -26,6 +28,7 @@ public class OrderListVO {
 		this.revName = revName;
 		this.message = message;
 		this.fName = fName;
+		this.fPrice = fPrice;
 		this.receive = receive;
 	} // constructor using fields
 
@@ -96,14 +99,22 @@ public class OrderListVO {
 		this.fName = fName;
 	}
 
-	public String getReceive() {
+	public int getReceive() {
 		return receive;
 	}
 
-	public void setReceive(String receive) {
+	public void setReceive(int receive) {
 		this.receive = receive;
 	}
+
+	public int getfPrice() {
+		return fPrice;
+	}
+
+	public void setfPrice(int fPrice) {
+		this.fPrice = fPrice;
+	}
 	
-	// getter - setter message
+	
 
 }

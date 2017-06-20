@@ -16,7 +16,7 @@ public class OrderDAO extends Connect {
 		ArrayList<OrderListVO> list = null;
 		sb.setLength(0);
 
-		sb.append("SELECT ordercode, customercode, revtime, revtel, message, fname, receive ");
+		sb.append("SELECT ordercode, customercode, revtime, revtel, message, fname, (select FPRICE from PRODUCT where FNAME = orderlist.fname) as FPRICE, receive ");
 		sb.append("FROM orderlist ");
 
 		try {
@@ -31,7 +31,8 @@ public class OrderDAO extends Connect {
 				ovo.setRevTel(rs.getString(4));
 				ovo.setMessage(rs.getString(5));
 				ovo.setfName(rs.getString(6));
-				ovo.setReceive(rs.getString(7));
+				ovo.setfPrice(rs.getInt(7));
+				ovo.setReceive(rs.getInt(8));
 				
 				list.add(ovo);
 			}
@@ -40,6 +41,39 @@ public class OrderDAO extends Connect {
 		}
 		return list;
 	}
+	
+	public ArrayList<OrderListVO> selectUser() {
+		ArrayList<OrderListVO> list = null;
+		sb.setLength(0);
+		
+		sb.append("SELECT ordercode, customercode, revtime, revtel, message, fname, (select FPRICE from PRODUCT where FNAME = orderlist.fname) as FPRICE, receive ");
+		sb.append("FROM orderlist ");
+		sb.append("WHERE id =? ");
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, hm.get("id"));
+			rs = pstmt.executeQuery();
+			list = new ArrayList<OrderListVO>();
+			while (rs.next()) {
+				OrderListVO ovo = new OrderListVO();
+				ovo.setOrderCode(rs.getInt(1));
+				ovo.setCustomerCode(rs.getInt(2));
+				ovo.setRevTime(rs.getString(3));
+				ovo.setRevTel(rs.getString(4));
+				ovo.setMessage(rs.getString(5));
+				ovo.setfName(rs.getString(6));
+				ovo.setfPrice(rs.getInt(7));
+				ovo.setReceive(rs.getInt(8));
+				
+				list.add(ovo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 
 	// ¡÷πÆ method
 	public HashMap<String, String> order() {
