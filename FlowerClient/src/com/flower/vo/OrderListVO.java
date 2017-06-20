@@ -1,6 +1,9 @@
 package com.flower.vo;
 
-public class OrderListVO {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class OrderListVO implements Serializable {
 	private int orderCode;
 	private int customerCode;
 	private String revTime;
@@ -10,6 +13,8 @@ public class OrderListVO {
 	private String fName;
 	private int fPrice;
 	private int receive;
+	private String imgUrl;
+	private String orderDate;
 
 	// fields
 
@@ -17,10 +22,9 @@ public class OrderListVO {
 
 	} // default constructor
 
-	public OrderListVO(int orderCode, int customerCode, 
-			String revTime, String revTel, String revName, 
-			String message, String fName, int fPrice, int receive) {
-		
+	public OrderListVO(int orderCode, int customerCode, String revTime, String revTel, String revName, String message,
+			String fName, int fPrice, int receive, String imgUrl, String orderDate) {
+		super();
 		this.orderCode = orderCode;
 		this.customerCode = customerCode;
 		this.revTime = revTime;
@@ -30,12 +34,17 @@ public class OrderListVO {
 		this.fName = fName;
 		this.fPrice = fPrice;
 		this.receive = receive;
-	} // constructor using fields
+		this.imgUrl = imgUrl;
+		this.orderDate = orderDate;
+	}
 
+	
 	@Override
 	public String toString() {
 		return "OrderListVO [orderCode=" + orderCode + ", customerCode=" + customerCode + ", revTime=" + revTime
-				+ ", revTel=" + revTel + ", revName=" + revName + ", message=" + message + "]";
+				+ ", revTel=" + revTel + ", revName=" + revName + ", message=" + message + ", fName=" + fName
+				+ ", fPrice=" + fPrice + ", receive=" + receive + ", imgUrl=" + imgUrl + ", orderDate=" + orderDate
+				+ "]";
 	}
 
 	public int getOrderCode() {
@@ -114,7 +123,22 @@ public class OrderListVO {
 	public void setfPrice(int fPrice) {
 		this.fPrice = fPrice;
 	}
-	
-	
 
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	
+	
 }
