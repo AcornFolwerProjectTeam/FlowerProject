@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import com.flower.client.container.SingleContainPanal;
 import com.flower.client.curation.CurationMainPanel;
-import com.flower.client.curation.CurationSubPanel;
 import com.flower.client.board.BoardWritePanel;
 import com.flower.client.container.MenuContainPanal;
 import com.flower.client.login.LoginPanel;
@@ -122,7 +121,6 @@ public class MainClass {
 		mc.mf.add(mc.orderListMcp, "orderList"); // 주문 목록 패널 추가.
 		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
 		mc.mf.add(mc.productInfoMcp, "productInfo"); // 상품 정보 패널 추가.
-		mc.mf.add(mc.productMcp, "productPanel"); // 상품 리스트 패널 추가.
 		mc.mf.add(mc.curationMainMcp, "curationPanel"); // 큐레이션 패널 추가.
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.
@@ -146,6 +144,10 @@ public class MainClass {
 	
 	public OrderPanel getOrderPanel() {
 		return this.orderPanel;
+	}
+
+	public OrderListPanel getOrderListPanel() {
+		return this.orderListPanel;
 	}
 
 	

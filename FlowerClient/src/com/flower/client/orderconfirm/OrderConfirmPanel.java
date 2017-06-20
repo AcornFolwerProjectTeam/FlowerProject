@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -16,16 +14,15 @@ import com.flower.client.MainClass;
 import com.flower.client.component.EmphasisButton;
 
 @SuppressWarnings("serial")
-public class OrderConfirmPanel extends JPanel implements ActionListener, MouseListener{
+public class OrderConfirmPanel extends JPanel implements ActionListener{
 
 	MainClass mc;
-	JLabel jlbDate, jlbPrice, jlbGet, jlbProductName;
-	JButton jbtnProduct;
+	JLabel jlbProduct, jlbDate, jlbPrice, jlbGet, jlbProductName;
 	EmphasisButton ebtnBoard;
 	Font f;
 	Boolean flag;
 	
-	public OrderConfirmPanel(MainClass mc, String productName, String productPrice, Boolean flag) {
+	public OrderConfirmPanel(MainClass mc , String productName, String img, String date, String productPrice, Boolean flag) {
 		this.mc = mc;
 		
 		// 초기 설정
@@ -37,18 +34,17 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		f = new Font("맑은 고딕", Font.BOLD, 12);	// 라벨 폰트
 		
 		// 날짜라벨
-		jlbDate = new JLabel("오늘 날짜");	// 날짜 라벨 생성
+		jlbDate = new JLabel(date);	// 날짜 라벨 생성
 		// TODO: DB에서 구매 날짜 가지고 와서 setText
 		jlbDate.setFont(f);	// 날짜라벨 폰트 설정
 		jlbDate.setBounds(20, 60, 80, 20);	// 날짜 라벨 크기, 위치 설정	
 		add(jlbDate);	// 날짜 라벨 부착
 		
 		// 이미지버튼
-		jbtnProduct = new JButton();	// 이미지 버튼 생성
+		jlbProduct = new JLabel(new ImageIcon(img));	// 이미지 버튼 생성
 		// TODO: DB에서 정보 가지고 와서 해당하는 이미지 SET
-		jbtnProduct.setBounds(100, 35, 80, 80);	// 이미지 버튼 크기, 위치 설정
-		jbtnProduct.setEnabled(false);	// 이미지 버튼 눌리지 않게 설정
-		add(jbtnProduct);	// 이미지 버튼 부착
+		jlbProduct.setBounds(100, 35, 80, 80);	// 이미지 버튼 크기, 위치 설정
+		add(jlbProduct);	// 이미지 버튼 부착
 		
 		// 상품명라벨
 		
@@ -56,7 +52,6 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		// TODO: DB에서 상품명 가지고 와서 setText
 		jlbProductName.setFont(f);	// 상품명 라벨 폰트 설정
 		jlbProductName.setBounds(200,55,100,20);	// 상품명 라벨 크기, 위치 설정
-		jlbProductName.addMouseListener(this);	// 마우스 클릭 Listener 부착
 		add(jlbProductName);	// 상품명 라벨 부착
 		
 		// 상품가격라벨
@@ -98,24 +93,4 @@ public class OrderConfirmPanel extends JPanel implements ActionListener, MouseLi
 		}
 		
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if(e.getSource()==jlbProductName){	// 상품명 라벨 클릭하면
-			mc.changeCardLayout("productInfo");	// 상품 상세 정보 패널 전환
-		}
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
 }

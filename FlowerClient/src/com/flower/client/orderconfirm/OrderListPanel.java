@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.flower.client.MainClass;
 import com.flower.client.component.BottomBar;
+import com.flower.vo.OrderListVO;
 
 // OrderListPanel class
 @SuppressWarnings("serial")
@@ -48,25 +50,27 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 		// 화면에 배치
 		add(jspOrderScroll); // 패널에 추가.
 		
-		// 주문 리스트 추가.
-		// TODO : 서버에서 로그인된 회원의 주문목록 VO를 가져오는 코드 작성 필요
-
+		
+	}
+	// --- Constructor end ---
+	
+	public void setOrderList(ArrayList<OrderListVO> list) {
 		// 주문아이템 배열 크기에 맞게 생성
-		orderPanels = new OrderConfirmPanel[5]; // 주문 품목
-		bbLine = new BottomBar[5]; // 구분선
+		orderPanels = new OrderConfirmPanel[list.size()]; // 주문 품목
+		bbLine = new BottomBar[list.size()]; // 구분선
 		
 		// 테스트용 주문리스트
-		for (int i = 0; i < orderPanels.length; i++) {
-			orderPanels[i] = new OrderConfirmPanel(mc, "상품", "50000", i%2==0?true:false);
+		for (int i = 0; i < list.size(); i++) {
+			orderPanels[i] = new OrderConfirmPanel(mc, list.get(i).getfName(), list.get(i).getImgUrl(), list.get(i).getOrderDate(), String.valueOf(list.get(i).getfPrice()), list.get(i).getReceive()==0?true:false);
 			bbLine[i] = new BottomBar();
 			jpnOrderItems.add(orderPanels[i]);
 			jpnOrderItems.add(bbLine[i]);
 			// TODO : VO에서 상품정보를 OrderPanel에 넣어주는 코드 필요
 		}
 		
-		appendList(5);
+		// 주문 리스트 추가.
+		appendList(list.size());
 	}
-	// --- Constructor end ---
 	
 	// appendList method
 	private void appendList(int page) {
@@ -82,11 +86,13 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		jspOrderScroll.setSize(getWidth()-100, getHeight()-200);
-		
-		for (int i = 0; i < orderPanels.length; i++) {
-			orderPanels[i].setLocation((getWidth()-120-480)/2, orderPanels[i].getY());
-			bbLine[i].setSize(getWidth()-146, bbLine[i].getHeight());
+		if (orderPanels != null) {
+			jspOrderScroll.setSize(getWidth()-100, getHeight()-200);
+			
+			for (int i = 0; i < orderPanels.length; i++) {
+				orderPanels[i].setLocation((getWidth()-120-480)/2, orderPanels[i].getY());
+				bbLine[i].setSize(getWidth()-146, bbLine[i].getHeight());
+			}
 		}
 	}
 
