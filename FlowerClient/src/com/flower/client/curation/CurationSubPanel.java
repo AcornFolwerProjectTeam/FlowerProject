@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class QSubPan  extends JFrame {
+public class CurationSubPanel  extends JFrame {
 	public JButton jbtnMe;
 	public JButton jbtnYou;
 	public JButton jbtnMe1QT; //내게 주는꽃 첫 번째질문 위쪽 선택버튼
@@ -57,7 +57,7 @@ public class QSubPan  extends JFrame {
 	public JPanel paneYou2;  
 	public JPanel color;  
 	
-	public QSubPan(){
+	public CurationSubPanel(){
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		

@@ -28,7 +28,7 @@ public class ProductPanel extends JPanel implements ComponentListener {
 		addComponentListener(this);
 		
 		// 패널 추가.
-		tpp = new TopProdPane(); // 상단 패널 추가.
+		tpp = new TopProdPane(mc); // 상단 패널 추가.
 		tpp.setBounds(25, 80, 540, 220);
 		//tpp.setBorder(new LineBorder(Color.BLACK));
 		add(tpp); // 패널 상단에 추가.

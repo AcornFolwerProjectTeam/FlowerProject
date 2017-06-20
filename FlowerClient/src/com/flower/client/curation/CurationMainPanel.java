@@ -15,10 +15,10 @@ import com.flower.client.MainClass;
 import com.flower.client.model.ProductModule;
 import com.flower.vo.ProductVO;
 
-public class QmainPanel extends JPanel implements ActionListener{
+public class CurationMainPanel extends JPanel implements ActionListener{
 	
 	CardLayout c1;
-	QSubPan qsp;
+	CurationSubPanel qsp;
 	ProductModule pdao;
 	ProductVO pvo;
 	
@@ -33,9 +33,9 @@ public class QmainPanel extends JPanel implements ActionListener{
 	int flagColor =3; //색상 결과값 저장
 	int flagWait=0;
 	MainClass mc;
-	QmainPanel(MainClass mc){
+	public CurationMainPanel(MainClass mc){
 		this.mc=mc;
-		qsp= new QSubPan();//버튼있는 패널
+		qsp= new CurationSubPanel();//버튼있는 패널
 		c1=new CardLayout();//카드레이아웃
 		setLayout(c1);
 		list= new ArrayList<ProductVO>();
