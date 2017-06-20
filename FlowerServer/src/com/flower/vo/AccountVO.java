@@ -7,7 +7,7 @@ public class AccountVO {
 	private String pw;
 	private String name;
 	private String tel;
-
+	
 	public AccountVO() {
 
 	} // default constructor
@@ -69,4 +69,5 @@ public class AccountVO {
 		this.tel = tel;
 	}
 	// getter - setter tel
+	
 }

@@ -159,6 +159,16 @@ public class ChatMainServer extends JFrame implements ActionListener, KeyListene
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == jbtnExit) {
 			System.exit(0); // 종료버튼에 종료기능 추가
+			// 자원 반납
+				try {
+				if (pw != null)
+					pw.close();
+				if (ss!= null)
+					ss.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			
 		} else if (e.getSource() == jbtnStart) {
 			if (waiterList.peek() != null) { // 대기자 목록에 사람이 있을 경우
 				String ip = waiterList.poll(); // 맨 처음 들어온 사람의 ip 정보를 받아와서

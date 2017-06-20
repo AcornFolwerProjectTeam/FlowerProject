@@ -11,15 +11,14 @@ public class SignInDAO extends Connect {
 	String userName;
 	String userTel;
 
+
 	public SignInDAO(HashMap<String, String> hm) {
-		super();
 		this.hm = hm;
 		userId = hm.get("id");
 		userPw = hm.get("pw");
 		userName = hm.get("name");
 		userTel = hm.get("phone");
 
-		new Connect();
 	}
 
 	public HashMap<String, String> check() {
@@ -39,9 +38,8 @@ public class SignInDAO extends Connect {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLIntegrityConstraintViolationException e) {
-			System.out.println("실패");
 			signInMap.put("respond", "error");
-			signInMap.put("message", "id_error");
+			signInMap.put("message", "please check id and password");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // try - catch ends
@@ -51,11 +49,7 @@ public class SignInDAO extends Connect {
 			signInMap.put("respond", "okay");
 			signInMap.put("message", "success");
 			
-		} else {
-			System.out.println("실패");
-			signInMap.put("respond", "error");
-			signInMap.put("message", "id_error");
-		}
+		} 
 		
 		return signInMap;
 	}

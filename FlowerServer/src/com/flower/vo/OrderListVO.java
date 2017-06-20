@@ -7,21 +7,33 @@ public class OrderListVO {
 	private String revTel;
 	private String revName;
 	private String message;
+	private String fName;
+	private String receive;
 	// fields
 
-	OrderListVO() {
+	public OrderListVO() {
 
 	} // default constructor
 
-	OrderListVO(int orderCode, int customerCode, String revTime, String revTel, String revName, String message) {
-		super();
+	public OrderListVO(int orderCode, int customerCode, 
+			String revTime, String revTel, String revName, 
+			String message, String fName, String receive) {
+		
 		this.orderCode = orderCode;
 		this.customerCode = customerCode;
 		this.revTime = revTime;
 		this.revTel = revTel;
 		this.revName = revName;
 		this.message = message;
+		this.fName = fName;
+		this.receive = receive;
 	} // constructor using fields
+
+	@Override
+	public String toString() {
+		return "OrderListVO [orderCode=" + orderCode + ", customerCode=" + customerCode + ", revTime=" + revTime
+				+ ", revTel=" + revTel + ", revName=" + revName + ", message=" + message + "]";
+	}
 
 	public int getOrderCode() {
 		return orderCode;
@@ -75,6 +87,23 @@ public class OrderListVO {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String getfName() {
+		return fName;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public String getReceive() {
+		return receive;
+	}
+
+	public void setReceive(String receive) {
+		this.receive = receive;
+	}
+	
 	// getter - setter message
 
 }

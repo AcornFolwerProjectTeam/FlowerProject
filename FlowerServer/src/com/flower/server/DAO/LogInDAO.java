@@ -15,12 +15,11 @@ public class LogInDAO extends Connect {
 		userId = hm.get("id");
 		userPw = hm.get("password");
 
-		new Connect();
 	} // constructor with HashMap field ends
 
 	public HashMap<String, String> check() {
 		sb.setLength(0);
-		sb.append("SELECT id, pw, name, tel ");
+		sb.append("SELECT customercode, id, pw, name, tel ");
 		sb.append("FROM ACCOUNT ");
 		sb.append("WHERE id = ? and pw = ? ");
 		HashMap<String, String> accountMap = new HashMap<String, String>();
@@ -43,7 +42,7 @@ public class LogInDAO extends Connect {
 		} catch (SQLException e) {
 			System.out.println("SQL error");
 			e.printStackTrace();
-		} // try - catch ends
+		} 
 
 		return accountMap;
 	} // check method ends

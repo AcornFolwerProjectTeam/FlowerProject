@@ -22,7 +22,6 @@ public class MTreadServer extends Thread {
 
 	@Override
 	public void run() {
-		super.run();
 
 		try {
 			// 수신 객체 : hashMap을 받기에 ObjectInputStream을 사용한다
@@ -33,27 +32,19 @@ public class MTreadServer extends Thread {
 
 			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(client.getOutputStream()));
 
-			HashMap<String, String> hm1 = null;
-			System.out.println(hm.get("request"));
-			System.out.println("me1 :" + hm.get("me1"));
-			System.out.println("me2 :" + hm.get("me2"));
-			System.out.println("you1 :" + hm.get("you1"));
-			System.out.println("you2 :" + hm.get("you2"));
-			System.out.println("color :" + hm.get("color"));
+			HashMap<String, String> hmLogSignIn = null;
 
 			// 로그인과 회원가입
 			if (hm.get("request").equals("login")) {
 				LogInDAO ln = new LogInDAO(hm);
-				ln.check();
-				hm1 = ln.check();
-				oos.writeObject(hm1);
+				hmLogSignIn = ln.check();
+				oos.writeObject(hmLogSignIn);
 				oos.flush();
-				
+
 			} else if (hm.get("request").equals("signin")) {
 				SignInDAO si = new SignInDAO(hm);
-				si.check();
-				hm1 = si.check();
-				oos.writeObject(hm1);
+				hmLogSignIn = si.check();
+				oos.writeObject(hmLogSignIn);
 				oos.flush();
 			}
 
@@ -61,32 +52,34 @@ public class MTreadServer extends Thread {
 			// DAO 클래스에 hm 정보("request" 및 "me1" 등) 전달
 			ProductDAO pda = new ProductDAO(hm);
 			ArrayList<ProductVO> selectResult = null;
-			
+
 			// vo와 list 둘 다 클라이언트에 전송
-			
+			// 모든 제품정보를 보여주는 쿼리
 			if (hm.get("request").equals("selectall")) {
-				pda.selectAll();
 				selectResult = pda.selectAll();
 				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
-				hashData.put("datasize", selectResult.size()+1);
+				hashData.put("datasize", selectResult.size() + 1);
 				oos.writeObject(hashData);
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
 				oos.writeObject(selectResult);
 				oos.flush();
+				// me 항목의 제품 정보를 보여주는 쿼리
 			} else if (hm.get("request").equals("selectme")) {
-				System.out.println("select me 동작");
-				pda.selectMe();
 				selectResult = pda.selectMe();
+				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
+				hashData.put("datasize", selectResult.size() + 1);
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
 				oos.writeObject(selectResult);
 				oos.flush();
+				// you 항목의 제품 정보를 보여주는 쿼리
 			} else if (hm.get("request").equals("selectyou")) {
-				pda.selectYou();
 				selectResult = pda.selectYou();
+				HashMap<String, Integer> hashData = new HashMap<String, Integer>();
+				hashData.put("datasize", selectResult.size() + 1);
 				for (int i = 0; i < selectResult.size(); i++) {
 					oos.writeObject(selectResult.get(i));
 				}
@@ -94,13 +87,26 @@ public class MTreadServer extends Thread {
 				oos.flush();
 			}
 
+			// 주문 및 주문 정보 조회
+			if (hm.get("request").equals("order")) {
+				// DAO 클래스 인스턴스
+				OrderDAO odo = new OrderDAO();
+				// hashMap을 통해서 온 request와 다른 key, value를 전달
+				odo.setHm(hm);
+				// order query의 respond를 담은 hashMap return
+				HashMap<String, String> hmOrder = odo.order();
+				// hashMap을 전송
+				oos.writeObject(hmOrder);
+				oos.flush();
+			}
 		} catch (IOException e) {
 			System.out.println("IO exception in Reader and Writer, MThreadServer");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} finally {
+			
+		}// try - catch - finally ends
 
 	}// run method ends
 
