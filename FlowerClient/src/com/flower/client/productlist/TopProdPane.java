@@ -17,7 +17,7 @@ public class TopProdPane extends JPanel implements ActionListener{
 	
 	TopProdPane(){
 		setPreferredSize(new Dimension(550, 220));
-		imgCuration = new ImageIcon("src/sample/cu.jpg");
+		imgCuration = new ImageIcon("imgs/cu.jpg");
 		curation =new JButton(imgCuration);
 		curation.setBorderPainted(false);
 		curation.setContentAreaFilled(false);
