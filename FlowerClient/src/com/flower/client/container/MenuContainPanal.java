@@ -12,6 +12,7 @@ import com.flower.client.component.BottomBar;
 import com.flower.client.component.TopMenuBar;
 import com.flower.client.config.EnVal;
 import com.flower.client.orderconfirm.OrderListPanel;
+import com.flower.client.productlist.ProductPanel;
 
 // MenuContainPanal class
 /**
@@ -66,7 +67,7 @@ public class MenuContainPanal extends JPanel implements ComponentListener {
 		int increaseWidth = (int) (mf.getWidth() - mf.getMinimumSize().getWidth());
 		int increaseHeight = (int) (mf.getHeight() - mf.getMinimumSize().getHeight());
 		
-		if (jp instanceof OrderListPanel) {
+		if (jp instanceof OrderListPanel || jp instanceof ProductPanel) {
 			int width = earlyWidth+increaseWidth>EnVal.MAXCOMPONENTWIDTH?EnVal.MAXCOMPONENTWIDTH:earlyWidth+increaseWidth;
 			width+=16;
 			int height = earlyHeight+increaseHeight>EnVal.MAXCOMPONENTHEIGhT?EnVal.MAXCOMPONENTHEIGhT:earlyHeight+increaseHeight;

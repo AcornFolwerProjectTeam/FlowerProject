@@ -57,7 +57,7 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 		
 		// 테스트용 주문리스트
 		for (int i = 0; i < orderPanels.length; i++) {
-			orderPanels[i] = new OrderConfirmPanel(mc, "상품", "50000", false);
+			orderPanels[i] = new OrderConfirmPanel(mc, "상품", "50000", i%2==0?true:false);
 			bbLine[i] = new BottomBar();
 			jpnOrderItems.add(orderPanels[i]);
 			jpnOrderItems.add(bbLine[i]);
@@ -72,7 +72,7 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 	private void appendList(int page) {
 		while (index < page) {
 			orderPanels[index].setBounds(0, 0+160*index, 480, 150);
-			bbLine[index].setBounds(0, 0+orderPanels[index].getY()+150, 2000, 10);
+			bbLine[index].setBounds(15, 0+orderPanels[index].getY()+150, 470, 3);
 			
 			index++;
 		}
@@ -85,26 +85,18 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 		jspOrderScroll.setSize(getWidth()-100, getHeight()-200);
 		
 		for (int i = 0; i < orderPanels.length; i++) {
-			orderPanels[i].setLocation((getWidth()-100-480)/2, orderPanels[i].getY());
+			orderPanels[i].setLocation((getWidth()-120-480)/2, orderPanels[i].getY());
+			bbLine[i].setSize(getWidth()-146, bbLine[i].getHeight());
 		}
 	}
 
 	@Override
-	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void componentMoved(ComponentEvent e) {}
 
 	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void componentShown(ComponentEvent e) {}
 
 	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void componentHidden(ComponentEvent e) {}
 	
 } // OrderListPanel class end

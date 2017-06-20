@@ -1,6 +1,7 @@
 package com.flower.client;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import com.flower.client.container.SingleContainPanal;
 import com.flower.client.board.BoardWritePanel;
@@ -56,10 +57,15 @@ public class MainClass {
 	// 생성하는 순간부터 서버에 접속하는 패널들은 타이밍 조절을 위해 별도 메서드로 분리한다.
 	public void loginPass() {
 		// 상품 목록 컨테이너 및 컴포넌트
-		productPanel = new ProductPanel(this); // 상품 목록 패널 생성
-		productMcp = new MenuContainPanal(mf, productPanel, this, true); // 상품목록용 중앙정렬 컨테이너 생성 및 매개값 전달
-		mf.add(productMcp, "productList"); // 상품 리스트.
-		changeCardLayout("productList"); // 로그인이 끝났으므로 화면을 상품 리스트로 전환한다.
+		try {
+			productPanel = new ProductPanel(this);
+			productMcp = new MenuContainPanal(mf, productPanel, this, true); // 상품목록용 중앙정렬 컨테이너 생성 및 매개값 전달
+			mf.add(productMcp, "productList"); // 상품 리스트.
+			changeCardLayout("productList"); // 로그인이 끝났으므로 화면을 상품 리스트로 전환한다.
+		} catch (IOException e) {
+			// TODO : 에러 페이지 이동 코드 필요
+			e.printStackTrace();
+		} // 상품 목록 패널 생성
 	} // end loginPass method
 	
 	// changeCardLayout method

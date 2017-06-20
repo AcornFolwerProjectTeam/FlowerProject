@@ -14,7 +14,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import com.flower.client.MainClass;
 import com.flower.client.model.ProductModule;
@@ -24,70 +23,34 @@ import com.flower.vo.ProductVO;
 public class Resize2 extends JPanel implements ComponentListener {
 
 	MainClass mc ; //
-	JScrollPane jsp; // 상품 스크롤 패널
 	JPanel jfrBorder; // 테두리 패널, 그리드 패널의 크기를 결정한다.
 	JPanel jfrGrid = new JPanel(); // 테두리 패널위에 붙는다. 상품정렬
 	ReSizeButton[] jbtn; // ArrayList<ProductVO> 리스트를 저장하는 버튼
 	ImageIcon[] prodImg;// 상품의 이미지를 저장
 	ArrayList<ProductVO> list;// 특정 조건에 맞는 꽃정보를 가지고 있는 리스트 객체
 	ProductVO fvo; // 리스트에서 받은 VO를 전달받는 객체
-	ProductModule pdm;// 서버와 연결해서 VOlist를 받기위한 모듈
-
-	int listLength;// ArrayList의 size 받는다.
+	
+	int listLength; // 리스트길이
 	int firstHeight;// 초기 상품목록 개수에 따른 초기 패널 길이.
 	int changeHeight;// 창 크기에 따라서 달라지는 패널의 길이.
 
 	public Resize2(MainClass mc) {// 로그인 직후 모든 상품 보여주는 생성자
-		ProductModule pdm;
-		try {
-			pdm = new ProductModule();// 모듈 생성한다.
-			list = pdm.allFlower(); // 리스트에 모든 상품 담는다.
-		} catch (ConnectException e) {
-
-			e.printStackTrace();
-		} catch (UnknownHostException e) {
-
-			e.printStackTrace();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-
 		this.setLayout(new BorderLayout()); // 패널의 layout스타일을 BorderLayout()으로 변경
 		this.mc = mc; // 패널을 붙이는 frame을 전달 받는다.
-		listLength = list.size(); // 리스트길이를 전달 받는다.
 		this.setBounds(150, 150, 500, 600);
 
-		jsp = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		// 스크롤 패널 생성하고 조건 설정한다.
-
-		// jsp.setPreferredSize(new Dimension(500, 600));
-		jsp.getViewport().add(this);
-		jsp.getVerticalScrollBar().setUnitIncrement(16); // 스크롤바 속도
-
-		firstHeight = setFirstHeigth(listLength); // 초기 borderPanel 높이를 받아온다.
-		this.setPreferredSize(new Dimension(600, firstHeight)); // 초기 높이를 설정한다.
+		this.setPreferredSize(new Dimension(600, 600)); // 초기 크기를 설정한다.
 		this.setBorder(BorderFactory.createEmptyBorder(50, 30, 50, 50)); // 내부여백 설정한다.
 
 		jfrGrid = new JPanel();// 패널 생성한다.
 		jfrGrid.setLayout(new GridLayout(4, 3, 15, 25));// 패널 레이아웃을 그리드로 설정한다.
-		jbtn = new ReSizeButton[listLength]; // 버튼 객체 참조변수 생성한다.
-
-		prodImg = new ImageIcon[listLength]; // prodImg 객체 참조변수 생성
-
-		for (int i = 0; i < listLength; i++) {
-			fvo = list.get(i);// 리스트에서 i번째 vo를 가져온다.
-			prodImg[i] = new ImageIcon(fvo.getImgUrl());// vo의 주소를 가져와서 imgicon을 생성다.
-			jbtn[i] = new ReSizeButton(list, i, prodImg[i]);// 버튼을 만들고 이미지를 넣는다.
-			jfrGrid.add(jbtn[i]);// 그리드 패널에 버튼을 추가한다.
-		} // for end
-
+		
 		add(jfrGrid);// 현재 패널에 그리드를 추가한다.
 		this.addComponentListener(this);// 컴포넌트 리스너 추가한다.
 
 	}
 
-	public Resize2(MainClass mc, ArrayList<ProductVO> list) {
+	/*public Resize2(MainClass mc, ArrayList<ProductVO> list) {
 		// 큐레이션 서비스 받고나서 선택된 상품만 보여주는 생성자.
 		this.mc = mc;
 
@@ -124,7 +87,33 @@ public class Resize2 extends JPanel implements ComponentListener {
 		add(jfrGrid);
 		this.addComponentListener(this);
 
+	}*/
+	
+	public void setProductItemAll() throws ConnectException, UnknownHostException, IOException {
+		ProductModule pdm = new ProductModule();// 모듈 생성한다.
+		list = pdm.allFlower(); // 리스트에 모든 상품 담는다.
+		
+		setProductItem(list);
 	}
+	
+	public void setProductItem(ArrayList<ProductVO> list) {
+		listLength = list.size(); // 리스트길이를 전달 받는다.
+
+		// 목록 패널 크기 수정
+		firstHeight = setFirstHeigth(listLength); // 초기 borderPanel 높이를 받아온다.
+		this.setPreferredSize(new Dimension(600, firstHeight)); // 초기 높이를 설정한다.
+		
+		jbtn = new ReSizeButton[listLength]; // 버튼 객체 참조변수 생성한다.
+		prodImg = new ImageIcon[listLength]; // prodImg 객체 참조변수 생성
+
+		for (int i = 0; i < listLength; i++) {
+			fvo = list.get(i);// 리스트에서 i번째 vo를 가져온다.
+			prodImg[i] = new ImageIcon(fvo.getImgUrl());// vo의 주소를 가져와서 imgicon을 생성다.
+			jbtn[i] = new ReSizeButton(list, i, prodImg[i]);// 버튼을 만들고 이미지를 넣는다.
+			jfrGrid.add(jbtn[i]);// 그리드 패널에 버튼을 추가한다.
+		} // for end
+	}
+	
 
 	// setFirstHeigth method
 	public int setFirstHeigth(int listLength) {// 초기 패널 높이 설정
@@ -185,7 +174,7 @@ public class Resize2 extends JPanel implements ComponentListener {
 		System.out.println("boder : " + borderWidth);
 		this.setVisible(false);
 		this.setVisible(true);
-
+		System.out.println(getSize());
 	}
 
 	@Override
