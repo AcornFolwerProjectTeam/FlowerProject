@@ -44,6 +44,14 @@ public class ProductPanel extends JPanel implements ComponentListener {
 		add(jsp); // 패널 중앙에 추가.
 	}
 
+	public Resize2 getRs2() {
+		return rs2;
+	}
+
+	public void setRs2(Resize2 rs2) {
+		this.rs2 = rs2;
+	}
+
 	@Override
 	public void componentResized(ComponentEvent e) {
 		tpp.setSize(getWidth()-75, tpp.getHeight()); // 상단 메뉴 좌우 너비만 벌림

@@ -116,6 +116,7 @@ public class MainClass {
 		mc.mf.add(mc.orderListMcp, "orderList"); // 주문 목록 패널 추가.
 		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
 		mc.mf.add(mc.productInfoMcp, "productInfo"); // 상품 정보 패널 추가.
+		mc.mf.add(mc.productPanel, "productPanel"); // 상품 리스트 패널 추가.
 		
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.
@@ -149,7 +150,9 @@ public class MainClass {
 	public void setChatFlag(Boolean chatFlag) {
 		this.chatFlag = chatFlag;
 	}
-	
+	public ProductPanel getProductPanel() {
+		return this.productPanel;
+	}
 	
 	// --- Getter and Setter end ---
 }
