@@ -39,22 +39,28 @@ public class MainClass {
 		
 		// 로그인 컨테이너 및 컴포넌트
 		mf = new MainFrame(); // 메인 프레임 생성 및 화면을 띄움.
-		loginPanel = new LoginPanel(this); // 로그인 패널
+		loginPanel = new LoginPanel(this); // 로그인 패널 생성
 		loginScp = new SingleContainPanal(mf, loginPanel); // 로그인용 중앙정렬 컨테이너 생성 및 매개값 전달.
 		// 회원가입 컨테이너 및 컴포넌트
-		registerPanel = new RegisterPanel(this); // 회원가입 패널
+		registerPanel = new RegisterPanel(this); // 회원가입 패널 생성
 		registerMcp = new MenuContainPanal(mf, registerPanel, this, false); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
-		// 상품 목록 컨테이너 및 컴포넌트
-		productPanel = new ProductPanel(this);
-		productMcp = new MenuContainPanal(mf, productPanel, this, true);
-		// 상품 목록 컨테이너 및 컴포넌트
-		orderListPanel = new OrderListPanel(this);
-		orderListMcp = new MenuContainPanal(mf, orderListPanel, this, true);
+		// 주문 목록 컨테이너 및 컴포넌트
+		orderListPanel = new OrderListPanel(this); // 주문 목록 패널 생성
+		orderListMcp = new MenuContainPanal(mf, orderListPanel, this, true); // 주문목록용 중앙정렬 컨테이너 생성 및 매개값 전달
 		// 상품후기 컨테이너 및 컴포넌트
-		boardWritePanel = new BoardWritePanel(this);
+		boardWritePanel = new BoardWritePanel(this); // 상품 후기 패널 생성
 		boardWriteMcp = new MenuContainPanal(mf, boardWritePanel, this, true); // 회원가입용 주앙정렬 컨테이너 생성 및 매개값 전달.
 	}
 	// --- Constructors end ---
+
+	// 생성하는 순간부터 서버에 접속하는 패널들은 타이밍 조절을 위해 별도 메서드로 분리한다.
+	public void loginPass() {
+		// 상품 목록 컨테이너 및 컴포넌트
+		productPanel = new ProductPanel(this); // 상품 목록 패널 생성
+		productMcp = new MenuContainPanal(mf, productPanel, this, true); // 상품목록용 중앙정렬 컨테이너 생성 및 매개값 전달
+		mf.add(productMcp, "productList"); // 상품 리스트.
+		changeCardLayout("productList"); // 로그인이 끝났으므로 화면을 상품 리스트로 전환한다.
+	} // end loginPass method
 	
 	// changeCardLayout method
 	/**
@@ -83,9 +89,8 @@ public class MainClass {
 		// 화면 추가.
 		mc.mf.add(mc.loginScp, "login"); // 프레임에 로그인 패널 추가.
 		mc.mf.add(mc.registerMcp, "register"); // 프레임에 회원가입 패널 추가.
-		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
 		mc.mf.add(mc.orderListMcp, "orderList"); // 주문 목록 패널 추가.
-		mc.mf.add(mc.productMcp, "productList"); // 상품 리스트.
+		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
 		
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.

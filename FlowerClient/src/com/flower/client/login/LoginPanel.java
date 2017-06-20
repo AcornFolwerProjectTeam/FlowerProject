@@ -100,7 +100,7 @@ public class LoginPanel extends JPanel implements ActionListener, CaretListener{
 				// AccountVO데이터의 존재 여부가 로그인 성공 여부이므로 조건분기한다.
 				if (avo != null){ // 로그인 성공시
 					mc.setAvo(avo); // VO를 총괄하는 MainClass에 VO를 이관한다.
-					mc.changeCardLayout("productList"); // 로그인이 끝났으므로 화면을 상품 리스트로 전환한다.
+					mc.loginPass(); // 로그인이 끝났으므로 화면을 상품 리스트로 전환하는 메서드를 호출한다.
 				} else { // 로그인 실패시
 					new CommonDialog(mc.getMf(), "로그인에 실패했습니다."); // 로그인 실패 에러 다이얼 로그 출력
 				} // if end
