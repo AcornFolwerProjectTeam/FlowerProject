@@ -13,9 +13,9 @@ import com.flower.vo.ProductVO;
 
 
 
+@SuppressWarnings("serial")
 public class ReSizeButton extends JButton implements ActionListener{
 
-	
 	ArrayList<ProductVO> list;//flowerVO를 담은  list 객체를 받는다.
 	int index;//이 버튼이 몇번째로 생성되었는지 저장=> 몇번째 list에서 가져왔는지
 	ReSizeButton(ArrayList<ProductVO> list, int index, ImageIcon arg0){
@@ -27,10 +27,10 @@ public class ReSizeButton extends JButton implements ActionListener{
 		addActionListener(this);//버튼 액션리스너 추가
 		
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    DetailTop dt = new DetailTop(list, index);
-	    
 	}
 
 }
