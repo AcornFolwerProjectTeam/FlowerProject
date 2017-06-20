@@ -169,12 +169,11 @@ public class Resize2 extends JPanel implements ComponentListener {
 		this.setPreferredSize(new Dimension(600, (row * 275) - 25));// 현재패널의 길이를 재설정 한다.
 
 		this.setBorder(BorderFactory.createEmptyBorder(50, borderWidth, 50, borderWidth + 20));
-		System.out.println("row : " + row + " column : " + column);
-		System.out.println(mc.getMf().getWidth());
-		System.out.println("boder : " + borderWidth);
+		//System.out.println("row : " + row + " column : " + column);
+		//System.out.println(mc.getMf().getWidth());
+		//System.out.println("boder : " + borderWidth);
 		this.setVisible(false);
 		this.setVisible(true);
-		System.out.println(getSize());
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.flower.server.DAO.AccountDAO;
+import com.flower.server.DAO.MainServer;
 import com.flower.server.DAO.OrderDAO;
 import com.flower.server.DAO.ProductDAO;
 
@@ -53,5 +54,6 @@ public class ServerView extends JFrame {
 	}
 	public static void main(String[] args) {
 		new ServerView();
+		new MainServer();
 	}
 }
