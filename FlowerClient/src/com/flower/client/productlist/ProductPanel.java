@@ -28,7 +28,7 @@ public class ProductPanel extends JPanel implements ComponentListener {
 		addComponentListener(this);
 		
 		// 패널 추가.
-		tpp = new TopProdPane(); // 상단 패널 추가.
+		tpp = new TopProdPane(mc); // 상단 패널 추가.
 		tpp.setBounds(25, 80, 540, 220);
 		//tpp.setBorder(new LineBorder(Color.BLACK));
 		add(tpp); // 패널 상단에 추가.
@@ -42,6 +42,14 @@ public class ProductPanel extends JPanel implements ComponentListener {
 		jsp.setBounds(25, 300, 540, 450);
 		jsp.getVerticalScrollBar().setUnitIncrement(16); // 스크롤바 속도
 		add(jsp); // 패널 중앙에 추가.
+	}
+
+	public Resize2 getRs2() {
+		return rs2;
+	}
+
+	public void setRs2(Resize2 rs2) {
+		this.rs2 = rs2;
 	}
 
 	@Override

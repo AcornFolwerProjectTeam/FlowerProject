@@ -9,15 +9,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.flower.client.MainClass;
+
 @SuppressWarnings("serial")
 public class TopProdPane extends JPanel implements ActionListener{
 	JButton curation;
 	ImageIcon imgCuration;
-
+	MainClass mc;
 	
-	TopProdPane(){
+	TopProdPane(MainClass mc){
+		this.mc=mc;
 		setPreferredSize(new Dimension(550, 220));
-		imgCuration = new ImageIcon("src/sample/cu.jpg");
+		imgCuration = new ImageIcon("imgs/cu.jpg");
 		curation =new JButton(imgCuration);
 		curation.setBorderPainted(false);
 		curation.setContentAreaFilled(false);
@@ -28,5 +31,5 @@ public class TopProdPane extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("´­¸²?");	}
+		mc.changeCardLayout("curationPanel");	}
 }

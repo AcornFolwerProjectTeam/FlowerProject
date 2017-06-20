@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.io.IOException;
 
 import com.flower.client.container.SingleContainPanal;
+import com.flower.client.curation.CurationMainPanel;
+import com.flower.client.curation.CurationSubPanel;
 import com.flower.client.board.BoardWritePanel;
 import com.flower.client.container.MenuContainPanal;
 import com.flower.client.login.LoginPanel;
@@ -33,7 +35,8 @@ public class MainClass {
 	private OrderPanel orderPanel; // 주문 패널
 	private MenuContainPanal orderPanelMcp; // 주문 정보 패널 가운데 정렬 컨테인 패널
 	private Boolean chatFlag;	// 채팅창이 켜져 있는지를 판별하는 변수
-	
+	private CurationMainPanel curationMainPanel;
+	private MenuContainPanal curationMainMcp; 
 	// 필드VO
 	private AccountVO avo;
 
@@ -60,7 +63,10 @@ public class MainClass {
 		// 상품 정보 컨테이너 및 컴포넌트
 		productInfoPanel = new ProductInfoPanel(this); // 상품 정보 패널 생성
 		productInfoMcp = new MenuContainPanal(mf, productInfoPanel, this, true); // 상품 정보용 주앙정렬 컨테이너 생성 및 매개값 전달.
-
+		//큐레이션 컨테이너 및 컴포넌트
+		curationMainPanel= new CurationMainPanel(this);//큐레이션 패널 생성
+		curationMainMcp=new  MenuContainPanal(mf,curationMainPanel,this, true);// 큐레이션 패널용 중앙정렬 컨테이너 생성 및 매개값 전달
+		
 	}
 	// --- Constructors end ---
 
@@ -116,7 +122,8 @@ public class MainClass {
 		mc.mf.add(mc.orderListMcp, "orderList"); // 주문 목록 패널 추가.
 		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
 		mc.mf.add(mc.productInfoMcp, "productInfo"); // 상품 정보 패널 추가.
-		
+		mc.mf.add(mc.productMcp, "productPanel"); // 상품 리스트 패널 추가.
+		mc.mf.add(mc.curationMainMcp, "curationPanel"); // 큐레이션 패널 추가.
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.
 		
@@ -149,7 +156,9 @@ public class MainClass {
 	public void setChatFlag(Boolean chatFlag) {
 		this.chatFlag = chatFlag;
 	}
-	
+	public ProductPanel getProductPanel() {
+		return this.productPanel;
+	}
 	
 	// --- Getter and Setter end ---
 }
