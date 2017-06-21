@@ -40,7 +40,7 @@ public class ProductPanel extends JPanel implements ComponentListener {
 		
 		// 스크롤 패널 생성하고 조건 설정한다.
 		jsp = new JScrollPane(rs2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		jsp.setBounds(25, 350, 540, 450);
+		jsp.setBounds(25, 310, 540, 200);
 		jsp.getVerticalScrollBar().setUnitIncrement(16); // 스크롤바 속도
 		add(jsp); // 패널 중앙에 추가.
 	}

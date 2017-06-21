@@ -2,7 +2,7 @@ package com.flower.client.config;
 
 import java.awt.Color;
 import java.awt.Font;
-
+ 
 /**
  * 환경변수 클래스로 테마색상, 공통변수 등 저장해두는 전역 변수 클래스이다.
  * */

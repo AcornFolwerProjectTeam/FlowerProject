@@ -2,6 +2,7 @@ package com.flower.client.orderconfirm;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,12 +17,12 @@ import com.flower.client.component.EmphasisButton;
 @SuppressWarnings("serial")
 public class OrderConfirmPanel extends JPanel implements ActionListener{
 
-	MainClass mc;
-	JLabel jlbProduct, jlbDate, jlbPrice, jlbGet, jlbProductName;
-	EmphasisButton ebtnBoard;
-	Font f;
-	Boolean flag;
-	String productName;
+	private MainClass mc;
+	private JLabel jlbProduct, jlbDate, jlbPrice, jlbGet, jlbProductName;
+	private EmphasisButton ebtnBoard;
+	private Font f;
+	private Boolean flag;
+	private String productName;
 	
 	public OrderConfirmPanel(MainClass mc , String productName, String img, String date, String productPrice, Boolean flag) {
 		this.mc = mc;
@@ -54,6 +55,7 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 		// TODO: DB에서 상품명 가지고 와서 setText
 		jlbProductName.setFont(f);	// 상품명 라벨 폰트 설정
 		jlbProductName.setBounds(200,55,100,20);	// 상품명 라벨 크기, 위치 설정
+		jlbProductName.setHorizontalAlignment(SwingConstants.CENTER);	// 가운데 정렬
 		add(jlbProductName);	// 상품명 라벨 부착
 		
 		// 상품가격라벨

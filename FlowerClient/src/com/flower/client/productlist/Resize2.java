@@ -41,7 +41,7 @@ public class Resize2 extends JPanel implements ComponentListener {
 		this.setBounds(150, 150, 500, 600);
 
 		this.setPreferredSize(new Dimension(600, 600)); // 초기 크기를 설정한다.
-		this.setBorder(BorderFactory.createEmptyBorder(50, 30, 50, 50)); // 내부여백 설정한다.
+		this.setBorder(BorderFactory.createEmptyBorder(20, 30, 50, 60)); // 내부여백 설정한다.
 		setBackground(Color.white);//패널 색상 흰색
 		jfrGrid = new JPanel();// 패널 생성한다.
 		jfrGrid.setLayout(new GridLayout(4, 3, 15, 25));// 패널 레이아웃을 그리드로 설정한다.
