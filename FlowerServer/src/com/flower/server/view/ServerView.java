@@ -1,6 +1,8 @@
 package com.flower.server.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -12,7 +14,7 @@ import com.flower.server.DAO.OrderDAO;
 import com.flower.server.DAO.ProductDAO;
 
 @SuppressWarnings("serial")
-public class ServerView extends JFrame {
+public class ServerView extends JFrame implements MouseListener {
 
 	JTable jtOrder;
 	JTable jtAccount;
@@ -30,6 +32,7 @@ public class ServerView extends JFrame {
 		String[] title = { "주문코드", "주문회원", "예약시간", "전화번호", "메세지", "제품명", "제품가격", "수령확인" };
 		// 주문 정보 콤포넌트 생성
 		jtOrder = new JTable(order, title);
+		jtOrder.addMouseListener(this);
 		jspOrder = new JScrollPane(jtOrder);
 		add(jspOrder, BorderLayout.NORTH);
 
@@ -56,4 +59,23 @@ public class ServerView extends JFrame {
 		new ServerView();
 		new MainServer();
 	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int selIndex = -1;		
+		selIndex = jtOrder.getSelectionModel().getMinSelectionIndex();
+		
+		if (selIndex > -1 && (int) jtOrder.getValueAt(selIndex, 7) < 1 ) {
+			int orderCode = (int) jtOrder.getValueAt(selIndex, 0);
+			int customerCode = (int) jtOrder.getValueAt(selIndex, 1);
+			new OrderViewDialog(this, orderCode, customerCode);
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
 }
