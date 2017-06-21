@@ -126,6 +126,29 @@ public class OrderDAO extends Connect {
 		return orderMap;
 	} // order method ends
 
+	// 상품 수령
+	public void updateReceive(int orderCode, int receiveVal) {
+		// sql문 초기화
+		sb.setLength(0);
+		// sql문 작성
+		sb.append("UPDATE orderlist ");
+		sb.append("SET receive = ? ");
+		sb.append("WHERE orderCode = ? ");
+		
+		try {
+			// sql문 인스턴스 및 정의
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, receiveVal);
+			pstmt.setInt(2, orderCode);
+			
+			// sql문 실행
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Object[][] getObject() {
 		ArrayList<OrderListVO> list = selectAll();
 
