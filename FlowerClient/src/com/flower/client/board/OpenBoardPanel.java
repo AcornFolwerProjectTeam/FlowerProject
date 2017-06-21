@@ -30,6 +30,7 @@ public class OpenBoardPanel extends JScrollPane implements ComponentListener {
 	public OpenBoardPanel() {
 		super(VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_NEVER); // 좌우 스크롤바는 사용안함, 상하 스크롤바는 사용
 		setBackground(Color.WHITE);// 배경색은 흰색으로 한다.
+		setBorder(null);	// 게시판 테두리를 보이지 않는다.
 		addComponentListener(this); // 컴포넌트 이벤트 핸들러 추가.
 		
 		// 기본 필드변수/객체 설정
