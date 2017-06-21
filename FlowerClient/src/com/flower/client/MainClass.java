@@ -2,6 +2,8 @@ package com.flower.client;
 
 import java.awt.CardLayout;
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import com.flower.client.container.SingleContainPanal;
 import com.flower.client.curation.CurationMainPanel;
@@ -36,6 +38,7 @@ public class MainClass {
 	private Boolean chatFlag;	// 채팅창이 켜져 있는지를 판별하는 변수
 	private CurationMainPanel curationMainPanel;
 	private MenuContainPanal curationMainMcp; 
+	
 	// 필드VO
 	private AccountVO avo;
 
@@ -65,6 +68,9 @@ public class MainClass {
 		//큐레이션 컨테이너 및 컴포넌트
 		curationMainPanel= new CurationMainPanel(this);//큐레이션 패널 생성
 		curationMainMcp=new  MenuContainPanal(mf,curationMainPanel,this, true);// 큐레이션 패널용 중앙정렬 컨테이너 생성 및 매개값 전달
+		
+		
+		
 		
 	}
 	// --- Constructors end ---
@@ -122,6 +128,7 @@ public class MainClass {
 		mc.mf.add(mc.boardWriteMcp, "postscript"); // 구매 후기 쓰기 패널 추가.
 		mc.mf.add(mc.productInfoMcp, "productInfo"); // 상품 정보 패널 추가.
 		mc.mf.add(mc.curationMainMcp, "curationPanel"); // 큐레이션 패널 추가.
+		
 		// 화면 처리
 		mc.mf.setVisible(true); // 프레임윈도우를 화면에 띄운다.
 		
@@ -164,6 +171,16 @@ public class MainClass {
 	public ProductPanel getProductPanel() {
 		return this.productPanel;
 	}
+
+	public MenuContainPanal getProductMcp() {
+		return productMcp;
+	}
+
+	public void setProductMcp(MenuContainPanal productMcp) {
+		this.productMcp = productMcp;
+	}
+
+	
 	
 	// --- Getter and Setter end ---
 }

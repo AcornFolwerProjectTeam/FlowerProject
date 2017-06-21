@@ -98,6 +98,9 @@ public class Resize2 extends JPanel implements ComponentListener {
 	}
 	
 	public void setProductItem(ArrayList<ProductVO> list) {
+		
+	
+		this.list=list;
 		listLength = list.size(); // 리스트길이를 전달 받는다.
 
 		// 목록 패널 크기 수정
@@ -106,12 +109,14 @@ public class Resize2 extends JPanel implements ComponentListener {
 		
 		jbtn = new ReSizeButton[listLength]; // 버튼 객체 참조변수 생성한다.
 		prodImg = new ImageIcon[listLength]; // prodImg 객체 참조변수 생성
-
+		
 		for (int i = 0; i < listLength; i++) {
 			fvo = list.get(i);// 리스트에서 i번째 vo를 가져온다.
 			prodImg[i] = new ImageIcon(fvo.getImgUrl());// vo의 주소를 가져와서 imgicon을 생성다.
 			jbtn[i] = new ReSizeButton(mc, list, i, prodImg[i]);// 버튼을 만들고 이미지를 넣는다.
+			jbtn[i].setIcon(new ImageIcon("imgs/iconimg/21.jpg"));
 			jfrGrid.add(jbtn[i]);// 그리드 패널에 버튼을 추가한다.
+			System.out.println("리스트길이 :"+list.size()+"그리드 생성할때 "+fvo.getImgUrl()+"이름 :"+fvo.getfName());
 		} // for end
 	}
 	

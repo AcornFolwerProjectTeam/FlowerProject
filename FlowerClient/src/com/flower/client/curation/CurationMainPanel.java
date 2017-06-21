@@ -146,8 +146,7 @@ public class CurationMainPanel extends JPanel implements ActionListener{
 				//resize2의 setProductItem 메소드를 실행한다. 상품재배치
 				mc.changeCardLayout("productList");//상품리스트 패널로 전환한다.
 				c1.show(this,"paneMeYou");//큐래이션 패널을 맨처음으로 초기화 한다.
-				System.out.println("flagMe1 : " +flagMe1+"/flagMe2 : "+flagMe2+"/color : "+flagColor );
-				System.out.println(list);
+			
 				pdao.close();//접속 중지
 			}
 			else if(flagYouMe==1){//상대에게 꽃 선택했을 때
@@ -156,8 +155,7 @@ public class CurationMainPanel extends JPanel implements ActionListener{
 				//resize2의 setProductItem 메소드를 실행한다. 상품재배치
 				mc.changeCardLayout("productList");//상품리스트 패널로 전환한다.
 				c1.show(this,"paneMeYou");//큐래이션 패널을 맨처음으로 초기화 한다.
-				System.out.println("flagYou1 : " +flagYou1+"/flagYou2 : "+flagYou2+"/color : "+flagColor );
-				System.out.println(list);
+			
 				pdao.close();//접속 중지
 			}
 			
@@ -176,8 +174,7 @@ public class CurationMainPanel extends JPanel implements ActionListener{
 				mc.changeCardLayout("productList");//상품리스트 패널로 전환한다.
 				c1.show(this,"paneMeYou");//큐래이션 패널을 맨처음으로 초기화 한다.
 				
-				System.out.println("flagMe1 : " +flagMe1+"/flagMe2 : "+flagMe2+"/color : "+flagColor );
-				System.out.println(list);
+			
 				pdao.close();//접속 중지
 			}
 			else if(flagYouMe==1){//상대에게 꽃 선택했을 때
@@ -187,8 +184,7 @@ public class CurationMainPanel extends JPanel implements ActionListener{
 				mc.changeCardLayout("productList");//상품리스트 패널로 전환한다.
 				c1.show(this,"paneMeYou");//큐래이션 패널을 맨처음으로 초기화 한다.
 				
-				System.out.println("flagYou1 : " +flagYou1+"/flagYou2 : "+flagYou2+"/color : "+flagColor );
-				System.out.println(list);
+				
 				pdao.close();//접속 중지
 			}
 				
