@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -49,7 +50,7 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		// 좌측 상단 제품 사진
 		jlbImg = new JLabel();	// 제품사진 버튼 생성
 		jlbImg.setBounds(50, 50, 200, 200);	// 제품사진 버튼 크기, 위치 지정
-		jlbImg.setBorder(new LineBorder(EnVal.MAINCOLOR));	// 테스트를 위한 테두리 설정
+		//jlbImg.setBorder(new LineBorder(EnVal.MAINCOLOR));	// 테스트를 위한 테두리 설정
 		//jlbImg.setEnabled(false);	// 제품사진 버튼 클릭 비활성화
 		jlbImg.setIcon(null); //라벨에 이미지 추가한다.
 		add(jlbImg);	// 제품사진 버튼 부착
@@ -98,8 +99,10 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		
 		// 상세정보 사진과 게시판 패널이 들어갈 스크롤 패널
 		jsp = new JScrollPane(backPanel);	// TODO: 상세정보와 게시판 패널 부착하고 스크롤바
+		jsp.setBorder(null);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		jsp.getVerticalScrollBar().setUnitIncrement(16);
 		jsp.setBounds(50, 290, 490, 430);	// 스크롤패널 크기, 위치 지정
 		add(jsp);	// 스크롤 패널 부착
 		
@@ -148,7 +151,11 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==sbtnReview){
-			mc.changeCardLayout("productList");
+			
+			JScrollBar jsb = jsp.getVerticalScrollBar(); // 수직 스크롤바 객체 가지고오기
+			int v = jsb.getMaximum();
+			jsb.setValue(v); // 수직 스크롤바가 항상 밑으로 내려감
+			
 		} else if (e.getSource()==ebtnBuy){
 			mc.getOrderPanel().setProductData(pvo);
 			mc.changeCardLayout("order"); // OrderPanel로 전환한다.
