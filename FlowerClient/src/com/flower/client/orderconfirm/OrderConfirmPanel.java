@@ -20,12 +20,15 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 	private JLabel jlbProduct, jlbDate, jlbPrice, jlbGet, jlbProductName;
 	private EmphasisButton ebtnBoard;
 	private Font f;
-	private int flag;
 	private String productName;
 	
-	public OrderConfirmPanel(MainClass mc , String productName, String img, String date, String productPrice, int flag) {
+	private int flag;
+	private int ordercode;
+	
+	public OrderConfirmPanel(MainClass mc, int ordercode, String productName, String img, String date, String productPrice, int flag) {
 		this.mc = mc;
 		this.productName = productName;
+		this.ordercode = ordercode;
 		
 		// 초기 설정
 		setLayout(null);
@@ -96,6 +99,7 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 		if(e.getSource()==ebtnBoard){	// 후기 작성버튼 클릭하면
 			mc.changeCardLayout("postscript");	// 후기 작성 패널로 전환
 			mc.getBoardWritePanel().setFname(this.productName);
+			mc.getBoardWritePanel().setOrdercode(this.ordercode);
 		}
 		
 	}

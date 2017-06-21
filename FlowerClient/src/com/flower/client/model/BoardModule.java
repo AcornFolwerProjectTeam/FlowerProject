@@ -74,7 +74,7 @@ public class BoardModule {
 		return list;
 	}
 	
-	public boolean writePost(String title, int grade, String comment, String id, String fname) {
+	public boolean writePost(String title, int grade, String comment, String id, String fname, int ordercode) {
 		try {
 			// 변수/객체 설정
 			oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream())); // 서버에 객체타입의 값을 전달하기위한 객체 생성
@@ -86,7 +86,8 @@ public class BoardModule {
 			hmdata.put("fname", fname); // 제품명
 			hmdata.put("posttitle", title); // 게시글 제목
 			hmdata.put("postcomment", comment); // 게시글 내용
-			hmdata.put("grade", String.valueOf(grade)); // 비밀번호
+			hmdata.put("grade", String.valueOf(grade)); // 평점
+			hmdata.put("ordercode", String.valueOf(ordercode)); // 평점
 			
 			// 서버에 로그인 값을 전달한다.
 			oos.writeObject(hmdata); // 서버에 값 전달을 전달하나 특성상 예약된다.
