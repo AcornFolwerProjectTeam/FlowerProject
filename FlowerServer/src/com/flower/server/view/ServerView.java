@@ -1,9 +1,12 @@
 package com.flower.server.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,7 +17,7 @@ import com.flower.server.DAO.OrderDAO;
 import com.flower.server.DAO.ProductDAO;
 
 @SuppressWarnings("serial")
-public class ServerView extends JFrame implements MouseListener {
+public class ServerView extends JFrame implements MouseListener, ActionListener {
 
 	JTable jtOrder;
 	JTable jtAccount;
@@ -23,6 +26,8 @@ public class ServerView extends JFrame implements MouseListener {
 	JScrollPane jspOrder;
 	JScrollPane jspAccount;
 	JScrollPane jspProduct;
+	
+	JButton jbtnRefresh;
 
 	public ServerView() {
 		setBounds(150, 150, 800, 600);
@@ -54,11 +59,22 @@ public class ServerView extends JFrame implements MouseListener {
 		jspProduct = new JScrollPane(jtProduct);
 		add(jspProduct, BorderLayout.CENTER);
 		setVisible(true);
+		
+		// 새로고침 버튼 생성
+		jbtnRefresh = new JButton("새로고침");
+		jbtnRefresh.addActionListener(this);
+		add(jbtnRefresh, BorderLayout.SOUTH);
 	}
+	
 	public static void main(String[] args) {
 		new ServerView();
 		new MainServer();
 	}
+	
+	private void dataRefresh() {
+		jtOrder.setModel(new OrderDataModel());
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int selIndex = -1;		
@@ -68,6 +84,8 @@ public class ServerView extends JFrame implements MouseListener {
 			int orderCode = (int) jtOrder.getValueAt(selIndex, 0);
 			int customerCode = (int) jtOrder.getValueAt(selIndex, 1);
 			new OrderViewDialog(this, orderCode, customerCode);
+			
+			dataRefresh();
 		}
 	}
 	@Override
@@ -78,4 +96,9 @@ public class ServerView extends JFrame implements MouseListener {
 	public void mouseEntered(MouseEvent e) {}
 	@Override
 	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		dataRefresh();
+	}
 }
