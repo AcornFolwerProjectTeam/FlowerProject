@@ -25,25 +25,25 @@ public class CurationSubPanel  extends JPanel {
 	//질문 emageIcon
 	
 	//1. 나에게 주는 꽃, 상대에게 주는 꽃 선택
-	private ImageIcon imgMe=new ImageIcon("imgs/curationimg/me.jpg");
-	private ImageIcon imgYou=new ImageIcon("imgs/curationimg/you.jpg");
+	private ImageIcon imgMe=new ImageIcon("imgs/curationimg/1_0.png");
+	private ImageIcon imgYou=new ImageIcon("imgs/curationimg/1_1.png");
 	
 	//2. 나에게 주는 꽃 질문이미지
-	private ImageIcon imgMe1QT=new ImageIcon("imgs/curationimg/sul.jpg");
-	private ImageIcon imgMe1QB=new ImageIcon("imgs/curationimg/romantic.jpg");
-	private ImageIcon imgMe2QT=new ImageIcon("imgs/curationimg/simple.jpg");
-	private ImageIcon imgMe2QB=new ImageIcon("imgs/curationimg/go.jpg");
+	private ImageIcon imgMe1QT=new ImageIcon("imgs/curationimg/4_0.png");
+	private ImageIcon imgMe1QB=new ImageIcon("imgs/curationimg/4_1.png");
+	private ImageIcon imgMe2QT=new ImageIcon("imgs/curationimg/5_0.png");
+	private ImageIcon imgMe2QB=new ImageIcon("imgs/curationimg/5_1.png");
 	
 	//3. 상대에게 주는 꽃 질문이미지
-	private ImageIcon imgYou1QT=new ImageIcon("imgs/curationimg/sul.jpg");
-	private ImageIcon imgYou1QB=new ImageIcon("imgs/curationimg/romantic.jpg");
-	private ImageIcon imgYou2QT=new ImageIcon("imgs/curationimg/simple.jpg");
-	private ImageIcon imgYou2QB=new ImageIcon("imgs/curationimg/go.jpg");
+	private ImageIcon imgYou1QT=new ImageIcon("imgs/curationimg/2_0.png");
+	private ImageIcon imgYou1QB=new ImageIcon("imgs/curationimg/2_1.png");
+	private ImageIcon imgYou2QT=new ImageIcon("imgs/curationimg/3_0.png");
+	private ImageIcon imgYou2QB=new ImageIcon("imgs/curationimg/3_1.png");
 	
 	
 	//4. 색상 질문이미지
-	private ImageIcon imgColorQT=new ImageIcon("imgs/curationimg/cool.jpg");
-	private ImageIcon imgColorQB=new ImageIcon("imgs/curationimg/warm.jpg");
+	private ImageIcon imgColorQT=new ImageIcon("imgs/curationimg/6_0.png");
+	private ImageIcon imgColorQB=new ImageIcon("imgs/curationimg/6_1.png");
 
 	
 	
