@@ -61,7 +61,7 @@ public class OrderListPanel extends JPanel implements ComponentListener {
 		
 		// 테스트용 주문리스트
 		for (int i = 0; i < list.size(); i++) {
-			orderPanels[i] = new OrderConfirmPanel(mc, list.get(i).getfName(), list.get(i).getImgUrl(), list.get(i).getOrderDate(), String.valueOf(list.get(i).getfPrice()), list.get(i).getReceive()==0?true:false);
+			orderPanels[i] = new OrderConfirmPanel(mc, list.get(i).getfName(), list.get(i).getImgUrl(), list.get(i).getOrderDate(), String.valueOf(list.get(i).getfPrice()), list.get(i).getReceive());
 			bbLine[i] = new BottomBar();
 			jpnOrderItems.add(orderPanels[i]);
 			jpnOrderItems.add(bbLine[i]);

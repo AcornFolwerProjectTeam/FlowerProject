@@ -2,7 +2,6 @@ package com.flower.client.orderconfirm;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,10 +20,10 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 	private JLabel jlbProduct, jlbDate, jlbPrice, jlbGet, jlbProductName;
 	private EmphasisButton ebtnBoard;
 	private Font f;
-	private Boolean flag;
+	private int flag;
 	private String productName;
 	
-	public OrderConfirmPanel(MainClass mc , String productName, String img, String date, String productPrice, Boolean flag) {
+	public OrderConfirmPanel(MainClass mc , String productName, String img, String date, String productPrice, int flag) {
 		this.mc = mc;
 		this.productName = productName;
 		
@@ -78,14 +77,16 @@ public class OrderConfirmPanel extends JPanel implements ActionListener{
 		ebtnBoard.setBounds(390, 45, 70, 40);	// 후기 작성버튼 크기, 위치 설정
 		ebtnBoard.addActionListener(this);	// 후기 작성버튼 Listener 부착
 		
-		if(flag == true){
-			jlbGet.setText("수령 완료");	// 상품 수령했으면 수령현황을 수령완료로 변경한다.
-			add(ebtnBoard);	// 후기 작성버튼 부착
-		}else {
+		if(flag==0){
 			jlbGet.setText("준비중");	// 상품 수령하지 않으면 수령현황을 준비중으로 변경한다.
 			ebtnBoard.setEnabled(false); // 상품 수령하지 않으면 후기 작성 버튼 비활성화한다.
+		}else if(flag==1){
+			jlbGet.setText("수령 완료");	// 상품 수령했으면 수령현황을 수령완료로 변경한다.
+			add(ebtnBoard);	// 후기 작성버튼 부착
+		}else if(flag==2){
+			jlbGet.setText("작성 완료");
+			ebtnBoard.setEnabled(false);
 		}
-		
 		
 		setVisible(true);
 	}
