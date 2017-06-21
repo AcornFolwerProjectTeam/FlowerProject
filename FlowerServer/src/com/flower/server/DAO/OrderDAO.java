@@ -96,9 +96,9 @@ public class OrderDAO extends Connect {
 		sb.append("INSERT INTO orderlist ");
 		sb.append("values (ordercode.nextval, ");
 		sb.append("(SELECT customercode ");
-		sb.append("FROM account ");
-		sb.append("WHERE id =?), ");
-		sb.append("?, ?, ?, ?, ?, 1, sysdate) ");
+		sb.append(" FROM account ");
+		sb.append(" WHERE id =?), ");
+		sb.append("?, ?, ?, ?, ?, 0, sysdate) ");
 		HashMap<String, String> orderMap = new HashMap<String, String>();
 		int result = 0;
 		try {
@@ -115,6 +115,7 @@ public class OrderDAO extends Connect {
 			
 		// insert query가 실패했을 때
 		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
 			orderMap.put("respond", "error");
 		} catch (SQLException e) {
 			e.printStackTrace();
