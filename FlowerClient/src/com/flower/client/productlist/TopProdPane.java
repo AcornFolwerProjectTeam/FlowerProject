@@ -1,6 +1,7 @@
 package com.flower.client.productlist;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ public class TopProdPane extends JPanel implements ActionListener{
 	
 	TopProdPane(MainClass mc){
 		this.mc=mc;
+		setBackground(Color.WHITE);//패널 색상 흰색
 		setPreferredSize(new Dimension(550, 220));
 		imgCuration = new ImageIcon("imgs/cu.jpg");
 		curation =new JButton(imgCuration);

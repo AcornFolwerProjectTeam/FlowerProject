@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class CurationSubPanel  extends JFrame {
+public class CurationSubPanel  extends JPanel {
 	public JButton jbtnMe;
 	public JButton jbtnYou;
 	public JButton jbtnMe1QT; //내게 주는꽃 첫 번째질문 위쪽 선택버튼
@@ -37,7 +37,7 @@ public class CurationSubPanel  extends JFrame {
 	private ImageIcon imgYou1QT=new ImageIcon("imgs/curationimg/sul.jpg");
 	private ImageIcon imgYou1QB=new ImageIcon("imgs/curationimg/romantic.jpg");
 	private ImageIcon imgYou2QT=new ImageIcon("imgs/curationimg/simple.jpg");
-	private ImageIcon imgYou2QB=new ImageIcon("imgs/curationimg/sample/go.jpg");
+	private ImageIcon imgYou2QB=new ImageIcon("imgs/curationimg/go.jpg");
 	
 	
 	//4. 색상 질문이미지
@@ -55,7 +55,7 @@ public class CurationSubPanel  extends JFrame {
 	
 	public CurationSubPanel(){
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		
 		jbtnMe = new JButton(imgMe);
 		jbtnYou = new JButton(imgYou);

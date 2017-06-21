@@ -109,7 +109,7 @@ public class CurationMainPanel extends JPanel implements ActionListener{
 			c1.show(this,"color");
 			flagWait++;
 			
-		}else if(obj==qsp.jbtnMe2QT){//meQ2의 위 버튼 선택
+		}else if(obj==qsp.jbtnMe2QB){//meQ2의 위 버튼 선택
 			flagMe2=1;
 			c1.show(this,"color");//color패널로 이동
 			flagWait++;

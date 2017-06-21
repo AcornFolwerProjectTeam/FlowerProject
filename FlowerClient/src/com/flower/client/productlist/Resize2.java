@@ -1,6 +1,7 @@
 package com.flower.client.productlist;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
@@ -41,10 +42,10 @@ public class Resize2 extends JPanel implements ComponentListener {
 
 		this.setPreferredSize(new Dimension(600, 600)); // 초기 크기를 설정한다.
 		this.setBorder(BorderFactory.createEmptyBorder(50, 30, 50, 50)); // 내부여백 설정한다.
-
+		setBackground(Color.white);//패널 색상 흰색
 		jfrGrid = new JPanel();// 패널 생성한다.
 		jfrGrid.setLayout(new GridLayout(4, 3, 15, 25));// 패널 레이아웃을 그리드로 설정한다.
-		
+		jfrGrid.setBackground(Color.WHITE);//패널 색상 흰색
 		add(jfrGrid);// 현재 패널에 그리드를 추가한다.
 		this.addComponentListener(this);// 컴포넌트 리스너 추가한다.
 
