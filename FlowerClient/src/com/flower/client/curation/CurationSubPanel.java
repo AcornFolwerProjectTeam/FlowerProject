@@ -1,6 +1,7 @@
 package com.flower.client.curation;
 //큐레이션 질문의 부속패널
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
@@ -61,64 +62,70 @@ public class CurationSubPanel  extends JPanel {
 		paneMeYou=new JPanel();
 		paneMeYou.setLayout(null);//레이아웃  null
 		paneMeYou.setSize(new Dimension(450, 600));//크기설정
+		paneMeYou.setBackground(Color.white);
 		
 		
 		paneMe1=new JPanel();
 		paneMe1.setLayout(null);//레이아웃  null
 		paneMe1.setSize(new Dimension(450, 600));//크기설정
+		paneMe1.setBackground(Color.white);
 		
 		paneMe2=new JPanel();
 		paneMe2.setLayout(null);//레이아웃  null
 		paneMe2.setSize(new Dimension(450, 600));//크기설정
+		paneMe2.setBackground(Color.white);
 		
 		paneYou1=new JPanel();
 		paneYou1.setLayout(null);//레이아웃  null
 		paneYou1.setSize(new Dimension(450, 600));//크기설정
+		paneYou1.setBackground(Color.white);
 		
 		paneYou2=new JPanel();
 		paneYou2.setLayout(null);//레이아웃  null
 		paneYou2.setSize(new Dimension(450, 600));//크기설정
+		paneYou2.setBackground(Color.white);
 		
 		color=new JPanel();
 		color.setLayout(null);//레이아웃  null
 		color.setSize(new Dimension(450, 600));//크기설정
+		color.setBackground(Color.white);
 		
 		//버튼생성 및 설정
 		jbtnMe = new JButton(imgMe);
-		jbtnMe.setBounds(50, 50, 350, 250);//버튼위치설정
+		jbtnMe.setBounds(70, 100, 450, 280);//버튼위치설정
 		
 		jbtnYou = new JButton(imgYou);
-		jbtnYou.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnYou.setBounds(70,400, 450, 280);//버튼위치설정
 		
 		jbtnMe1QT = new JButton(imgMe1QT);
-		jbtnMe1QT.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnMe1QT.setBounds(70, 100, 450, 280);//버튼위치설정
 		
 		jbtnMe1QB = new JButton(imgMe1QB);
-		jbtnMe1QB.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnMe1QB.setBounds(70,400, 450, 280);//버튼위치설정
 		
 		jbtnMe2QT = new JButton(imgMe2QT);
-		jbtnMe2QT.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnMe2QT.setBounds(70, 100, 450, 280);//버튼위치설정
 		
 		jbtnMe2QB = new JButton(imgMe2QB);
-		jbtnMe2QB.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnMe2QB.setBounds(70,400, 450, 280);//버튼위치설정
 		
 		jbtnYou1QT = new JButton(imgYou1QT);
-		jbtnYou1QT.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnYou1QT.setBounds(70, 100, 450, 280);//버튼위치설정
 		
 		jbtnYou1QB = new JButton(imgYou1QB);
-		jbtnYou1QB.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnYou1QB.setBounds(70,400, 450, 280);//버튼위치설정
 		
 		jbtnYou2QT = new JButton(imgYou2QT);
-		jbtnYou2QT.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnYou2QT.setBounds(70, 100, 450, 280);//버튼위치설정
 		
 		jbtnYou2QB = new JButton(imgYou2QB);
-		jbtnYou2QB.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnYou2QB.setBounds(70,400, 450, 280);//버튼위치설정
 		
 		jbtnColorQT = new JButton(imgColorQT);
-		jbtnColorQT.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnColorQT.setBounds(70, 100, 450, 280);//버튼위치설정
 		
 		jbtnColorQB = new JButton(imgColorQB);
-		jbtnColorQB.setBounds(50, 350, 350, 250);//버튼위치설정
+		jbtnColorQB.setBounds(70,400, 450, 280);//버튼위치설정
 		
 		
 		//jpanel에 버튼추가

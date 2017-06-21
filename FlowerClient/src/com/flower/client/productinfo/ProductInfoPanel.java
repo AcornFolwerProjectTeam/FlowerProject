@@ -102,7 +102,7 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 	
 	public void setProduct(ProductVO pvo) {
 		this.pvo = pvo;
-		jlbImg.setIcon(new ImageIcon(pvo.getImgUrl())); // 썸네일 이미지 설정
+		jlbImg.setIcon(new ImageIcon(pvo.getThumbNail())); // 썸네일 이미지 설정
 		jlbProduct.setText(pvo.getfName() + "\n" + pvo.getfPrice()); // 제품명 & 가격
 		
 		System.out.println(pvo.getTextUrl());
