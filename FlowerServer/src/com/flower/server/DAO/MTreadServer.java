@@ -123,6 +123,9 @@ public class MTreadServer extends Thread {
 				HashMap<String, String> hmBoard = bdao.boardInsert();
 				oos.writeObject(hmBoard);
 				oos.flush();
+				
+				OrderDAO odao = new OrderDAO();
+				odao.updateReceive(Integer.parseInt(hm.get("ordercode")), 2);
 			}  else if (hm.get("request").equals("postList")) {
 				BoardDAO bdao = new BoardDAO();
 				bdao.setHm(hm);

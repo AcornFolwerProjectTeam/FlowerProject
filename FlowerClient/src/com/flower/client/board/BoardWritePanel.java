@@ -51,6 +51,7 @@ public class BoardWritePanel extends JPanel implements ActionListener, ItemListe
 	
 	private int grade;
 	private String fname;
+	private int ordercode;
 	
 	// --- Constructor ---
 	public BoardWritePanel(MainClass mc) {
@@ -185,7 +186,7 @@ public class BoardWritePanel extends JPanel implements ActionListener, ItemListe
 		} else if (e.getSource() == sbtnPost) {
 			try {
 				BoardModule bm = new BoardModule();
-				Boolean flag = bm.writePost(jlabTitle.getText(), grade, jtaComment.getText(), mc.getAvo().getId(), fname);
+				Boolean flag = bm.writePost(jlabTitle.getText(), grade, jtaComment.getText(), mc.getAvo().getId(), fname, ordercode);
 				bm.close();
 				
 				if (flag == true) {
@@ -224,6 +225,11 @@ public class BoardWritePanel extends JPanel implements ActionListener, ItemListe
 		this.fname = fname;
 		jlabProductNameVal.setText(fname);
 	}
+
+	public void setOrdercode(int ordercode) {
+		this.ordercode = ordercode;
+	}
+	
 	
 	
 } // BoardWritePanel class end

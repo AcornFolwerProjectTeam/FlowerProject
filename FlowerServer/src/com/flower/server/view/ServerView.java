@@ -1,7 +1,12 @@
 package com.flower.server.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,7 +17,7 @@ import com.flower.server.DAO.OrderDAO;
 import com.flower.server.DAO.ProductDAO;
 
 @SuppressWarnings("serial")
-public class ServerView extends JFrame {
+public class ServerView extends JFrame implements MouseListener, ActionListener {
 
 	JTable jtOrder;
 	JTable jtAccount;
@@ -21,6 +26,8 @@ public class ServerView extends JFrame {
 	JScrollPane jspOrder;
 	JScrollPane jspAccount;
 	JScrollPane jspProduct;
+	
+	JButton jbtnRefresh;
 
 	public ServerView() {
 		setBounds(150, 150, 800, 600);
@@ -30,6 +37,7 @@ public class ServerView extends JFrame {
 		String[] title = { "주문코드", "주문회원", "예약시간", "전화번호", "메세지", "제품명", "제품가격", "수령확인" };
 		// 주문 정보 콤포넌트 생성
 		jtOrder = new JTable(order, title);
+		jtOrder.addMouseListener(this);
 		jspOrder = new JScrollPane(jtOrder);
 		add(jspOrder, BorderLayout.NORTH);
 
@@ -51,9 +59,46 @@ public class ServerView extends JFrame {
 		jspProduct = new JScrollPane(jtProduct);
 		add(jspProduct, BorderLayout.CENTER);
 		setVisible(true);
+		
+		// 새로고침 버튼 생성
+		jbtnRefresh = new JButton("새로고침");
+		jbtnRefresh.addActionListener(this);
+		add(jbtnRefresh, BorderLayout.SOUTH);
 	}
+	
 	public static void main(String[] args) {
 		new ServerView();
 		new MainServer();
+	}
+	
+	private void dataRefresh() {
+		jtOrder.setModel(new OrderDataModel());
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int selIndex = -1;		
+		selIndex = jtOrder.getSelectionModel().getMinSelectionIndex();
+		
+		if (selIndex > -1 && (int) jtOrder.getValueAt(selIndex, 7) < 1 ) {
+			int orderCode = (int) jtOrder.getValueAt(selIndex, 0);
+			int customerCode = (int) jtOrder.getValueAt(selIndex, 1);
+			new OrderViewDialog(this, orderCode, customerCode);
+			
+			dataRefresh();
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		dataRefresh();
 	}
 }
