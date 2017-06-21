@@ -3,6 +3,7 @@ package com.flower.client.productinfo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.flower.client.MainClass;
@@ -35,12 +37,14 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 	private JLabel jlbTextImg;
 	private OpenBoardPanel obp;
 	private ProductVO pvo;
+	private Font f;
 	// ------- Constructor ---------
 	public ProductInfoPanel(MainClass mc) {
 		// 초기설정
 		this.mc = mc;
 		setLayout(null);
 		setBackground(Color.WHITE);
+		f = new Font("맑은 고딕", Font.BOLD, 17);
 		
 		// 좌측 상단 제품 사진
 		jlbImg = new JLabel();	// 제품사진 버튼 생성
@@ -53,8 +57,10 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		// 우측 상단 제품 정보
 		jlbProduct = new JLabel();	// 제품정보 레이블 생성	
 		jlbProduct.setBounds(290, 50, 250, 140);	// 제품정보 레이블 크기, 위치 지정
-		jlbProduct.setBorder(new LineBorder(EnVal.MAINCOLOR));	// 테스트를 위한 테두리 설정
+		//jlbProduct.setBorder(new LineBorder(EnVal.MAINCOLOR));	// 테스트를 위한 테두리 설정
 		//jlbProduct.setEnabled(false);	// 제품정보 이벤트 클릭 비활성화
+		jlbProduct.setHorizontalAlignment(SwingConstants.CENTER);
+		jlbProduct.setFont(f);
 		add(jlbProduct);	// 제품정보 버튼 부착
 		
 		// 우측 상단 리뷰보기 버튼
@@ -103,7 +109,7 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 	public void setProduct(ProductVO pvo) {
 		this.pvo = pvo;
 		jlbImg.setIcon(new ImageIcon(pvo.getThumbNail())); // 썸네일 이미지 설정
-		jlbProduct.setText(pvo.getfName() + "\n" + pvo.getfPrice()); // 제품명 & 가격
+		jlbProduct.setText("<html>" + pvo.getfName() + "<br><br>" + pvo.getfPrice() + "</html>"); // 제품명 & 가격
 		
 		System.out.println(pvo.getTextUrl());
 		
