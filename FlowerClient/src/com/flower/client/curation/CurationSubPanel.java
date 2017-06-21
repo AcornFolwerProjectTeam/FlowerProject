@@ -61,33 +61,33 @@ public class CurationSubPanel  extends JPanel {
 		// 버튼을 붙일패널 생성 및 설정
 		paneMeYou=new JPanel();
 		paneMeYou.setLayout(null);//레이아웃  null
-		paneMeYou.setSize(new Dimension(450, 600));//크기설정
+		paneMeYou.setSize(new Dimension(450, 400));//크기설정
 		paneMeYou.setBackground(Color.white);
 		
 		
 		paneMe1=new JPanel();
 		paneMe1.setLayout(null);//레이아웃  null
-		paneMe1.setSize(new Dimension(450, 600));//크기설정
+		paneMe1.setSize(new Dimension(450, 400));//크기설정
 		paneMe1.setBackground(Color.white);
 		
 		paneMe2=new JPanel();
 		paneMe2.setLayout(null);//레이아웃  null
-		paneMe2.setSize(new Dimension(450, 600));//크기설정
+		paneMe2.setSize(new Dimension(450, 400));//크기설정
 		paneMe2.setBackground(Color.white);
 		
 		paneYou1=new JPanel();
 		paneYou1.setLayout(null);//레이아웃  null
-		paneYou1.setSize(new Dimension(450, 600));//크기설정
+		paneYou1.setSize(new Dimension(450, 400));//크기설정
 		paneYou1.setBackground(Color.white);
 		
 		paneYou2=new JPanel();
 		paneYou2.setLayout(null);//레이아웃  null
-		paneYou2.setSize(new Dimension(450, 600));//크기설정
+		paneYou2.setSize(new Dimension(450,400));//크기설정
 		paneYou2.setBackground(Color.white);
 		
 		color=new JPanel();
 		color.setLayout(null);//레이아웃  null
-		color.setSize(new Dimension(450, 600));//크기설정
+		color.setSize(new Dimension(450, 400));//크기설정
 		color.setBackground(Color.white);
 		
 		//버튼생성 및 설정
