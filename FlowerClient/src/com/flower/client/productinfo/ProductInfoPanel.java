@@ -111,7 +111,7 @@ public class ProductInfoPanel extends JPanel implements ActionListener{
 		jlbImg.setIcon(new ImageIcon(pvo.getThumbNail())); // 썸네일 이미지 설정
 		jlbProduct.setText("<html>" + pvo.getfName() + "<br><br>" + pvo.getfPrice() + "</html>"); // 제품명 & 가격
 		
-		System.out.println(pvo.getTextUrl());
+		
 		
 		// 이미지를 가져와서 화면 크기에 맞게 줄여 배치한다.
 		ImageIcon img = new ImageIcon(pvo.getTextUrl());
